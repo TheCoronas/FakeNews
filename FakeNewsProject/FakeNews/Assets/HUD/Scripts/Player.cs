@@ -6,23 +6,44 @@ public class Player : MonoBehaviour
 {
 
     public int maxHealth = 10; 
+    public int maxCoins = 20; 
+    public int maxAbilityPoints = 3; 
     public int currentHealth; 
+    public int currentCoins; 
+    public int currentAbilityPoints; 
 
     public HealthBar healthBar; 
+    public CoinBar coinBar; 
+    public AbilityPointsBar abilityPointsBar; 
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        currentCoins = maxCoins; 
+        currentAbilityPoints = maxAbilityPoints; 
+
         healthBar.SetMaxHealth(maxHealth); 
+        coinBar.SetMaxCoins(maxCoins); 
+        abilityPointsBar.SetMaxAbilityPoints(maxAbilityPoints); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("h")) 
+        if (Input.GetKeyDown("1")) 
         {
             TakeDamage(1); 
+        }
+
+        if (Input.GetKeyDown("3"))
+        {
+            TakeCoins(1); 
+        }
+
+        if (Input.GetKeyDown("2"))
+        {
+            TakeAbilityPoints(1); 
         }
     }
 
@@ -31,5 +52,19 @@ public class Player : MonoBehaviour
         currentHealth -= damage; 
 
         healthBar.SetHealth(currentHealth); 
+    }
+
+    void TakeCoins(int expense)
+    {
+        currentCoins -= expense; 
+
+        coinBar.SetCoins(currentCoins); 
+    }
+
+    void TakeAbilityPoints(int points)
+    {
+        currentAbilityPoints -= points; 
+
+        abilityPointsBar.SetAbilityPoints(currentAbilityPoints); 
     }
 }
