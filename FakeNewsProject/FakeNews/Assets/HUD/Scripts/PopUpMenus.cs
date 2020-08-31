@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
@@ -15,54 +17,33 @@ public class PopUpMenus : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("m") && gamePaused == false) {
-            if (mapDisplayed == false)
-            {
-                Cursor.visible = true;
-                Time.timeScale = 0;
-                mapDisplayed = true;
-            
-                mapMenu.SetActive(true);
-                player.GetComponent<FirstPersonController>().enabled = false;
-            }
-            else
-            {
-                mapMenu.SetActive(false);
-                Cursor.visible = false;
-                mapDisplayed = false;
-                Time.timeScale = 1;
-                player.GetComponent<FirstPersonController>().enabled = true;
-            }
-            
+            toggleMap();            
         }
         
         if (Input.GetButtonDown("Cancel") && mapDisplayed == false) {
-            if (gamePaused == false)
-            {
-                Cursor.visible = true;
-                Time.timeScale = 0;
-                gamePaused = true;
-            
-                pauseMenu.SetActive(true);
-                player.GetComponent<FirstPersonController>().enabled = false;
-            }
-            else
-            {
-                pauseMenu.SetActive(false);
-                Cursor.visible = false;
-                gamePaused = false;
-                Time.timeScale = 1;
-                player.GetComponent<FirstPersonController>().enabled = true;
-            }
-            
+            togglePause();            
         }
         
-        
-        if (mapDisplayed == true || gamePaused == true) {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        } else {
-            Cursor.visible = false;
-        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = mapDisplayed || gamePaused;
+    }
+
+    public void toggleMap()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        mapDisplayed = !mapDisplayed;
+            
+        mapMenu.SetActive(!mapMenu.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled; 
+    }
+
+    private void togglePause()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        gamePaused = !gamePaused;
+    
+        pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled; 
     }
     
     public void returntoGameFromMap()
