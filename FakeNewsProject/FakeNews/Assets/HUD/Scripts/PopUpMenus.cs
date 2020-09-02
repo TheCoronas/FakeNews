@@ -8,24 +8,40 @@ using UnityEngine.SceneManagement;
 
 public class PopUpMenus : MonoBehaviour
 {
-    public static bool mapDisplayed = false;
+    public bool mapDisplayed = false;
     public bool gamePaused = false;
+    public bool scrollClicked;
+    public bool showScroll = false;
     public GameObject mapMenu;
     public GameObject player;
     public GameObject pauseMenu;
+    public GameObject scrollDisplay;
+    
     
     void Update()
     {
-        if (Input.GetKeyDown("m") && gamePaused == false) {
+        if (Input.GetKeyDown("m") && gamePaused == false && showScroll == false) {
             toggleMap();            
         }
         
-        if (Input.GetButtonDown("Cancel") && mapDisplayed == false) {
+        if (Input.GetButtonDown("Cancel") && mapDisplayed == false && showScroll == false) {
             togglePause();            
         }
         
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = mapDisplayed || gamePaused;
+        scrollClicked = SelectObject.scrollClicked;
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false) {
+            toggleScroll();
+        }
+        
+        // Cursor needs to be dealt with like this, or else it jams. 
+        if (mapDisplayed || gamePaused || showScroll)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        } else {
+            Cursor.visible = false;
+        }
+
     }
 
     public void toggleMap()
@@ -34,7 +50,7 @@ public class PopUpMenus : MonoBehaviour
         mapDisplayed = !mapDisplayed;
             
         mapMenu.SetActive(!mapMenu.activeInHierarchy);
-        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled; 
+        player.GetComponent<FirstPersonController>().enabled = false;
     }
 
     private void togglePause()
@@ -43,7 +59,16 @@ public class PopUpMenus : MonoBehaviour
         gamePaused = !gamePaused;
     
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
-        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled; 
+        player.GetComponent<FirstPersonController>().enabled = false; 
+    }
+    
+    private void toggleScroll()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        showScroll = !showScroll;
+    
+        scrollDisplay.SetActive(!scrollDisplay.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
     }
     
     public void returntoGameFromMap()
@@ -64,6 +89,15 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
     
+    public void returnToGameFromScroll()
+    {
+        scrollDisplay.SetActive(false);
+        Cursor.visible = false;
+        showScroll = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+    }
+    
     
     public void returnToMenu()
     {
@@ -74,4 +108,6 @@ public class PopUpMenus : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+    
+
 }
