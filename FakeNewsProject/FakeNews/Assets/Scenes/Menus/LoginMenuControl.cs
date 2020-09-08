@@ -64,7 +64,7 @@ public class LoginMenuControl : MonoBehaviour
         } else if (result.Equals("")) {
             textDisplay.GetComponent<Text>().text = "Please enter username and password!";
         }else {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(3);
         }
         
     }
