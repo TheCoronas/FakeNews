@@ -33,20 +33,31 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown("1")) 
         {
-            TakeDamage(1); 
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            TakeCoins(1); 
+            if (currentHealth > 0) {
+                TakeDamage(1); 
+            } else {
+                currentHealth = 0; 
+            }
         }
 
         if (Input.GetKeyDown("2"))
         {
-            TakeAbilityPoints(1); 
+            if (currentAbilityPoints > 0) {
+                TakeAbilityPoints(1); 
+            } else {
+                currentAbilityPoints = 0; 
+            }
+        }        
+
+        if (Input.GetKeyDown("3"))
+        {
+            if (currentCoins > 0) {
+                TakeCoins(1); 
+            } else {
+                currentCoins = 0; 
+            }
         }
     }
-
     void TakeDamage(int damage)
     {
         currentHealth -= damage; 
