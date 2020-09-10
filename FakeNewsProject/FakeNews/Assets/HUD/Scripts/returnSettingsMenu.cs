@@ -17,6 +17,10 @@ public class returnSettingsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingsScreen.SetActive(false);
+        }
         
     }
 
