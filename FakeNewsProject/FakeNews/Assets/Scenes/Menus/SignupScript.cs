@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using System.Collections.Specialized;
 using System.Net;
 using System.Text;
@@ -8,27 +8,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
-using UnityEditor;
+using UnityEngine.EventSystems;
 
-public class LoginMenuControl : MonoBehaviour
+public class SignupScript : MonoBehaviour
 {
+    
     public string username;
     public string password;
     public GameObject usernameInputField;
     public GameObject passwordInputField;
     public GameObject textDisplay;
-
-
-    public void StoreName()
+    
+    // Start is called before the first frame update
+    void Start()
     {
-        textDisplay.GetComponent<Text>().text = "Welcome " + username + " to the game.";
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+        }
+    }
 
-    
-   
-    
-    public void ButtonLogin()
+     
+    public void submitButton()
     {
         username = usernameInputField.GetComponent<Text>().text;
         password = passwordInputField.GetComponent<Text>().text;
@@ -49,31 +53,27 @@ public class LoginMenuControl : MonoBehaviour
         values["username"] = username;
         values["password"] = hash;
         
-        // temp credentials
-        // username: smith
-        // password: password
-       
         // send to server
         WebClient client = new WebClient();
-        byte[] response = client.UploadValues("https://corona.uqcloud.net/test/", values);
+        byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/register", values);
         var result = Encoding.UTF8.GetString(response);
     
         Debug.Log(result);
 
-        if (result.Equals("false")) {
-            // todo change to real scene name
-            textDisplay.GetComponent<Text>().text = "Incorrect Username or Password!";
-        } else if (result.Equals("")) {
-            textDisplay.GetComponent<Text>().text = "Please enter username and password!";
-        }else {
-            SceneManager.LoadScene(3);
+        // server will respond with fail if username already exists
+        if (result.Equals("fail"))
+        {
+            textDisplay.GetComponent<Text>().text = "Please try another username";
         }
-        
+        else
+        {
+            textDisplay.GetComponent<Text>().text = "Successful! Please return and login.";
+        }
     }
     
     public void ButtonReturn()
     {
         // todo change to real scene name
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Scenes/Menus/start_screen");
     }
 }
