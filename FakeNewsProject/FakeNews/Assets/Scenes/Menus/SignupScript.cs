@@ -73,7 +73,6 @@ public class SignupScript : MonoBehaviour
     
     public void ButtonReturn()
     {
-        // todo change to real scene name
         SceneManager.LoadScene("Scenes/Menus/start_screen");
     }
 }
