@@ -30,8 +30,8 @@ public class LoginMenuControl : MonoBehaviour
     
     public void ButtonLogin()
     {
-        username = usernameInputField.GetComponent<Text>().text;
-        password = passwordInputField.GetComponent<Text>().text;
+        username = usernameInputField.GetComponent<InputField>().text;
+        password = passwordInputField.GetComponent<InputField>().text;
 
         // calculate hash
         byte[] passBytes = Encoding.UTF8.GetBytes(password);

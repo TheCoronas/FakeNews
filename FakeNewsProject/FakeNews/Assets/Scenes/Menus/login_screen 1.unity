@@ -281,8 +281,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 221717372}
   m_TextComponent: {fileID: 81493197}
   m_Placeholder: {fileID: 1742105775}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -1390,8 +1390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: 
   password: 
-  usernameInputField: {fileID: 2107786854}
-  passwordInputField: {fileID: 81493195}
+  usernameInputField: {fileID: 2140082258}
+  passwordInputField: {fileID: 221717369}
   textDisplay: {fileID: 1519989940}
 --- !u!4 &1883680158
 Transform:
