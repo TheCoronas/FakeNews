@@ -865,8 +865,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: 
   password: 
-  usernameInputField: {fileID: 2107786854}
-  passwordInputField: {fileID: 81493195}
+  usernameInputField: {fileID: 2140082258}
+  passwordInputField: {fileID: 221717369}
   textDisplay: {fileID: 1519989940}
 --- !u!4 &745206696
 Transform:

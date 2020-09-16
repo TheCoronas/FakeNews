@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.Specialized;
@@ -12,7 +13,6 @@ using UnityEngine.EventSystems;
 
 public class SignupScript : MonoBehaviour
 {
-    
     public string username;
     public string password;
     public GameObject usernameInputField;
@@ -26,7 +26,28 @@ public class SignupScript : MonoBehaviour
 
     void Update()
     {
+        // change focus on tab press
         if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            setNextInputField();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            submitButton();   
+        }
+    }
+
+    // change focus to next input 
+    private void setNextInputField()
+    {
+        EventSystem system = EventSystem.current;
+        try
+        {
+            Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
+            next.Select();
+        }
+        catch (Exception e)
         {
         }
     }
@@ -34,8 +55,8 @@ public class SignupScript : MonoBehaviour
      
     public void submitButton()
     {
-        username = usernameInputField.GetComponent<Text>().text;
-        password = passwordInputField.GetComponent<Text>().text;
+        username = usernameInputField.GetComponent<InputField>().text;
+        password = passwordInputField.GetComponent<InputField>().text;
 
         // calculate hash
         byte[] passBytes = Encoding.UTF8.GetBytes(password);
