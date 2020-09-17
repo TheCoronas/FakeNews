@@ -14,13 +14,13 @@ public class StartMenuControl : MonoBehaviour
     public void ButtonLogin()
     {
         // todo change to real scene name
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Scenes/Menus/login_screen 1");
     }
     
     public void ButtonSignUp()
     {
         // todo change to real scene name
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("signup_screen");
     }
     
     public void ButtonQuit()

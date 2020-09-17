@@ -7,14 +7,16 @@ public class Player : MonoBehaviour
 
     public int maxHealth = 10; 
     public int maxCoins = 20; 
-    public int maxAbilityPoints = 3; 
-    public int currentHealth; 
+    public int maxAbilityPoints = 3;
+    private static int currentHealth;
     public int currentCoins; 
     public int currentAbilityPoints; 
 
     public HealthBar healthBar; 
     public CoinBar coinBar; 
-    public AbilityPointsBar abilityPointsBar; 
+    public AbilityPointsBar abilityPointsBar;
+
+    public static int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
     // Start is called before the first frame update
     void Start()
