@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
 using UnityEditor;
+using UnityEngine.EventSystems;
 
 public class LoginMenuControl : MonoBehaviour
 {
@@ -24,12 +25,40 @@ public class LoginMenuControl : MonoBehaviour
         textDisplay.GetComponent<Text>().text = "Welcome " + username + " to the game.";
     }
 
+    void Update()
+    {
+        // change focus on tab press
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            setNextInputField();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            ButtonLogin();
+        }
+    }
+
+    // changes cursor to next input field
+    private void setNextInputField()
+    {
+        EventSystem system = EventSystem.current;
+        try
+        {
+            Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
+            next.Select();
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    
    
     
     public void ButtonLogin()
     {
-        username = usernameInputField.GetComponent<Text>().text;
-        password = passwordInputField.GetComponent<Text>().text;
+        username = usernameInputField.GetComponent<InputField>().text;
+        password = passwordInputField.GetComponent<InputField>().text;
 
         // calculate hash
         byte[] passBytes = Encoding.UTF8.GetBytes(password);
