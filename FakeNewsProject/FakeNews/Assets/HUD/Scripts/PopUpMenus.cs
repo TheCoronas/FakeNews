@@ -13,20 +13,30 @@ public class PopUpMenus : MonoBehaviour
     public bool scrollClicked;
     public bool showScroll = false;
     public bool displayGameOver = false;
+
+    public bool displayIncorrectChar = false; 
     public GameObject mapMenu;
     public GameObject player;
     public GameObject pauseMenu;
     public GameObject scrollDisplay;
     public GameObject gameOverMenu;
+
+    public GameObject incorrectCharacter; 
+
+    public int currentCharacter; 
     
-    
+    public int currentCharacterCount; 
+     void Start()
+    {
+        currentCharacter = 1; 
+    }
+
     void Update()
     {
         if (Player.CurrentHealth <= 0 && !displayGameOver)
         {
             enterGameOver();
         }
-
 
         if (Input.GetKeyDown("m") && gamePaused == false && showScroll == false && displayGameOver == false) {
             toggleMap();            
@@ -37,9 +47,24 @@ public class PopUpMenus : MonoBehaviour
         }
         
         scrollClicked = SelectObject.scrollClicked;
+        currentCharacterCount = GameObject.FindWithTag("Character").GetComponent<Character>().characterOrder;
+        Debug.Log(currentCharacter); 
+        Debug.Log(currentCharacterCount); 
+        //currentCharacterCount = SelectObject.currentCharacterCount; 
         if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
-            toggleScroll();
+        Debug.Log(currentCharacter); 
+        Debug.Log(currentCharacterCount); 
+            if (currentCharacterCount != currentCharacter) {
+            //{
+                //toggleScroll(); 
+                incorrectCharacterCall(); 
+            }
+            else {
+                toggleScroll();
+                //incorrectCharacterCall(); 
+            }
         }
+        //}
         
         // Cursor needs to be dealt with like this, or else it jams. 
         if (mapDisplayed || gamePaused || showScroll || displayGameOver)
@@ -109,6 +134,7 @@ public class PopUpMenus : MonoBehaviour
     public void returnToGameFromScroll()
     {
         scrollDisplay.SetActive(false);
+        incorrectCharacter.SetActive(false);
         Cursor.visible = false;
         showScroll = false;
         Time.timeScale = 1;
@@ -125,6 +151,13 @@ public class PopUpMenus : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-    
 
+    private void incorrectCharacterCall()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        showScroll = !showScroll;
+    
+        incorrectCharacter.SetActive(!incorrectCharacter.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
 }
