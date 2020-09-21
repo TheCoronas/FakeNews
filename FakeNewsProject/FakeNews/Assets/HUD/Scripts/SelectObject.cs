@@ -20,7 +20,11 @@ public class SelectObject : MonoBehaviour
     public GameObject scrollPopUp;
     public GameObject player;
 
-    public static int current_character; 
+    public static int currentCharacter; 
+    public static int scrollAbilityPoints; 
+    public static int scrollDamage; 
+    public static int scrollCoins; 
+
     
     void Update()
     {
@@ -34,10 +38,13 @@ public class SelectObject : MonoBehaviour
     {
         scrollClicked = true;
         // To get the name of the character youve clicked on
-        Debug.Log(gameObject.name);
-
+        //Debug.Log(gameObject.name);
+        currentCharacter = gameObject.GetComponent<Character>().getCharacterOrder();
+        scrollDamage = gameObject.GetComponent<Character>().getScrollDamage();
+        scrollAbilityPoints = gameObject.GetComponent<Character>().getScrollAbilityPoints(); 
+        scrollCoins = gameObject.GetComponent<Character>().getScrollCoins();
         // To get their character order
-        Debug.Log(gameObject.GetComponent<Character>().getCharacterOrder());
+        //Debug.Log(gameObject.GetComponent<Character>().getCharacterOrder());
 
     }
     

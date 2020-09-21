@@ -13,19 +13,26 @@ public class PopUpMenus : MonoBehaviour
     public bool scrollClicked;
     public bool showScroll = false;
     public bool displayGameOver = false;
-
-    public bool displayIncorrectChar = false; 
+    public bool displayExplanation = false; 
+    public static bool displayCorrectExplanation = false; 
+    public static bool displayIncorrectExplanation = false; 
     public GameObject mapMenu;
     public GameObject player;
     public GameObject pauseMenu;
     public GameObject scrollDisplay;
     public GameObject gameOverMenu;
-
+    public GameObject explanationView; 
     public GameObject incorrectCharacter; 
+    public GameObject correctExplanationView; 
+    public GameObject incorrectExplanationView;
+
+    private int characterCount; 
+
+    private string currentScrollDisplay; 
 
      void Start()
     {
-        // currentCharacter = 1; 
+        characterCount = 1; 
     }
 
     void Update()
@@ -45,12 +52,12 @@ public class PopUpMenus : MonoBehaviour
         
         scrollClicked = SelectObject.scrollClicked;
         if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
-            // if (currentCharacterCount != currentCharacter) {
-            //     incorrectCharacterCall(); 
-            // }
-            // else {
+            if (characterCount != SelectObject.currentCharacter) {
+                incorrectCharacterCall(); 
+            }
+            else {
                 toggleScroll();
-            // }
+            }
         } 
         if (mapDisplayed || gamePaused || showScroll || displayGameOver)
         {
@@ -84,6 +91,9 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
     
+        // currentScrollDisplay = "ScrollDisplay" + (SelectObject.currentCharacter);
+        // Debug.Log(currentScrollDisplay);
+        // scrollDisplay = currentScrollDisplay;
         scrollDisplay.SetActive(!scrollDisplay.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
@@ -94,6 +104,16 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
         gameOverMenu.SetActive(!gameOverMenu.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void enterExplainScroll()
+    {
+        scrollDisplay.SetActive(false);
+        displayExplanation = true;
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        explanationView.SetActive(!explanationView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
     
@@ -118,9 +138,12 @@ public class PopUpMenus : MonoBehaviour
     public void returnToGameFromScroll()
     {
         scrollDisplay.SetActive(false);
+        correctExplanationView.SetActive(false); 
+        incorrectExplanationView.SetActive(false); 
         incorrectCharacter.SetActive(false);
         Cursor.visible = false;
         showScroll = false;
+        displayExplanation = false;
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
@@ -142,6 +165,28 @@ public class PopUpMenus : MonoBehaviour
         showScroll = !showScroll;
     
         incorrectCharacter.SetActive(!incorrectCharacter.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void enterCorrectExplanation()
+    {
+        scrollDisplay.SetActive(false);
+        displayCorrectExplanation = true;
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        // correctExplanationView.name = "correctExplanationView" + (SelectObject.currentCharacter); 
+        correctExplanationView.SetActive(!correctExplanationView.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void enterIncorrectExplanation()
+    {
+        scrollDisplay.SetActive(false);
+        displayIncorrectExplanation = true;
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        // incorrectExplanationView.name = "incorrectExplanationView" + (SelectObject.currentCharacter);
+        incorrectExplanationView.SetActive(!incorrectExplanationView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 }
