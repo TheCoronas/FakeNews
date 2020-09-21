@@ -33,6 +33,12 @@ public class SelectObject : MonoBehaviour
     void OnMouseDown()
     {
         scrollClicked = true;
+        // To get the name of the character youve clicked on
+        Debug.Log(gameObject.name);
+
+        // To get their character order
+        Debug.Log(gameObject.GetComponent<Character>().getCharacterOrder());
+
     }
     
     void OnMouseUp()

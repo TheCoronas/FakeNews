@@ -5,6 +5,10 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     //initialises the order of characters in the game
-    public int characterOrder; 
+    public int characterOrder;
 
+    public int getCharacterOrder()
+    {
+        return characterOrder;
+    }
 }
