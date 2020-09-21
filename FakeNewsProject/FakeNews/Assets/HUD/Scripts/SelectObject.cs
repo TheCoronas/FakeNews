@@ -19,6 +19,8 @@ public class SelectObject : MonoBehaviour
     public static bool scrollClicked = false;
     public GameObject scrollPopUp;
     public GameObject player;
+
+    public static int current_character; 
     
     void Update()
     {
@@ -27,6 +29,23 @@ public class SelectObject : MonoBehaviour
             selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255);
         }
     }
+    
+    void OnMouseDown()
+    {
+        scrollClicked = true;
+    }
+    
+    void OnMouseUp()
+    {
+        scrollClicked = false;
+        
+    }
+    
+    public void returntoGameFromScroll()
+    {
+        scrollClicked = false;
+    }
+
     
 
 //    void OnMouseOver()
@@ -49,21 +68,6 @@ public class SelectObject : MonoBehaviour
 //        StopCoroutine(FlashObject());
 //        selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
 //    }
-    
-    void OnMouseDown()
-    {
-        scrollClicked = true;
-    }
-    
-    void OnMouseUp()
-    {
-        scrollClicked = false;
-    }
-    
-    public void returntoGameFromScroll()
-    {
-        scrollClicked = false;
-    }
     
 //    IEnumerator FlashObject()
 //    {

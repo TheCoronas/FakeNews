@@ -23,12 +23,9 @@ public class PopUpMenus : MonoBehaviour
 
     public GameObject incorrectCharacter; 
 
-    public int currentCharacter; 
-    
-    public int currentCharacterCount; 
      void Start()
     {
-        currentCharacter = 1; 
+        // currentCharacter = 1; 
     }
 
     void Update()
@@ -47,26 +44,14 @@ public class PopUpMenus : MonoBehaviour
         }
         
         scrollClicked = SelectObject.scrollClicked;
-        currentCharacterCount = GameObject.FindWithTag("Character").GetComponent<Character>().characterOrder;
-        Debug.Log(currentCharacter); 
-        Debug.Log(currentCharacterCount); 
-        //currentCharacterCount = SelectObject.currentCharacterCount; 
         if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
-        Debug.Log(currentCharacter); 
-        Debug.Log(currentCharacterCount); 
-            if (currentCharacterCount != currentCharacter) {
-            //{
-                //toggleScroll(); 
-                incorrectCharacterCall(); 
-            }
-            else {
+            // if (currentCharacterCount != currentCharacter) {
+            //     incorrectCharacterCall(); 
+            // }
+            // else {
                 toggleScroll();
-                //incorrectCharacterCall(); 
-            }
-        }
-        //}
-        
-        // Cursor needs to be dealt with like this, or else it jams. 
+            // }
+        } 
         if (mapDisplayed || gamePaused || showScroll || displayGameOver)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -74,7 +59,6 @@ public class PopUpMenus : MonoBehaviour
         } else {
             Cursor.visible = false;
         }
-
     }
 
     public void toggleMap()

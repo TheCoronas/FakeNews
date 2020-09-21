@@ -10525,8 +10525,6 @@ MonoBehaviour:
   scrollDisplay: {fileID: 1052429449}
   gameOverMenu: {fileID: 215791712}
   incorrectCharacter: {fileID: 1567027002}
-  currentCharacter: 0
-  currentCharacterCount: 0
 --- !u!4 &721570766
 Transform:
   m_ObjectHideFlags: 0
