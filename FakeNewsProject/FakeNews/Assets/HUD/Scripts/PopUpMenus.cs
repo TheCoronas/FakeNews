@@ -25,8 +25,9 @@ public class PopUpMenus : MonoBehaviour
     public GameObject incorrectCharacter; 
     public GameObject correctExplanationView; 
     public GameObject incorrectExplanationView;
+    public GameObject replayCharacterView;
 
-    private int characterCount; 
+    public static int characterCount; 
 
     private string currentScrollDisplay; 
 
@@ -52,10 +53,11 @@ public class PopUpMenus : MonoBehaviour
         
         scrollClicked = SelectObject.scrollClicked;
         if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
-            if (characterCount != SelectObject.currentCharacter) {
+            if (SelectObject.currentCharacter > characterCount) {
                 incorrectCharacterCall(); 
-            }
-            else {
+            } else if (SelectObject.currentCharacter < characterCount) {
+                replayCharacterCall(); 
+            } else {
                 toggleScroll();
             }
         } 
@@ -98,22 +100,13 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
-    private void enterGameOver()
+    public void enterGameOver()
     {
         displayGameOver = true;
+        incorrectExplanationView.SetActive(false); 
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
         gameOverMenu.SetActive(!gameOverMenu.activeInHierarchy);
-        player.GetComponent<FirstPersonController>().enabled = false;
-    }
-
-    public void enterExplainScroll()
-    {
-        scrollDisplay.SetActive(false);
-        displayExplanation = true;
-        Time.timeScale = Math.Abs(Time.timeScale - 1);
-
-        explanationView.SetActive(!explanationView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
     
@@ -141,6 +134,7 @@ public class PopUpMenus : MonoBehaviour
         correctExplanationView.SetActive(false); 
         incorrectExplanationView.SetActive(false); 
         incorrectCharacter.SetActive(false);
+        replayCharacterView.SetActive(false);
         Cursor.visible = false;
         showScroll = false;
         displayExplanation = false;
@@ -165,6 +159,15 @@ public class PopUpMenus : MonoBehaviour
         showScroll = !showScroll;
     
         incorrectCharacter.SetActive(!incorrectCharacter.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    private void replayCharacterCall()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        showScroll = !showScroll;
+    
+        replayCharacterView.SetActive(!replayCharacterView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
