@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(PopUpMenus.displayIncorrectExplanation);
         health = SelectObject.scrollDamage; 
         expense = SelectObject.scrollAbilityPoints;
         points = SelectObject.scrollCoins; 

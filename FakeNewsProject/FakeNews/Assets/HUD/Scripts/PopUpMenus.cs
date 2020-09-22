@@ -207,14 +207,13 @@ public class PopUpMenus : MonoBehaviour
         displayCorrectExplanation = true;
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
-        // correctExplanationView.name = "correctExplanationView" + (SelectObject.currentCharacter); 
         correctExplanationView.SetActive(!correctExplanationView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
     public void enterIncorrectExplanation()
     {
-                scrollDisplay1.SetActive(false);
+        scrollDisplay1.SetActive(false);
         scrollDisplay2.SetActive(false);
         scrollDisplay3.SetActive(false);
         scrollDisplay4.SetActive(false);
@@ -223,7 +222,6 @@ public class PopUpMenus : MonoBehaviour
         displayIncorrectExplanation = true;
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
-        // incorrectExplanationView.name = "incorrectExplanationView" + (SelectObject.currentCharacter);
         incorrectExplanationView.SetActive(!incorrectExplanationView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
