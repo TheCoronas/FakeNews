@@ -656,7 +656,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 721570765}
-        m_MethodName: enterExplainScroll
+        m_MethodName: enterCorrectExplanation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5625,7 +5625,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 721570765}
-        m_MethodName: enterExplainScroll
+        m_MethodName: enterCorrectExplanation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7776,10 +7776,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fae067962e5934395be31c8aba4a3455, type: 3}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -7787,7 +7787,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<Player, \r\n\r\nThe General sends tidings of unrest in the Eastern Province
+  m_Text: "Player, \r\n\r\nThe General sends tidings of unrest in the Eastern Province
     and requests your immediate assistance. You must gather the men-at-arms and send
     them to assist the Baron of Sunderland in quelling the uprising. \r\n\r\nOn the
     fourteenth day from hence, the men must be waiting on the banks of the Rania
@@ -12326,7 +12326,11 @@ MonoBehaviour:
   mapMenu: {fileID: 1264592388}
   player: {fileID: 1334521179}
   pauseMenu: {fileID: 1060340442}
-  scrollDisplay: {fileID: 1052429449}
+  scrollDisplay1: {fileID: 1052429449}
+  scrollDisplay2: {fileID: 1148657939}
+  scrollDisplay3: {fileID: 1357353775}
+  scrollDisplay4: {fileID: 1052429449}
+  scrollDisplay5: {fileID: 1052429449}
   gameOverMenu: {fileID: 215791712}
   explanationView: {fileID: 1417358374}
   incorrectCharacter: {fileID: 1567027002}
@@ -18747,7 +18751,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 721570765}
-        m_MethodName: returnToGameFromScroll
+        m_MethodName: enterIncorrectExplanation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21707,7 +21711,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 721570765}
-        m_MethodName: returnToGameFromScroll
+        m_MethodName: enterIncorrectExplanation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25208,7 +25212,7 @@ GameObject:
   - component: {fileID: 1357353778}
   - component: {fileID: 1357353777}
   m_Layer: 5
-  m_Name: ScrollDisplay2
+  m_Name: ScrollDisplay3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28687,7 +28691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8962264, g: 0.4523407, b: 0.4523407, a: 0.93333334}
+  m_Color: {r: 0.8980392, g: 0.8311283, b: 0.4509804, a: 0.93333334}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -36829,7 +36833,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fae067962e5934395be31c8aba4a3455, type: 3}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -36840,10 +36844,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Sergeant,\r\nA fierce warrior by the name of Player is becoming too strong,
-    and my fears of him overthrowing our kingdom are growing. I have his trust for
-    now, but it is imperative that this leader is taken down if we are to maintain
-    control.\r\n\r\nAssemble your units. You are ordered to attack Player\u2019s
+  m_Text: "Sergeant,\r\n\nA fierce warrior by the name of Player is becoming too
+    strong, and my fears of him overthrowing our kingdom are growing. I have his
+    trust for now, but it is imperative that this leader is taken down if we are
+    to maintain control.\r\n\r\nAssemble your units. You are ordered to attack Player\u2019s
     camp in two moons time.\r\n\r\nGodspeed\r\nGeneral\r\n(This is true)"
 --- !u!222 &2025808464
 CanvasRenderer:
