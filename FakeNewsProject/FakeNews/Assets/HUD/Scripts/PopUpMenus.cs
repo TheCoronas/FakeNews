@@ -150,16 +150,8 @@ public class PopUpMenus : MonoBehaviour
     
     public void returnToGameFromScroll()
     {
-        scrollDisplay1.SetActive(false);
-        scrollDisplay2.SetActive(false);
-        scrollDisplay3.SetActive(false);
-        scrollDisplay4.SetActive(false);
-        scrollDisplay4.SetActive(false);
+        setScrollDisplaysToFalse(); 
 
-        correctExplanationView.SetActive(false); 
-        incorrectExplanationView.SetActive(false); 
-        incorrectCharacter.SetActive(false);
-        replayCharacterView.SetActive(false);
         Cursor.visible = false;
         showScroll = false;
         displayExplanation = false;
@@ -198,11 +190,7 @@ public class PopUpMenus : MonoBehaviour
 
     public void enterCorrectExplanation()
     {
-        scrollDisplay1.SetActive(false);
-        scrollDisplay2.SetActive(false);
-        scrollDisplay3.SetActive(false);
-        scrollDisplay4.SetActive(false);
-        scrollDisplay4.SetActive(false);
+        setScrollDisplaysToFalse(); 
 
         displayCorrectExplanation = true;
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -213,16 +201,24 @@ public class PopUpMenus : MonoBehaviour
 
     public void enterIncorrectExplanation()
     {
-        scrollDisplay1.SetActive(false);
-        scrollDisplay2.SetActive(false);
-        scrollDisplay3.SetActive(false);
-        scrollDisplay4.SetActive(false);
-        scrollDisplay4.SetActive(false);
+        setScrollDisplaysToFalse(); 
 
         displayIncorrectExplanation = true;
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
         incorrectExplanationView.SetActive(!incorrectExplanationView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void setScrollDisplaysToFalse() {
+        scrollDisplay1.SetActive(false);
+        scrollDisplay2.SetActive(false);
+        scrollDisplay3.SetActive(false);
+        scrollDisplay4.SetActive(false);
+        scrollDisplay5.SetActive(false);
+        correctExplanationView.SetActive(false); 
+        incorrectExplanationView.SetActive(false); 
+        incorrectCharacter.SetActive(false);
+        replayCharacterView.SetActive(false);
     }
 }
