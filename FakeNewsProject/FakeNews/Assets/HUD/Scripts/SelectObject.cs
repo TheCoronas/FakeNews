@@ -19,6 +19,12 @@ public class SelectObject : MonoBehaviour
     public static bool scrollClicked = false;
     public GameObject scrollPopUp;
     public GameObject player;
+
+    public static int currentCharacter; 
+    public static int scrollAbilityPoints; 
+    public static int scrollDamage; 
+    public static int scrollCoins; 
+
     
     void Update()
     {
@@ -27,6 +33,33 @@ public class SelectObject : MonoBehaviour
             selectedObject.GetComponent<Renderer>().material.color = new Color32((byte)redCol, (byte)greenCol, (byte)blueCol, 255);
         }
     }
+    
+    void OnMouseDown()
+    {
+        scrollClicked = true;
+        // To get the name of the character youve clicked on
+        //Debug.Log(gameObject.name);
+        currentCharacter = gameObject.GetComponent<Character>().getCharacterOrder();
+        //currentScroll = gameObject.GetComponent<SelectedObject>().scrollPopUp();
+        scrollDamage = gameObject.GetComponent<Character>().getScrollDamage();
+        scrollAbilityPoints = gameObject.GetComponent<Character>().getScrollAbilityPoints(); 
+        scrollCoins = gameObject.GetComponent<Character>().getScrollCoins();
+        // To get their character order
+        //Debug.Log(gameObject.GetComponent<Character>().getCharacterOrder());
+
+    }
+    
+    void OnMouseUp()
+    {
+        scrollClicked = false;
+        
+    }
+    
+    public void returntoGameFromScroll()
+    {
+        scrollClicked = false;
+    }
+
     
 
 //    void OnMouseOver()
@@ -49,21 +82,6 @@ public class SelectObject : MonoBehaviour
 //        StopCoroutine(FlashObject());
 //        selectedObject.GetComponent<Renderer>().material.color = new Color32(255, 255, 255, 255);
 //    }
-    
-    void OnMouseDown()
-    {
-        scrollClicked = true;
-    }
-    
-    void OnMouseUp()
-    {
-        scrollClicked = false;
-    }
-    
-    public void returntoGameFromScroll()
-    {
-        scrollClicked = false;
-    }
     
 //    IEnumerator FlashObject()
 //    {
