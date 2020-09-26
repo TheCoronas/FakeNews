@@ -80,7 +80,7 @@ public class PopUpMenus : MonoBehaviour
         mapDisplayed = !mapDisplayed;
             
         mapMenu.SetActive(!mapMenu.activeInHierarchy);
-        player.GetComponent<FirstPersonController>().enabled = false;
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     private void togglePause()
@@ -89,7 +89,8 @@ public class PopUpMenus : MonoBehaviour
         gamePaused = !gamePaused;
     
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
-        player.GetComponent<FirstPersonController>().enabled = false; 
+        
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
     
     private void toggleScroll()
