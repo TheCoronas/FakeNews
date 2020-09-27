@@ -5,6 +5,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PopUpMenus : MonoBehaviour
 {
@@ -33,11 +34,15 @@ public class PopUpMenus : MonoBehaviour
 
     public static int characterCount; 
 
-    private string currentScrollDisplay; 
+    private string currentScrollDisplay;
 
-     void Start()
+    private Text[] mapText;
+    private Button[] mapButtons;
+
+    void Start()
     {
-        characterCount = 1; 
+        characterCount = 1;
+        initialiseMap();
     }
 
     void Update()
@@ -78,10 +83,27 @@ public class PopUpMenus : MonoBehaviour
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         mapDisplayed = !mapDisplayed;
+        displayMapError(false);
             
         mapMenu.SetActive(!mapMenu.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
+
+
+    public void initialiseMap()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+
+        mapText = GameObject.Find("HUD/MapScreen/MapScreenUI/Text").GetComponentsInChildren<Text>();
+
+        foreach (Text mapText in mapText) {
+            if (mapText.name == "CurrentLevelText")
+            {
+                mapText.text = String.Format("Current Level: {0}", scene.name);
+            }
+        }
+    }
+
 
     private void togglePause()
     {
@@ -222,4 +244,86 @@ public class PopUpMenus : MonoBehaviour
         incorrectCharacter.SetActive(false);
         replayCharacterView.SetActive(false);
     }
+
+    // Returns true if the requested level is not the current, false otherwise. Used for map navigation.
+    // todo: Check whether a player has completed all scrolls on a level before allowing access to later ones.
+    private void changeLevels(int currentLevel, int nextLevel)
+    {
+        if (currentLevel != nextLevel)
+        {
+            SceneManager.LoadScene(nextLevel);
+            toggleMap();
+        }
+        else
+        {
+            displayMapError(true);
+        }
+    }
+
+    public void navigateMapLevels(Button button)
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        int currentBuildIndex = scene.buildIndex;
+        int requestedSceneIndex;
+
+        switch (button.name)
+        {
+            case "Level1":
+                requestedSceneIndex = 1;
+
+                changeLevels(currentBuildIndex, requestedSceneIndex);
+
+                break;
+
+            case "Level2":
+                requestedSceneIndex = 2;
+
+                changeLevels(currentBuildIndex, requestedSceneIndex);
+
+                break;
+
+            case "Level3":
+                requestedSceneIndex = 3;
+
+                changeLevels(currentBuildIndex, requestedSceneIndex);
+
+                break;
+
+            case "Level4":
+                requestedSceneIndex = 4;
+
+                changeLevels(currentBuildIndex, requestedSceneIndex);
+
+                break;
+
+            case "Level5":
+                requestedSceneIndex = 5;
+
+                changeLevels(currentBuildIndex, requestedSceneIndex);
+                break;
+
+            case "ReturnToGame":
+                break;
+
+            default:
+                Debug.Log("somethig wrong pal");
+                break;
+        }
+    }
+
+    private void displayMapError(bool status)
+    {
+        foreach (Text mapText in mapText)
+        {
+            if (mapText.name == "LevelChangeError" && status)
+            {
+                mapText.text = "Already on this level!";
+            }
+            else if (mapText.name == "LevelChangeError" && !status)
+            {
+                mapText.text = "";
+            }
+        }
+    }
 }
+
