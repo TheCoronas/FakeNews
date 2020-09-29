@@ -17,6 +17,7 @@ public class PopUpMenus : MonoBehaviour
     public bool displayExplanation = false; 
     public static bool displayCorrectExplanation = false; 
     public static bool displayIncorrectExplanation = false; 
+    public bool storyFlag = false; 
     public GameObject mapMenu;
     public GameObject player;
     public GameObject pauseMenu;
@@ -25,6 +26,12 @@ public class PopUpMenus : MonoBehaviour
     public GameObject scrollDisplay3;
     public GameObject scrollDisplay4;
     public GameObject scrollDisplay5;
+    public GameObject storyDisplay1;
+    public GameObject storyDisplay2;
+    public GameObject storyDisplay3;
+    public GameObject storyDisplay4;
+    public GameObject storyDisplay5;
+    public GameObject storyDisplay6;
     public GameObject gameOverMenu;
     public GameObject explanationView; 
     public GameObject incorrectCharacter; 
@@ -34,6 +41,8 @@ public class PopUpMenus : MonoBehaviour
 
     public static int characterCount; 
 
+    public static int storyCount; 
+
     private string currentScrollDisplay;
 
     private Text[] mapText;
@@ -42,11 +51,15 @@ public class PopUpMenus : MonoBehaviour
     void Start()
     {
         characterCount = 1;
+        storyCount = 1; 
         initialiseMap();
     }
 
     void Update()
     {
+        if (storyCount == 1 && !storyFlag) {
+            StartCoroutine(toggleStoryScroll());
+        }
         if (Player.CurrentHealth <= 0 && !displayGameOver)
         {
             enterGameOver();
@@ -137,10 +150,42 @@ public class PopUpMenus : MonoBehaviour
                 scrollDisplay5.SetActive(!scrollDisplay5.activeInHierarchy);
                 break;
             default: 
-                Debug.Log("Error in PopUpMenus.toggleScroll()");
                 break; 
         }
         player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    private IEnumerator toggleStoryScroll() {
+        storyFlag = true; 
+        yield return new WaitForSeconds(1);
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        showScroll = !showScroll;
+        player.GetComponent<FirstPersonController>().enabled = false;
+        
+        switch (storyCount) {
+            case 1:
+                storyDisplay1.SetActive(!storyDisplay1.activeInHierarchy);
+                yield break;
+            case 2:
+                storyDisplay2.SetActive(!storyDisplay2.activeInHierarchy);
+                yield break;
+            case 3:
+                storyDisplay3.SetActive(!storyDisplay3.activeInHierarchy);
+                yield break;
+            case 4:
+                storyDisplay4.SetActive(!storyDisplay4.activeInHierarchy);
+                yield break;
+            case 5:
+                storyDisplay5.SetActive(!storyDisplay5.activeInHierarchy);
+                yield break;
+            case 6:
+                storyDisplay6.SetActive(!storyDisplay6.activeInHierarchy);
+                yield break;
+            default: 
+                yield break; 
+        }
+        StopCoroutine(toggleStoryScroll());
+        yield return null;      
     }
 
     public void enterGameOver()
@@ -181,7 +226,20 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
-    
+
+    public void returnToGameAfterExplain()
+    {
+        setScrollDisplaysToFalse();       
+
+        Cursor.visible = false;
+        showScroll = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+
+        storyCount += 1; 
+
+        StartCoroutine(toggleStoryScroll());
+    }
     
     public void returnToMenu()
     {
@@ -239,6 +297,12 @@ public class PopUpMenus : MonoBehaviour
         scrollDisplay3.SetActive(false);
         scrollDisplay4.SetActive(false);
         scrollDisplay5.SetActive(false);
+        storyDisplay1.SetActive(false);
+        storyDisplay2.SetActive(false);
+        storyDisplay3.SetActive(false);
+        storyDisplay4.SetActive(false);
+        storyDisplay5.SetActive(false);
+        storyDisplay6.SetActive(false);
         correctExplanationView.SetActive(false); 
         incorrectExplanationView.SetActive(false); 
         incorrectCharacter.SetActive(false);
