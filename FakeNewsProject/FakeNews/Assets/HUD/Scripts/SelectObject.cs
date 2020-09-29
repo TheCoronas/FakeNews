@@ -37,7 +37,7 @@ public class SelectObject : MonoBehaviour
         currentCharacter = gameObject.GetComponent<Character>().getCharacterOrder();
         //currentScroll = gameObject.GetComponent<SelectedObject>().scrollPopUp();
         scrollDamage = gameObject.GetComponent<Character>().getScrollDamage();
-        scrollAbilityPoints = gameObject.GetComponent<Character>().getScrollAbilityPoints(); 
+        //scrollAbilityPoints = gameObject.GetComponent<Character>().getScrollAbilityPoints(); 
         scrollCoins = gameObject.GetComponent<Character>().getScrollCoins();
         // To get their character order
         //Debug.Log(gameObject.GetComponent<Character>().getCharacterOrder());

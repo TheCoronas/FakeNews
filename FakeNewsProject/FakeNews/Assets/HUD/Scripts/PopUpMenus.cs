@@ -18,6 +18,8 @@ public class PopUpMenus : MonoBehaviour
     public static bool displayCorrectExplanation = false; 
     public static bool displayIncorrectExplanation = false; 
     public bool storyFlag = false; 
+    public static bool displayNotEnoughPoints = false; 
+    public Player self; 
     public GameObject mapMenu;
     public GameObject player;
     public GameObject pauseMenu;
@@ -37,14 +39,16 @@ public class PopUpMenus : MonoBehaviour
     public GameObject incorrectCharacter; 
     public GameObject correctExplanationView; 
     public GameObject incorrectExplanationView;
+    public GameObject insufficientAbilityPoints; 
     public GameObject replayCharacterView;
-
+    public GameObject advisorsOpinion; 
+    public GameObject empireMap; 
+    public GameObject peoplesOpinion; 
+    public GameObject lieutOpinion; 
+    public GameObject councilOpinion; 
     public static int characterCount; 
-
     public static int storyCount; 
-
     private string currentScrollDisplay;
-
     private Text[] mapText;
     private Button[] mapButtons;
 
@@ -63,6 +67,10 @@ public class PopUpMenus : MonoBehaviour
         if (Player.CurrentHealth <= 0 && !displayGameOver)
         {
             enterGameOver();
+        }
+
+        if (Player.currentAbilityPoints == 0 && displayNotEnoughPoints) {
+            enterNotEnoughPoints(); 
         }
 
         if (Input.GetKeyDown("m") && gamePaused == false && showScroll == false && displayGameOver == false) {
@@ -128,7 +136,7 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
     
-    private void toggleScroll()
+    public void toggleScroll()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
@@ -197,7 +205,54 @@ public class PopUpMenus : MonoBehaviour
         gameOverMenu.SetActive(!gameOverMenu.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
-    
+
+    public void enterAdvisorsOpinion() {
+        setScrollDisplaysToFalse();
+        self.updateAbilityPoints(1);
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        advisorsOpinion.SetActive(!advisorsOpinion.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+        
+    }
+
+    public void enterEmpireMap() {
+        setScrollDisplaysToFalse();
+        self.updateAbilityPoints(1);
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        empireMap.SetActive(!empireMap.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void enterPeoplesOpinion() {
+        setScrollDisplaysToFalse();
+        //Player.updateAbilityPoints(1); 
+        self.updateAbilityPoints(1);
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        peoplesOpinion.SetActive(!peoplesOpinion.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void enterLieutOpinion() {
+        setScrollDisplaysToFalse();
+        self.updateAbilityPoints(1);
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        lieutOpinion.SetActive(!lieutOpinion.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void enterCouncilOpinion() {
+        setScrollDisplaysToFalse();
+        self.updateAbilityPoints(1);
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        councilOpinion.SetActive(!councilOpinion.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
     public void returntoGameFromMap()
     {
         mapMenu.SetActive(false);
@@ -219,6 +274,8 @@ public class PopUpMenus : MonoBehaviour
     public void returnToGameFromScroll()
     {
         setScrollDisplaysToFalse(); 
+        setAbilityDisplaysToFalse();
+        setStoryDisplaysToFalse(); 
 
         Cursor.visible = false;
         showScroll = false;
@@ -249,6 +306,18 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void returnToScroll()
+    {
+        setAbilityDisplaysToFalse();      
+
+        Cursor.visible = false;
+        showScroll = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+
+        toggleScroll(); 
     }
 
     private void incorrectCharacterCall()
@@ -291,22 +360,46 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    public void enterNotEnoughPoints()
+    {
+        setAbilityDisplaysToFalse(); 
+        setScrollDisplaysToFalse();
+        displayNotEnoughPoints = false; 
+
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        insufficientAbilityPoints.SetActive(!insufficientAbilityPoints.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
     public void setScrollDisplaysToFalse() {
         scrollDisplay1.SetActive(false);
         scrollDisplay2.SetActive(false);
         scrollDisplay3.SetActive(false);
         scrollDisplay4.SetActive(false);
         scrollDisplay5.SetActive(false);
+        correctExplanationView.SetActive(false); 
+        incorrectExplanationView.SetActive(false); 
+        incorrectCharacter.SetActive(false);
+        replayCharacterView.SetActive(false);
+    }
+
+    public void setStoryDisplaysToFalse() {
         storyDisplay1.SetActive(false);
         storyDisplay2.SetActive(false);
         storyDisplay3.SetActive(false);
         storyDisplay4.SetActive(false);
         storyDisplay5.SetActive(false);
         storyDisplay6.SetActive(false);
-        correctExplanationView.SetActive(false); 
-        incorrectExplanationView.SetActive(false); 
-        incorrectCharacter.SetActive(false);
-        replayCharacterView.SetActive(false);
+    }
+
+    public void setAbilityDisplaysToFalse() {
+        advisorsOpinion.SetActive(false); 
+        empireMap.SetActive(false); 
+        peoplesOpinion.SetActive(false);
+        lieutOpinion.SetActive(false); 
+        councilOpinion.SetActive(false);
+        insufficientAbilityPoints.SetActive(false);
     }
 
     // Returns true if the requested level is not the current, false otherwise. Used for map navigation.

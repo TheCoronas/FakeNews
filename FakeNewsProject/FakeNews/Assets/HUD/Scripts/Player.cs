@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public int maxAbilityPoints = 3;
     private static int currentHealth;
     public int currentCoins; 
-    public int currentAbilityPoints; 
+    public static int currentAbilityPoints; 
 
     public HealthBar healthBar; 
     public CoinBar coinBar; 
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     public static int health;
     public static int expense; 
-    public static int points; 
+    public int points; 
 
     public static int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
@@ -43,16 +43,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         health = SelectObject.scrollDamage; 
-        expense = SelectObject.scrollAbilityPoints;
-        points = SelectObject.scrollCoins; 
+        expense = SelectObject.scrollCoins;
+        //points = SelectObject.scrollCoins; 
 
         if (PopUpMenus.displayCorrectExplanation) 
         {
             PopUpMenus.characterCount += 1;
 
             currentHealth = currentHealth + health;
-            currentAbilityPoints = currentAbilityPoints + expense; 
-            currentCoins = currentCoins + points;
+            //currentAbilityPoints = currentAbilityPoints + expense; 
+            currentCoins = currentCoins + expense;
 
             if ((currentHealth) < maxHealth) { 
                 healthBar.SetHealth(currentHealth); 
@@ -61,12 +61,6 @@ public class Player : MonoBehaviour
                 currentHealth = maxHealth; 
             }
 
-            if ((currentAbilityPoints) < maxAbilityPoints) {
-                abilityPointsBar.SetAbilityPoints(currentAbilityPoints); 
-            } else {
-                abilityPointsBar.SetAbilityPoints(maxAbilityPoints); 
-                currentAbilityPoints = maxAbilityPoints; 
-            }
             if ((currentCoins) < maxCoins) {  
                 coinBar.SetCoins(currentCoins);
             } else {
@@ -78,8 +72,8 @@ public class Player : MonoBehaviour
             PopUpMenus.characterCount += 1;
 
             currentHealth = currentHealth - health;
-            currentAbilityPoints = currentAbilityPoints - expense; 
-            currentCoins = currentCoins - points;
+            //currentAbilityPoints = currentAbilityPoints - expense; 
+            currentCoins = currentCoins - expense;
 
             if ((currentHealth) > 0) { 
                 healthBar.SetHealth(currentHealth); 
@@ -88,12 +82,6 @@ public class Player : MonoBehaviour
                 currentHealth = 0; 
             }
 
-            if ((currentAbilityPoints) > 0) {
-                abilityPointsBar.SetAbilityPoints(currentAbilityPoints); 
-            } else {
-                abilityPointsBar.SetAbilityPoints(0); 
-                currentAbilityPoints = 0;
-            }
             if ((currentCoins) > 0) {  
                 coinBar.SetCoins(currentCoins);
             } else {
@@ -103,5 +91,16 @@ public class Player : MonoBehaviour
         }
         PopUpMenus.displayCorrectExplanation = false; 
         PopUpMenus.displayIncorrectExplanation = false;
+    }
+
+    public void updateAbilityPoints(int points) {
+        currentAbilityPoints = currentAbilityPoints - points;
+        if ((currentAbilityPoints) >= 0) { 
+            abilityPointsBar.SetAbilityPoints(currentAbilityPoints); 
+        } else {
+            PopUpMenus.displayNotEnoughPoints = true;
+            abilityPointsBar.SetAbilityPoints(0); 
+            currentAbilityPoints = 0;
+        }
     }
 }

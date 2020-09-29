@@ -11,6 +11,6 @@ public class abilityCounter : MonoBehaviour
     }
 
     void Update () {
-        abilityPoints.text = "Ability Points: " + GameObject.Find("Player").GetComponent<Player>().currentAbilityPoints;
+        abilityPoints.text = "Ability Points: " + Player.currentAbilityPoints;
     }
 }
