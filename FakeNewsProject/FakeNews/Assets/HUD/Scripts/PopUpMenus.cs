@@ -50,7 +50,6 @@ public class PopUpMenus : MonoBehaviour
     public static int storyCount; 
     private string currentScrollDisplay;
     private Text[] mapText;
-    private Button[] mapButtons;
 
     void Start()
     {
@@ -460,6 +459,12 @@ public class PopUpMenus : MonoBehaviour
                 break;
 
             case "ReturnToGame":
+                break;
+
+
+            case "NextLevel":
+                requestedSceneIndex = currentBuildIndex + 1;
+                changeLevels(currentBuildIndex, requestedSceneIndex);
                 break;
 
             default:

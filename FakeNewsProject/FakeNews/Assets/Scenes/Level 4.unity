@@ -28540,7 +28540,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Return to Game
+  m_Text: Next Level
 --- !u!222 &1624447832
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28640,7 +28640,7 @@ GameObject:
   - component: {fileID: 1627915859}
   - component: {fileID: 1627915858}
   m_Layer: 5
-  m_Name: ReturnToGame
+  m_Name: NextLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28710,11 +28710,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 721570765}
-        m_MethodName: returnToGameFromScroll
-        m_Mode: 1
+        m_MethodName: navigateMapLevels
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1627915858}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
