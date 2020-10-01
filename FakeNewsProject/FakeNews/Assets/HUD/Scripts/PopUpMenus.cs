@@ -72,11 +72,11 @@ public class PopUpMenus : MonoBehaviour
             enterNotEnoughPoints(); 
         }
 
-        if (Input.GetKeyDown("m") && gamePaused == false && showScroll == false && displayGameOver == false) {
+        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver) {
             toggleMap();            
         }
         
-        if (Input.GetButtonDown("Cancel") && mapDisplayed == false && showScroll == false && displayGameOver == false) {
+        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver) {
             togglePause();            
         }
         
@@ -468,7 +468,7 @@ public class PopUpMenus : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("somethig wrong pal");
+                Debug.Log("something wrong");
                 break;
         }
     }
