@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class PopUpMenus : MonoBehaviour
 {
     public bool mapDisplayed = false;
+    public bool inspectDisplayed = false;
     public bool gamePaused = false;
     public bool scrollClicked;
     public bool showScroll = false;
@@ -21,6 +22,7 @@ public class PopUpMenus : MonoBehaviour
     public static bool displayNotEnoughPoints = false; 
     public Player self; 
     public GameObject mapMenu;
+    public GameObject inspectMenu;
     public GameObject player;
     public GameObject pauseMenu;
     public GameObject scrollDisplay1;
@@ -72,16 +74,20 @@ public class PopUpMenus : MonoBehaviour
             enterNotEnoughPoints(); 
         }
 
-        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver) {
+        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !inspectDisplayed) {
             toggleMap();            
         }
+
+        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed) {
+            toggleInspect();            
+        }
         
-        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver) {
+        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed) {
             togglePause();            
         }
         
         scrollClicked = SelectObject.scrollClicked;
-        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false) {
             if (SelectObject.currentCharacter > characterCount) {
                 incorrectCharacterCall(); 
             } else if (SelectObject.currentCharacter < characterCount) {
@@ -90,13 +96,22 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         } else {
             Cursor.visible = false;
         }
+    }
+
+    public void toggleInspect()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        inspectDisplayed = !inspectDisplayed;
+            
+        inspectMenu.SetActive(!inspectMenu.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     public void toggleMap()
@@ -260,6 +275,15 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
+
+    public void returntoGameFromInspect()
+    {
+        inspectMenu.SetActive(false);
+        Cursor.visible = false;
+        inspectDisplayed = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+    }
     
     public void returntoGameFromPause()
     {
@@ -399,6 +423,7 @@ public class PopUpMenus : MonoBehaviour
         lieutOpinion.SetActive(false); 
         councilOpinion.SetActive(false);
         insufficientAbilityPoints.SetActive(false);
+        inspectMenu.SetActive(false);
     }
 
     // Returns true if the requested level is not the current, false otherwise. Used for map navigation.
