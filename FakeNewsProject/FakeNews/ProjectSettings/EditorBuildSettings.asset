@@ -9,15 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/start_screen.unity
     guid: 985767fc344d944ca8147a420ee1de3e
   - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 19cc67643bddc1b4a87d21a9fd810cbe
+  - enabled: 1
     path: Assets/Scenes/test_scene1.unity
     guid: c507ef31967ad4263aad7d1d7246099c
   - enabled: 1
-    path: Assets/Scenes/Menus/signup_screen.unity
-    guid: 23321aeb8acc04ff7ab0c71ac8b4bdb9
+    path: Assets/Scenes/Level 3.unity
+    guid: 693e80a74af470643a64f3b54c2d449d
   - enabled: 1
     path: Assets/Scenes/Level 4.unity
     guid: 0864aee01d2508049a7b718f741793de
   - enabled: 1
+    path: Assets/Scenes/Level 5.unity
+    guid: 1142bfbf600d24d3c992221b0247f61c
+  - enabled: 1
     path: Assets/Scenes/Menus/login_screen 1.unity
     guid: 8a876739496c38c4da8268938c62f412
+  - enabled: 1
+    path: Assets/Scenes/Menus/signup_screen.unity
+    guid: 23321aeb8acc04ff7ab0c71ac8b4bdb9
   m_configObjects: {}

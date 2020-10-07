@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
     //initialises the order of characters in the game
     public int characterOrder;
     public int scrollDamage; 
-    public int scrollAbilityPoints; 
+    // public int scrollAbilityPoints; 
     public int ScrollCoins; 
 
     public int getCharacterOrder()
@@ -20,10 +20,10 @@ public class Character : MonoBehaviour
         return scrollDamage;
     }
 
-    public int getScrollAbilityPoints()
-    {
-        return scrollAbilityPoints;
-    }
+    // public int getScrollAbilityPoints()
+    // {
+    //     return scrollAbilityPoints;
+    // }
 
     public int getScrollCoins()
     {
