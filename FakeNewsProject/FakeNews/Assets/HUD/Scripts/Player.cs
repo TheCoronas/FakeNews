@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     public int maxAbilityPoints = 3;
     private static int currentHealth;
     public int currentCoins; 
-    public static int currentAbilityPoints; 
+    public static int currentAbilityPoints;
+    public static int userId;
 
     public HealthBar healthBar; 
     public CoinBar coinBar; 

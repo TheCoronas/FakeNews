@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net;
+using System.Text;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -123,6 +126,7 @@ public class PopUpMenus : MonoBehaviour
             }
         }
     }
+
 
 
     private void togglePause()
@@ -296,9 +300,24 @@ public class PopUpMenus : MonoBehaviour
 
         StartCoroutine(toggleStoryScroll());
     }
+
+    public void saveGame()
+    {
+        WebClient client = new WebClient();
+        var values = new NameValueCollection();
+        values["user_id"] = Player.userId.ToString();
+        values["currentHealth"] = Player.CurrentHealth.ToString();
+        values["abilityPoints"] = Player.currentAbilityPoints.ToString();
+        values["activeScene"] = SceneManager.GetActiveScene().buildIndex.ToString();
+        
+        byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/save", values);
+        var result = Encoding.UTF8.GetString(response);
+        Debug.Log(result);
+    }
     
     public void returnToMenu()
     {
+        saveGame();
         SceneManager.LoadScene(0);
         gamePaused = false;
         Time.timeScale = 1;
