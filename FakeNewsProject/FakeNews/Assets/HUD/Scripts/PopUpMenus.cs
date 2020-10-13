@@ -13,6 +13,7 @@ public class PopUpMenus : MonoBehaviour
     public bool gamePaused = false;
     public bool scrollClicked;
     public bool showScroll = false;
+    public bool showHelp = false;
     public bool displayGameOver = false;
     public bool displayExplanation = false; 
     public static bool displayCorrectExplanation = false; 
@@ -34,6 +35,7 @@ public class PopUpMenus : MonoBehaviour
     public GameObject storyDisplay4;
     public GameObject storyDisplay5;
     public GameObject storyDisplay6;
+    public GameObject helpDisplay;
     public GameObject gameOverMenu;
     public GameObject explanationView; 
     public GameObject incorrectCharacter; 
@@ -72,16 +74,21 @@ public class PopUpMenus : MonoBehaviour
             enterNotEnoughPoints(); 
         }
 
-        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver) {
+        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !showHelp) {
             toggleMap();            
         }
         
-        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver) {
+        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !showHelp) {
             togglePause();            
         }
-        
+
+        if (Input.GetButtonDown("h") && !mapDisplayed && !showScroll && !displayGameOver && !gamePaused)
+        {
+            toggleHelp();
+        }
+
         scrollClicked = SelectObject.scrollClicked;
-        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && !showHelp) {
             if (SelectObject.currentCharacter > characterCount) {
                 incorrectCharacterCall(); 
             } else if (SelectObject.currentCharacter < characterCount) {
@@ -90,7 +97,7 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver || showHelp)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -160,6 +167,15 @@ public class PopUpMenus : MonoBehaviour
                 break; 
         }
         player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void toggleHelp() {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        showHelp = !showHelp;
+
+        helpDisplay.SetActive(!helpDisplay.activeInHierarchy);
+
+        //player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     private IEnumerator toggleStoryScroll() {
@@ -279,6 +295,15 @@ public class PopUpMenus : MonoBehaviour
         Cursor.visible = false;
         showScroll = false;
         displayExplanation = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+    }
+
+    public void returnToGameFromHelp()
+    {
+        helpDisplay.SetActive(false);
+        Cursor.visible = false;
+        showHelp = false;
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
