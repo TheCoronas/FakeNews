@@ -55,6 +55,7 @@ public class PopUpMenus : MonoBehaviour
     public static int storyCount; 
     private string currentScrollDisplay;
     private Text[] mapText;
+    public bool dialoguing = false; 
 
     void Start()
     {
@@ -114,7 +115,7 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver || dialoguing)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
