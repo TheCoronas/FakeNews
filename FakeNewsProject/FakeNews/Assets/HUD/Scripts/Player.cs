@@ -10,17 +10,20 @@ public class Player : MonoBehaviour
 {
 
     //public PopUpMenus popUpMenu; 
-    public int maxHealth = 10; 
-    public int maxCoins = 20; 
-    public int maxAbilityPoints = 3;
+    public static int maxHealth = 10; 
+    public static int maxCoins = 20; 
+    public static int maxAbilityPoints = 3;
     private static int currentHealth;
-    public int currentCoins; 
+    public static int currentCoins; 
     public static int currentAbilityPoints;
     public static int userId;
+    public static int characterCount;
+    public static bool loggedIn = false;
 
     public HealthBar healthBar; 
     public CoinBar coinBar; 
     public AbilityPointsBar abilityPointsBar;
+    public static int activeScene;
 
     public static int health;
     public static int expense; 
@@ -31,25 +34,34 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
-        currentCoins = maxCoins; 
-        currentAbilityPoints = maxAbilityPoints; 
-
+        // currentHealth = maxHealth;
+        // currentCoins = maxCoins; // todo change 
+        // currentAbilityPoints = maxAbilityPoints; 
+        
+        // set max values
         healthBar.SetMaxHealth(maxHealth); 
         coinBar.SetMaxCoins(maxCoins); 
-        abilityPointsBar.SetMaxAbilityPoints(maxAbilityPoints);       
+        abilityPointsBar.SetMaxAbilityPoints(maxAbilityPoints);    
+        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        // set current values
+        healthBar.SetHealth(CurrentHealth);
+        coinBar.SetCoins(currentCoins);
+         abilityPointsBar.SetAbilityPoints(currentAbilityPoints);
+         
         health = SelectObject.scrollDamage; 
         expense = SelectObject.scrollCoins;
-        //points = SelectObject.scrollCoins; 
+        //points = SelectObject.scrollCoins;
 
         if (PopUpMenus.displayCorrectExplanation) 
         {
             PopUpMenus.characterCount += 1;
+            characterCount += 1;
 
             currentHealth = currentHealth + health;
             //currentAbilityPoints = currentAbilityPoints + expense; 
@@ -71,6 +83,7 @@ public class Player : MonoBehaviour
 
         } else if (PopUpMenus.displayIncorrectExplanation) {
             PopUpMenus.characterCount += 1;
+            characterCount += 1;
 
             currentHealth = currentHealth - health;
             //currentAbilityPoints = currentAbilityPoints - expense; 

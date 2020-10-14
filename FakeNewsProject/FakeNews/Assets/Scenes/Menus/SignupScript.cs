@@ -89,6 +89,7 @@ public class SignupScript : MonoBehaviour
         else
         {
             textDisplay.GetComponent<Text>().text = "Successful! Please return and login.";
+            // setting default values is handled by the webserver when you signup
         }
     }
     

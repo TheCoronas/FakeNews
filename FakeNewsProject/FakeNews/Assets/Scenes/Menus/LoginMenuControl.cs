@@ -62,6 +62,8 @@ public class LoginMenuControl : MonoBehaviour
         public string currentHealth;
         public string activeScene;
         public string abilityPoints;
+        public string coins;
+        public string characterCount;
     } 
    
     
@@ -106,11 +108,14 @@ public class LoginMenuControl : MonoBehaviour
             // Player.userId = Int32.Parse(result);
             // int abilityPoints = Int32.Parse(result);
             var v = JsonUtility.FromJson<Values>(result);
+            var activeScene = Int32.Parse(v.activeScene);
             Player.userId = Int32.Parse(v.user_id);
             Player.CurrentHealth = Int32.Parse(v.currentHealth);
             Player.currentAbilityPoints = Int32.Parse(v.abilityPoints);
-            var activeScene = Int32.Parse(v.activeScene);
-            
+            Player.currentCoins = Int32.Parse(v.coins);
+            Player.characterCount = Int32.Parse(v.characterCount);
+            Player.activeScene = activeScene;
+            Player.loggedIn = true;
             SceneManager.LoadScene(activeScene); //todo change back
         }
     }

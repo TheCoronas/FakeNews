@@ -11,6 +11,6 @@ public class coinCounter : MonoBehaviour
     }
 
     void Update () {
-        coins.text = "Coins: " + GameObject.Find("Player").GetComponent<Player>().currentCoins;
+        coins.text = "Coins: " + Player.currentCoins;
     }
 }

@@ -58,8 +58,22 @@ public class PopUpMenus : MonoBehaviour
 
     void Start()
     {
-        characterCount = 1;
-        storyCount = 1; 
+        // should let you skip logging in whilst debugging
+        if (Player.loggedIn == false)
+        {
+            characterCount = 1;
+            Player.userId = 9999999;
+            Player.CurrentHealth = Player.maxHealth;
+            Player.currentAbilityPoints = Player.maxAbilityPoints;
+            Player.currentCoins = Player.maxCoins;
+            Player.characterCount = 1;
+            Player.activeScene = SceneManager.GetActiveScene().buildIndex;
+        }
+        else
+        {
+            storyCount = Player.activeScene;
+            characterCount = Player.characterCount;
+        }
         initialiseMap();
     }
 
@@ -132,6 +146,7 @@ public class PopUpMenus : MonoBehaviour
                 mapText.text = String.Format("Current Level: {0}", scene.name);
             }
         }
+        
     }
 
 
@@ -327,18 +342,24 @@ public class PopUpMenus : MonoBehaviour
         StartCoroutine(toggleStoryScroll());
     }
 
+    /** Saves the game state. **/
     public void saveGame()
     {
-        WebClient client = new WebClient();
-        var values = new NameValueCollection();
-        values["user_id"] = Player.userId.ToString();
-        values["currentHealth"] = Player.CurrentHealth.ToString();
-        values["abilityPoints"] = Player.currentAbilityPoints.ToString();
-        values["activeScene"] = SceneManager.GetActiveScene().buildIndex.ToString();
-        
-        byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/save", values);
-        var result = Encoding.UTF8.GetString(response);
-        Debug.Log(result);
+        if (Player.loggedIn)
+        {
+            WebClient client = new WebClient();
+            var values = new NameValueCollection();
+            values["user_id"] = Player.userId.ToString();
+            values["currentHealth"] = Player.CurrentHealth.ToString();
+            values["abilityPoints"] = Player.currentAbilityPoints.ToString();
+            values["activeScene"] = SceneManager.GetActiveScene().buildIndex.ToString();
+            values["coins"] = Player.currentCoins.ToString();
+            values["characterCount"] = Player.characterCount.ToString();
+            
+            byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/save", values);
+            var result = Encoding.UTF8.GetString(response);
+            Debug.Log(result);
+        }
     }
     
     public void returnToMenu()
