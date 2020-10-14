@@ -174,6 +174,10 @@ public class PopUpMenus : MonoBehaviour
 
     public void toggleScroll()
     {
+        if (Player.loggedIn)
+        {
+            saveGame();
+        }
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
 

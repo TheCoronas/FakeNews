@@ -18,6 +18,7 @@ public class SignupScript : MonoBehaviour
     public GameObject usernameInputField;
     public GameObject passwordInputField;
     public GameObject textDisplay;
+    public GameObject codefield;
     
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,7 @@ public class SignupScript : MonoBehaviour
     {
         username = usernameInputField.GetComponent<InputField>().text;
         password = passwordInputField.GetComponent<InputField>().text;
+        var code = codefield.GetComponent<InputField>().text;
 
         // calculate hash
         byte[] passBytes = Encoding.UTF8.GetBytes(password);
@@ -73,6 +75,7 @@ public class SignupScript : MonoBehaviour
         var values = new NameValueCollection();
         values["username"] = username;
         values["password"] = hash;
+        values["code"] = code; 
         
         // send to server
         WebClient client = new WebClient();
