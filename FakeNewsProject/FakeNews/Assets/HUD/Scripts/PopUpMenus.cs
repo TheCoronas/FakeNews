@@ -11,9 +11,9 @@ public class PopUpMenus : MonoBehaviour
 {
     public bool mapDisplayed = false;
     public bool gamePaused = false;
+    public bool showHelp = false;
     public bool scrollClicked;
     public bool showScroll = false;
-    public bool showHelp = false;
     public bool displayGameOver = false;
     public bool displayExplanation = false; 
     public static bool displayCorrectExplanation = false; 
@@ -24,6 +24,7 @@ public class PopUpMenus : MonoBehaviour
     public GameObject mapMenu;
     public GameObject player;
     public GameObject pauseMenu;
+    public GameObject helpDisplay;
     public GameObject scrollDisplay1;
     public GameObject scrollDisplay2;
     public GameObject scrollDisplay3;
@@ -35,7 +36,6 @@ public class PopUpMenus : MonoBehaviour
     public GameObject storyDisplay4;
     public GameObject storyDisplay5;
     public GameObject storyDisplay6;
-    public GameObject helpDisplay;
     public GameObject gameOverMenu;
     public GameObject explanationView; 
     public GameObject incorrectCharacter; 
@@ -82,13 +82,13 @@ public class PopUpMenus : MonoBehaviour
             togglePause();            
         }
 
-        if (Input.GetButtonDown("h") && !mapDisplayed && !showScroll && !displayGameOver && !gamePaused)
+        if (Input.GetKeyDown("h") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
         {
             toggleHelp();
         }
 
         scrollClicked = SelectObject.scrollClicked;
-        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && !showHelp) {
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
             if (SelectObject.currentCharacter > characterCount) {
                 incorrectCharacterCall(); 
             } else if (SelectObject.currentCharacter < characterCount) {
@@ -97,7 +97,7 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver || showHelp)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -141,7 +141,17 @@ public class PopUpMenus : MonoBehaviour
         
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
-    
+
+    private void toggleHelp()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        showHelp = !showHelp;
+
+        helpDisplay.SetActive(!helpDisplay.activeInHierarchy);
+
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
+    }
+
     public void toggleScroll()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -167,15 +177,6 @@ public class PopUpMenus : MonoBehaviour
                 break; 
         }
         player.GetComponent<FirstPersonController>().enabled = false;
-    }
-
-    public void toggleHelp() {
-        Time.timeScale = Math.Abs(Time.timeScale - 1);
-        showHelp = !showHelp;
-
-        helpDisplay.SetActive(!helpDisplay.activeInHierarchy);
-
-        //player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     private IEnumerator toggleStoryScroll() {
@@ -285,7 +286,16 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
-    
+
+    public void returntoGameFromHelp()
+    {
+        helpDisplay.SetActive(false);
+        Cursor.visible = false;
+        showHelp = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+    }
+
     public void returnToGameFromScroll()
     {
         setScrollDisplaysToFalse(); 
@@ -295,15 +305,6 @@ public class PopUpMenus : MonoBehaviour
         Cursor.visible = false;
         showScroll = false;
         displayExplanation = false;
-        Time.timeScale = 1;
-        player.GetComponent<FirstPersonController>().enabled = true;
-    }
-
-    public void returnToGameFromHelp()
-    {
-        helpDisplay.SetActive(false);
-        Cursor.visible = false;
-        showHelp = false;
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }

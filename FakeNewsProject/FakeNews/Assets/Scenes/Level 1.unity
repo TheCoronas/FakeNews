@@ -6190,7 +6190,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: INCORRECT explanation given here
+  m_Text: You have chosen incorrectly, which will take a toll on your funds or the
+    health of the empire.
 --- !u!222 &167017159
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6695,7 +6696,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fae067962e5934395be31c8aba4a3455, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -6706,8 +6707,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Controls:
-
+  m_Text: 'CONTROLS
 
     WASD: Move
 
@@ -6723,7 +6723,9 @@ MonoBehaviour:
     ESC: Pause
 
     Abilities: Buttons on the right when
-    viewing scrolls'
+    viewing scrolls
+
+    H: Exit'
 --- !u!222 &201718971
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9768,9 +9770,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapDisplayed: 0
   gamePaused: 0
+  showHelp: 0
   scrollClicked: 0
   showScroll: 0
-  showHelp: 0
   displayGameOver: 0
   displayExplanation: 0
   storyFlag: 0
@@ -9778,6 +9780,7 @@ MonoBehaviour:
   mapMenu: {fileID: 1052730903}
   player: {fileID: 1334521179}
   pauseMenu: {fileID: 725040769}
+  helpDisplay: {fileID: 751925199}
   scrollDisplay1: {fileID: 881330260}
   scrollDisplay2: {fileID: 1505249221}
   scrollDisplay3: {fileID: 464901331}
@@ -9789,7 +9792,6 @@ MonoBehaviour:
   storyDisplay4: {fileID: 63178641}
   storyDisplay5: {fileID: 616369029}
   storyDisplay6: {fileID: 1929565732}
-  helpDisplay: {fileID: 751925199}
   gameOverMenu: {fileID: 1505999306}
   explanationView: {fileID: 1237736823}
   incorrectCharacter: {fileID: 1000961053}
@@ -11133,7 +11135,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FIND THE 4th CHAR
+  m_Text: The witch doctor also tells you the man who was beaten had a friend who
+    was taken into captivity. Look around for more information.
 --- !u!222 &370745714
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11506,7 +11509,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ADVISORS OPINION
+  m_Text: "The scroll\u2019s author has not left a signature and so you must be careful
+    trusting this man."
 --- !u!222 &379355025
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16616,12 +16620,12 @@ GameObject:
   - component: {fileID: 560801970}
   - component: {fileID: 560801969}
   m_Layer: 5
-  m_Name: GameOverDisplay
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &560801968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17801,7 +17805,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LEVEL COMPLETED!!!
+  m_Text: The geographer teaches you the ways of navigation, and together you proceed
+    to a new town full of new opportunities.
 --- !u!222 &604514367
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21695,7 +21700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &751925200
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31215,7 +31220,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ADVISORS OPINION
+  m_Text: This doctor has helped me with illness in the past, if he is who he says
+    he is. The knights in this village are also known for their unnecessary brutality.
 --- !u!222 &1087791842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -31896,6 +31902,114 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1111462503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1111462504}
+  - component: {fileID: 1111462507}
+  - component: {fileID: 1111462506}
+  - component: {fileID: 1111462505}
+  m_Layer: 0
+  m_Name: NPC_Indicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1111462504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111462503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.09, y: 2.18, z: 0}
+  m_LocalScale: {x: 0.01611, y: 0.01611, z: 0.01611}
+  m_Children: []
+  m_Father: {fileID: 1042834091}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1111462505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111462503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c12a414faf9994fb1cbc65900591d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 75
+  direction: {x: 0, y: 1, z: 0}
+--- !u!102 &1111462506
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111462503}
+  m_Text: '!'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 400
+  m_FontStyle: 1
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190169
+--- !u!23 &1111462507
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111462503}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &1113421314
 GameObject:
   m_ObjectHideFlags: 0
@@ -36684,7 +36798,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FIND THE 5th CHAR
+  m_Text: Your help around the town has spread your name, and you have been requested
+    by a geographer who claims to be from the castle. Find him.
 --- !u!222 &1284318026
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41155,7 +41270,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ADVISORS OPINION
+  m_Text: He sounds like a reputable man. Perhaps working with him is in your best
+    interest.
 --- !u!222 &1428468186
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -52493,7 +52609,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CORRECT explanation given here
+  m_Text: You have chosen wisely, you have progressed without harm.
 --- !u!222 &1621764948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -52616,7 +52732,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ADVISORS OPINION
+  m_Text: The knights have been known to be unfair and abuse their authority. There
+    may be some truth to this.
 --- !u!222 &1627984770
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -54642,7 +54759,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fae067962e5934395be31c8aba4a3455, type: 3}
-    m_FontSize: 40
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -54657,7 +54774,7 @@ MonoBehaviour:
     news. To survive here, you must be capable of telling fact from fiction. Failure
     to do this will be harmful to your funds, yourself or even the empire.\n\nYou
     have arrived at this town as you have been asked to see a certain knight. Good
-    luck."
+    luck.\n\nPress H to view controls after closing this window."
 --- !u!222 &1685525380
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -59454,7 +59571,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ADVISORS OPINION
+  m_Text: The author of the letter is unheard of and not known to you, even though
+    he claims to be your friend. Be careful.
 --- !u!222 &1865977924
 CanvasRenderer:
   m_ObjectHideFlags: 0
