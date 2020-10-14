@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         // set current values
         healthBar.SetHealth(CurrentHealth);
         coinBar.SetCoins(currentCoins);
-         abilityPointsBar.SetAbilityPoints(currentAbilityPoints);
+        abilityPointsBar.SetAbilityPoints(currentAbilityPoints);
          
         health = SelectObject.scrollDamage; 
         expense = SelectObject.scrollCoins;

@@ -13,6 +13,7 @@ using UnityEngine.UI;
 public class PopUpMenus : MonoBehaviour
 {
     public bool mapDisplayed = false;
+    public bool scoreDisplayed = false;
     public bool gamePaused = false;
     public bool showHelp = false;
     public bool scrollClicked;
@@ -69,6 +70,7 @@ public class PopUpMenus : MonoBehaviour
             Player.currentCoins = Player.maxCoins;
             Player.characterCount = 1;
             Player.activeScene = SceneManager.GetActiveScene().buildIndex;
+            storyCount = 1;
         }
         else
         {
@@ -105,6 +107,12 @@ public class PopUpMenus : MonoBehaviour
             toggleHelp();
         }
 
+        // for highscore screen
+        if (Input.GetKeyDown("z") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
+        {
+            toggleScores();
+        }
+
         scrollClicked = SelectObject.scrollClicked;
         if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
             if (SelectObject.currentCharacter > characterCount) {
@@ -134,6 +142,15 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
+    public void toggleScores()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        scoreDisplayed = !scoreDisplayed;
+        // displayMapError(false);
+            
+        // mapMenu.SetActive(!mapMenu.activeInHierarchy);
+        // player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
+    }
 
     public void initialiseMap()
     {
