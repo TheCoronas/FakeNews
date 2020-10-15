@@ -74,7 +74,7 @@ public class PopUpMenus : MonoBehaviour
         }
         else
         {
-            storyCount = Player.activeScene;
+            storyCount = Player.characterCount;
             characterCount = Player.characterCount;
         }
         initialiseMap();
@@ -82,6 +82,7 @@ public class PopUpMenus : MonoBehaviour
 
     void Update()
     {
+        // Debug.Log(storyCount);
         if (storyCount == 1 && !storyFlag) {
             StartCoroutine(toggleStoryScroll());
         }
