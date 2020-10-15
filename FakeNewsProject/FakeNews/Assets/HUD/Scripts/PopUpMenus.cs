@@ -101,7 +101,9 @@ public class PopUpMenus : MonoBehaviour
             toggleMap();            
         }
 
-        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !showHelp && !scoreDisplayed) {
+        Scene scene = SceneManager.GetActiveScene();
+        int currentBuildIndex = scene.buildIndex;
+        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !showHelp && !scoreDisplayed && scene.buildIndex == 4) {
             toggleInspect();            
         }
         
