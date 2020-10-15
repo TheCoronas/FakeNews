@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net;
+using System.Text;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -10,6 +13,8 @@ using UnityEngine.UI;
 public class PopUpMenus : MonoBehaviour
 {
     public bool mapDisplayed = false;
+    public bool inspectDisplayed = false;
+    public bool scoreDisplayed = false;
     public bool gamePaused = false;
     public bool showHelp = false;
     public bool scrollClicked;
@@ -22,6 +27,7 @@ public class PopUpMenus : MonoBehaviour
     public static bool displayNotEnoughPoints = false; 
     public Player self; 
     public GameObject mapMenu;
+    public GameObject inspectMenu;
     public GameObject player;
     public GameObject pauseMenu;
     public GameObject helpDisplay;
@@ -56,13 +62,29 @@ public class PopUpMenus : MonoBehaviour
 
     void Start()
     {
-        characterCount = 1;
-        storyCount = 1; 
+        // should let you skip logging in whilst debugging
+        if (Player.loggedIn == false)
+        {
+            characterCount = 1;
+            Player.userId = 9999999;
+            Player.CurrentHealth = Player.maxHealth;
+            Player.currentAbilityPoints = Player.maxAbilityPoints;
+            Player.currentCoins = Player.maxCoins;
+            Player.characterCount = 1;
+            Player.activeScene = SceneManager.GetActiveScene().buildIndex;
+            storyCount = 1;
+        }
+        else
+        {
+            storyCount = Player.characterCount;
+            characterCount = Player.characterCount;
+        }
         initialiseMap();
     }
 
     void Update()
     {
+        // Debug.Log(storyCount);
         if (storyCount == 1 && !storyFlag) {
             StartCoroutine(toggleStoryScroll());
         }
@@ -75,11 +97,17 @@ public class PopUpMenus : MonoBehaviour
             enterNotEnoughPoints(); 
         }
 
-        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !showHelp) {
+        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed) {
             toggleMap();            
         }
+
+        Scene scene = SceneManager.GetActiveScene();
+        int currentBuildIndex = scene.buildIndex;
+        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !showHelp && !scoreDisplayed && scene.buildIndex == 4) {
+            toggleInspect();            
+        }
         
-        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !showHelp) {
+        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp) {
             togglePause();            
         }
 
@@ -88,8 +116,14 @@ public class PopUpMenus : MonoBehaviour
             toggleHelp();
         }
 
+        // for highscore screen
+        if (Input.GetKeyDown("z") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
+        {
+            toggleScores();
+        }
+
         scrollClicked = SelectObject.scrollClicked;
-        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false) {
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false) {
             if (SelectObject.currentCharacter > characterCount) {
                 incorrectCharacterCall(); 
             } else if (SelectObject.currentCharacter < characterCount) {
@@ -98,13 +132,22 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver || dialoguing)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         } else {
             Cursor.visible = false;
         }
+    }
+
+    public void toggleInspect()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        inspectDisplayed = !inspectDisplayed;
+            
+        inspectMenu.SetActive(!inspectMenu.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     public void toggleMap()
@@ -117,6 +160,15 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
+    public void toggleScores()
+    {
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        scoreDisplayed = !scoreDisplayed;
+        // displayMapError(false);
+            
+        // mapMenu.SetActive(!mapMenu.activeInHierarchy);
+        // player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
+    }
 
     public void initialiseMap()
     {
@@ -130,7 +182,9 @@ public class PopUpMenus : MonoBehaviour
                 mapText.text = String.Format("Current Level: {0}", scene.name);
             }
         }
+        
     }
+
 
 
     private void togglePause()
@@ -155,6 +209,10 @@ public class PopUpMenus : MonoBehaviour
 
     public void toggleScroll()
     {
+        if (Player.loggedIn)
+        {
+            saveGame();
+        }
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
 
@@ -278,6 +336,15 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
+
+    public void returntoGameFromInspect()
+    {
+        inspectMenu.SetActive(false);
+        Cursor.visible = false;
+        inspectDisplayed = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+    }
     
     public void returntoGameFromPause()
     {
@@ -323,9 +390,30 @@ public class PopUpMenus : MonoBehaviour
 
         StartCoroutine(toggleStoryScroll());
     }
+
+    /** Saves the game state. **/
+    public void saveGame()
+    {
+        if (Player.loggedIn)
+        {
+            WebClient client = new WebClient();
+            var values = new NameValueCollection();
+            values["user_id"] = Player.userId.ToString();
+            values["currentHealth"] = Player.CurrentHealth.ToString();
+            values["abilityPoints"] = Player.currentAbilityPoints.ToString();
+            values["activeScene"] = SceneManager.GetActiveScene().buildIndex.ToString();
+            values["coins"] = Player.currentCoins.ToString();
+            values["characterCount"] = Player.characterCount.ToString();
+            
+            byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/save", values);
+            var result = Encoding.UTF8.GetString(response);
+            Debug.Log(result);
+        }
+    }
     
     public void returnToMenu()
     {
+        saveGame();
         SceneManager.LoadScene(0);
         gamePaused = false;
         Time.timeScale = 1;
@@ -426,6 +514,7 @@ public class PopUpMenus : MonoBehaviour
         lieutOpinion.SetActive(false); 
         councilOpinion.SetActive(false);
         insufficientAbilityPoints.SetActive(false);
+        inspectMenu.SetActive(false);
     }
 
     // Returns true if the requested level is not the current, false otherwise. Used for map navigation.
