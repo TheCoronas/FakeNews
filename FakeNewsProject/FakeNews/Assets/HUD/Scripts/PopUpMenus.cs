@@ -97,11 +97,11 @@ public class PopUpMenus : MonoBehaviour
             enterNotEnoughPoints(); 
         }
 
-        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp) {
+        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed) {
             toggleMap();            
         }
 
-        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed) {
+        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !showHelp && !scoreDisplayed) {
             toggleInspect();            
         }
         
