@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,6 +54,17 @@ public class LoginMenuControl : MonoBehaviour
         }
     }
     
+    // for Json deserializing
+    [System.Serializable]
+    public class Values
+    {
+        public string user_id;
+        public string currentHealth;
+        public string activeScene;
+        public string abilityPoints;
+        public string coins;
+        public string characterCount;
+    } 
    
     
     public void ButtonLogin()
@@ -93,7 +105,18 @@ public class LoginMenuControl : MonoBehaviour
         } else if (result.Equals("")) {
             textDisplay.GetComponent<Text>().text = "Please enter username and password!";
         }else {
-            SceneManager.LoadScene("Scenes/Level 1");
+            // Player.userId = Int32.Parse(result);
+            // int abilityPoints = Int32.Parse(result);
+            var v = JsonUtility.FromJson<Values>(result);
+            var activeScene = Int32.Parse(v.activeScene);
+            Player.userId = Int32.Parse(v.user_id);
+            Player.CurrentHealth = Int32.Parse(v.currentHealth);
+            Player.currentAbilityPoints = Int32.Parse(v.abilityPoints);
+            Player.currentCoins = Int32.Parse(v.coins);
+            Player.characterCount = Int32.Parse(v.characterCount);
+            Player.activeScene = activeScene;
+            Player.loggedIn = true;
+            SceneManager.LoadScene(activeScene); //todo change back
         }
     }
     
