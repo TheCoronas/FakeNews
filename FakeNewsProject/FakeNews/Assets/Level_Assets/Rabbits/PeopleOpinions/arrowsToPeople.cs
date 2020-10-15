@@ -10,7 +10,8 @@ public class arrowsToPeople : MonoBehaviour
 {
     public GameObject char1;
     public GameObject char2;
-    public GameObject final; 
+    public GameObject final;
+    public int totalNumOpions = 2; 
 
     public PopUpMenus popup;
     public questPointer visualArrows; 
@@ -18,7 +19,7 @@ public class arrowsToPeople : MonoBehaviour
     public List<GameObject> characters = new List<GameObject>();
 
     public int active = 0; 
-    private int currentPerson = 0;
+    public int currentPerson = 0;
     private bool done = false; 
 
     // Start is called before the first frame update
@@ -79,7 +80,7 @@ public class arrowsToPeople : MonoBehaviour
     {
         currentPerson += 1; 
         visualArrows.changePoint(characters[currentPerson]); 
-
+        
     }
 
     public void endOpions()

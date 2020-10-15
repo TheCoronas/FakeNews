@@ -8,10 +8,7 @@ public class questPointer : MonoBehaviour
     public Image img;
     public Transform target;
     public GameObject player;
-    public Text meter; 
-
-
-
+    public Text meter;
 
     void Update()
     {
@@ -41,8 +38,11 @@ public class questPointer : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y + 130, minY, maxY);
 
         img.transform.position = pos;
-        meter.text = "Collect opinion in: \n" + Mathf.Round(Vector3.Distance(target.position, player.transform.position)/2).ToString();
 
+    
+
+            meter.text = "Head this way for: \n" + Mathf.Round(Vector3.Distance(target.position, player.transform.position) / 2).ToString() + "m";
+     
 
     }
 
