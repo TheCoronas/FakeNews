@@ -517,10 +517,10 @@ public class PopUpMenus : MonoBehaviour
         insufficientAbilityPoints.SetActive(false);
         
         // todo temp dom
-        if (SceneManager.GetActiveScene().buildIndex != 4)
-        {
-            return;
-        }
+        // if (SceneManager.GetActiveScene().buildIndex != 4)
+        // {
+        //     return;
+        // }
         inspectMenu.SetActive(false);
     }
 
