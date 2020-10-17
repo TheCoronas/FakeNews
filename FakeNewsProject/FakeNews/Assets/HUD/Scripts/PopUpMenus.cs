@@ -72,6 +72,7 @@ public class PopUpMenus : MonoBehaviour
             Player.currentCoins = Player.maxCoins;
             Player.characterCount = 1;
             Player.activeScene = SceneManager.GetActiveScene().buildIndex;
+            
             storyCount = 1;
         }
         else
@@ -401,9 +402,9 @@ public class PopUpMenus : MonoBehaviour
             values["user_id"] = Player.userId.ToString();
             values["currentHealth"] = Player.CurrentHealth.ToString();
             values["abilityPoints"] = Player.currentAbilityPoints.ToString();
-            values["activeScene"] = SceneManager.GetActiveScene().buildIndex.ToString();
+            values["activeScene"] = Player.latestScene.ToString();
             values["coins"] = Player.currentCoins.ToString();
-            values["characterCount"] = Player.characterCount.ToString();
+            values["characterCount"] = Player.latestCharacterCount.ToString();
             
             byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/save", values);
             var result = Encoding.UTF8.GetString(response);
@@ -531,14 +532,23 @@ public class PopUpMenus : MonoBehaviour
         {
             SceneManager.LoadScene(nextLevel);
             
-            // character count should remember current progress
-            if (Player.activeScene > nextLevel)
+            // if go to previous level
+            if (Player.latestScene > nextLevel)
             {
+                // character count determines who talks - if you go to previous level
+                // characters should have their scrolls already done.
                 Player.characterCount = 999;
             }
-            else if (Player.activeScene < nextLevel)
+            // return to current progression
+            else if (nextLevel == Player.latestScene)
             {
+                Player.characterCount = Player.latestCharacterCount;
+            } else if (nextLevel > Player.latestScene) // go to next level - todo need to check if you've completed previous scrolls 
+            // maybe charactercount > that levels max character count
+            {
+                Player.latestScene = nextLevel;
                 Player.characterCount = 1;
+                Player.latestCharacterCount = Player.characterCount;
             }
             toggleMap();
         }

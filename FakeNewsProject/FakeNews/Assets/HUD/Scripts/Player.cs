@@ -19,6 +19,12 @@ public class Player : MonoBehaviour
     public static int userId;
     public static int characterCount;
     public static bool loggedIn = false;
+    
+    // player's current progress in game
+    public static int latestScene;
+    
+    // player's current latest character count
+    public static int latestCharacterCount;
 
     public HealthBar healthBar; 
     public CoinBar coinBar; 
@@ -62,8 +68,7 @@ public class Player : MonoBehaviour
         {
             PopUpMenus.characterCount += 1;
             characterCount += 1;
-            
-
+            latestCharacterCount = characterCount;
             currentHealth = currentHealth + health;
             //currentAbilityPoints = currentAbilityPoints + expense; 
             currentCoins = currentCoins + expense;
@@ -86,6 +91,7 @@ public class Player : MonoBehaviour
             PopUpMenus.characterCount += 1;
             characterCount += 1;
 
+            latestCharacterCount = characterCount;
             currentHealth = currentHealth - health;
             //currentAbilityPoints = currentAbilityPoints - expense; 
             currentCoins = currentCoins - expense;

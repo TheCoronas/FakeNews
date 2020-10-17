@@ -108,15 +108,17 @@ public class LoginMenuControl : MonoBehaviour
             // Player.userId = Int32.Parse(result);
             // int abilityPoints = Int32.Parse(result);
             var v = JsonUtility.FromJson<Values>(result);
-            var activeScene = Int32.Parse(v.activeScene);
+            
             Player.userId = Int32.Parse(v.user_id);
             Player.CurrentHealth = Int32.Parse(v.currentHealth);
             Player.currentAbilityPoints = Int32.Parse(v.abilityPoints);
             Player.currentCoins = Int32.Parse(v.coins);
             Player.characterCount = Int32.Parse(v.characterCount);
-            Player.activeScene = activeScene;
+            Player.latestCharacterCount = Player.characterCount;
+            Player.activeScene = Int32.Parse(v.activeScene);
+            Player.latestScene = Player.activeScene;
             Player.loggedIn = true;
-            SceneManager.LoadScene(activeScene); //todo change back
+            SceneManager.LoadScene(Player.activeScene); //todo change back
         }
     }
     
