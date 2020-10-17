@@ -514,6 +514,12 @@ public class PopUpMenus : MonoBehaviour
         lieutOpinion.SetActive(false); 
         councilOpinion.SetActive(false);
         insufficientAbilityPoints.SetActive(false);
+        
+        // todo temp dom
+        if (SceneManager.GetActiveScene().buildIndex != 4)
+        {
+            return;
+        }
         inspectMenu.SetActive(false);
     }
 
@@ -524,6 +530,16 @@ public class PopUpMenus : MonoBehaviour
         if (currentLevel != nextLevel)
         {
             SceneManager.LoadScene(nextLevel);
+            
+            // character count should remember current progress
+            if (Player.activeScene > nextLevel)
+            {
+                Player.characterCount = 999;
+            }
+            else if (Player.activeScene < nextLevel)
+            {
+                Player.characterCount = 1;
+            }
             toggleMap();
         }
         else

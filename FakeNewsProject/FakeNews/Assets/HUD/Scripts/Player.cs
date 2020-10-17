@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
         {
             PopUpMenus.characterCount += 1;
             characterCount += 1;
+            
 
             currentHealth = currentHealth + health;
             //currentAbilityPoints = currentAbilityPoints + expense; 
