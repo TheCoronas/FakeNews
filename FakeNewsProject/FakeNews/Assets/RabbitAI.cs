@@ -65,7 +65,7 @@ public class RabbitAI : MonoBehaviour
         yield return new WaitForSeconds(walkTime);
         isRunning = false;
         yield return new WaitForSeconds(rotateWeight);
-        print(rotateLR);
+ 
         if (rotateLR == 1)
         {
             isRotatingRight = true;

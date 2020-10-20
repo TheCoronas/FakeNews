@@ -68,6 +68,7 @@ public class arrowsToPeople : MonoBehaviour
 
         }
 
+        popup.returnToScroll(); 
         popup.returnToGameFromScroll();
         popup.scrollClicked = false; 
         visualArrows.changePoint(characters[currentPerson]);
@@ -78,13 +79,16 @@ public class arrowsToPeople : MonoBehaviour
 
     public void nextPerson()
     {
-        currentPerson += 1; 
+        
+        currentPerson += 1;
+        print(currentPerson + " omg really"); 
         visualArrows.changePoint(characters[currentPerson]); 
         
     }
 
     public void endOpions()
     {
+        print("no");
         done = true; 
         for (int i = 0; i < characters.Count(); i++)
         {
