@@ -34,7 +34,6 @@ public class PopUpMenus : MonoBehaviour
     public GameObject player;
     public GameObject pauseMenu;
     public GameObject helpDisplay;
-    public GameObject scrollView;
     public GameObject scoreContentParent;
     public GameObject scrollDisplay1;
     public GameObject scrollDisplay2;
