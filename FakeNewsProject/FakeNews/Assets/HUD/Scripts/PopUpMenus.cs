@@ -80,30 +80,10 @@ public class PopUpMenus : MonoBehaviour
     {
         public UserData[] userInfo;
     }
-    
-    
-    void Start()
-    {
 
-        scoreScreenUI.SetActive(false);
-        // should let you skip logging in whilst debugging
-        if (Player.loggedIn == false)
-        {
-            characterCount = 1;
-            Player.userId = 9999999;
-            Player.CurrentHealth = Player.maxHealth;
-            Player.currentAbilityPoints = Player.maxAbilityPoints;
-            Player.currentCoins = Player.maxCoins;
-            Player.characterCount = 1;
-            Player.activeScene = SceneManager.GetActiveScene().buildIndex;
-            
-            storyCount = 1;
-        }
-        else
-        {
-            storyCount = Player.characterCount;
-            characterCount = Player.characterCount;
-            
+    /** Makes scoreboard. **/
+    private void renderScores()
+    {
             WebClient client = new WebClient();
             var values = new NameValueCollection();
             values["user_id"] = Player.userId.ToString();
@@ -172,8 +152,6 @@ public class PopUpMenus : MonoBehaviour
                         text[i] = ' ';
                     }
                 }
-                // sb.Insert(30, user.currentHealth);
-                // sb.Insert(40, user.abilityPoints);
                 o.GetComponent<Text>().text = new string(text);
                 o.GetComponent<Text>().font = ScoreText.GetComponent<Text>().font;
                 o.GetComponent<Text>().fontSize = 20;
@@ -181,6 +159,30 @@ public class PopUpMenus : MonoBehaviour
             }
             
             Canvas.ForceUpdateCanvases();
+    }
+    void Start()
+    {
+
+        scoreScreenUI.SetActive(false);
+        // should let you skip logging in whilst debugging
+        if (Player.loggedIn == false)
+        {
+            characterCount = 1;
+            Player.userId = 9999999;
+            Player.CurrentHealth = Player.maxHealth;
+            Player.currentAbilityPoints = Player.maxAbilityPoints;
+            Player.currentCoins = Player.maxCoins;
+            Player.characterCount = 1;
+            Player.activeScene = SceneManager.GetActiveScene().buildIndex;
+            
+            storyCount = 1;
+        }
+        else
+        {
+            storyCount = Player.characterCount;
+            characterCount = Player.characterCount;
+
+            renderScores();
         }
         initialiseMap();
 
@@ -221,7 +223,7 @@ public class PopUpMenus : MonoBehaviour
         }
 
         // for highscore screen
-        if (Input.GetKeyDown("z") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
+        if (Input.GetKeyDown("z") && Player.loggedIn && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
         {
             toggleScores();
         }
@@ -632,6 +634,12 @@ public class PopUpMenus : MonoBehaviour
     // todo: Check whether a player has completed all scrolls on a level before allowing access to later ones.
     private void changeLevels(int currentLevel, int nextLevel)
     {
+        // save game every level change
+        if (Player.loggedIn)
+        {
+            saveGame();
+        }
+        
         if (currentLevel != nextLevel)
         {
             SceneManager.LoadScene(nextLevel);
