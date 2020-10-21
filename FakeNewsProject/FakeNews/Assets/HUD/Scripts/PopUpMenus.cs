@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
 using System.Text;
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class PopUpMenus : MonoBehaviour
 {
@@ -25,12 +27,15 @@ public class PopUpMenus : MonoBehaviour
     public static bool displayIncorrectExplanation = false; 
     public bool storyFlag = false; 
     public static bool displayNotEnoughPoints = false; 
-    public Player self; 
+    public Player self;
+    public GameObject scoreScreenUI;
     public GameObject mapMenu;
     public GameObject inspectMenu;
     public GameObject player;
     public GameObject pauseMenu;
     public GameObject helpDisplay;
+    public GameObject scrollView;
+    public GameObject scoreContentParent;
     public GameObject scrollDisplay1;
     public GameObject scrollDisplay2;
     public GameObject scrollDisplay3;
@@ -53,15 +58,34 @@ public class PopUpMenus : MonoBehaviour
     public GameObject empireMap; 
     public GameObject peoplesOpinion; 
     public GameObject lieutOpinion; 
-    public GameObject councilOpinion; 
+    public GameObject councilOpinion;
+    public GameObject ScoreText;
     public static int characterCount; 
     public static int storyCount; 
     private string currentScrollDisplay;
     private Text[] mapText;
-    public bool dialoguing = false; 
+    public bool dialoguing = false;
 
+    [System.Serializable]
+    public class UserData
+    {
+        public string username;
+        public string currentHealth;
+        public string coins;
+        public string abilityPoints;
+    }
+    
+    [System.Serializable]
+    public class ScoreJSON
+    {
+        public UserData[] userInfo;
+    }
+    
+    
     void Start()
     {
+
+        scoreScreenUI.SetActive(false);
         // should let you skip logging in whilst debugging
         if (Player.loggedIn == false)
         {
@@ -79,8 +103,87 @@ public class PopUpMenus : MonoBehaviour
         {
             storyCount = Player.characterCount;
             characterCount = Player.characterCount;
+            
+            WebClient client = new WebClient();
+            var values = new NameValueCollection();
+            values["user_id"] = Player.userId.ToString();
+            byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/getScores", values);
+            var result = Encoding.UTF8.GetString(response);
+    
+            Debug.Log(result);
+
+            var v = JsonUtility.FromJson<ScoreJSON>("{\"userInfo\":" + result + "}");
+
+            int count = 1;
+            foreach (UserData user in v.userInfo)
+            {
+                GameObject o = new GameObject();
+                o.transform.SetParent(scoreContentParent.transform);
+                o.AddComponent<Text>();
+                o.AddComponent<ContentSizeFitter>();
+                o.GetComponent<ContentSizeFitter>().horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+                o.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+                o.GetComponent<Text>().alignment = TextAnchor.UpperLeft;
+                o.GetComponent<RectTransform>().pivot = new Vector2(0, (float) 0.5);
+                
+                o.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
+
+                char[] text = new char[70];
+
+                String countStr = count.ToString();
+                for (int i = 0; i < countStr.Length; ++i)
+                {
+                    text[i] = countStr[i];
+                }
+
+                text[countStr.Length] = '.';
+                
+                // set username
+                for (int i = 0; i < user.username.Length; ++i)
+                {
+                    text[i + 3] = user.username[i];
+                }
+
+                // set empire health
+                for (int i = 0; i < user.currentHealth.Length; ++i)
+                {
+                    text[i + 16] = user.currentHealth[i];
+                }
+                
+                // set coins
+                for (int i = 0; i < user.coins.Length; ++i)
+                {
+                    text[i + 26] = user.coins[i];
+                }
+                
+                
+                // set ability points
+                for (int i = 0; i < user.abilityPoints.Length; ++i)
+                {
+                    text[i + 34] = user.abilityPoints[i];
+                }
+                
+
+                // replace nulls
+                for (int i = 0; i < text.Length; ++i)
+                {
+                    if (text[i] == '\0')
+                    {
+                        text[i] = ' ';
+                    }
+                }
+                // sb.Insert(30, user.currentHealth);
+                // sb.Insert(40, user.abilityPoints);
+                o.GetComponent<Text>().text = new string(text);
+                o.GetComponent<Text>().font = ScoreText.GetComponent<Text>().font;
+                o.GetComponent<Text>().fontSize = 20;
+                count++;
+            }
+            
+            Canvas.ForceUpdateCanvases();
         }
         initialiseMap();
+
     }
 
     void Update()
@@ -108,11 +211,11 @@ public class PopUpMenus : MonoBehaviour
             toggleInspect();            
         }
         
-        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp) {
+        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed) {
             togglePause();            
         }
 
-        if (Input.GetKeyDown("h") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
+        if (Input.GetKeyDown("h") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !scoreDisplayed)
         {
             toggleHelp();
         }
@@ -133,7 +236,7 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing || scoreDisplayed)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -161,14 +264,14 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
+    /** Display's score screen. **/
     public void toggleScores()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         scoreDisplayed = !scoreDisplayed;
-        // displayMapError(false);
             
-        // mapMenu.SetActive(!mapMenu.activeInHierarchy);
-        // player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
+        scoreScreenUI.SetActive(!scoreScreenUI.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     public void initialiseMap()
@@ -356,6 +459,7 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+   
     public void returntoGameFromHelp()
     {
         helpDisplay.SetActive(false);
@@ -517,10 +621,10 @@ public class PopUpMenus : MonoBehaviour
         insufficientAbilityPoints.SetActive(false);
         
         // todo temp dom
-        // if (SceneManager.GetActiveScene().buildIndex != 4)
-        // {
-        //     return;
-        // }
+        if (SceneManager.GetActiveScene().buildIndex != 4)
+        {
+            return;
+        }
         inspectMenu.SetActive(false);
     }
 
