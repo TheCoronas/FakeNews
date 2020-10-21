@@ -7,6 +7,7 @@ using System.Text;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -68,6 +69,7 @@ public class PopUpMenus : MonoBehaviour
     [System.Serializable]
     public class UserData
     {
+        public string user_id;
         public string username;
         public string currentHealth;
         public string coins;
@@ -93,6 +95,7 @@ public class PopUpMenus : MonoBehaviour
 
             var v = JsonUtility.FromJson<ScoreJSON>("{\"userInfo\":" + result + "}");
 
+            int playerPos;
             int count = 1;
             foreach (UserData user in v.userInfo)
             {
@@ -106,13 +109,37 @@ public class PopUpMenus : MonoBehaviour
                 o.GetComponent<RectTransform>().pivot = new Vector2(0, (float) 0.5);
                 
                 o.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
-
+                
                 char[] text = new char[70];
 
                 String countStr = count.ToString();
                 for (int i = 0; i < countStr.Length; ++i)
                 {
                     text[i] = countStr[i];
+                }
+
+                // save player position to inform of change in rank
+                if (user.user_id == Player.userId.ToString())
+                {
+                    int rankGain = Player.ranking - count;
+                    
+                    if (Player.ranking != -1)
+                    {
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.Confined;
+                        if (rankGain > 0)
+                        {
+                            EditorUtility.DisplayDialog("Class Rank", $"Your rank has increased by {rankGain}. You are now rank {count}", "Ok");
+                        } else if (rankGain == 0)
+                        {
+                            EditorUtility.DisplayDialog("Class Rank", $"Your rank has not changed. You are still rank {Player.ranking}", "Ok");
+                        }
+                        else
+                        {
+                            EditorUtility.DisplayDialog("Class Rank", $"Your rank has decreased by {rankGain}. You are now rank {count}", "Ok");
+                        }
+                    }
+                    Player.ranking = count;
                 }
 
                 text[countStr.Length] = '.';
@@ -180,8 +207,10 @@ public class PopUpMenus : MonoBehaviour
         {
             storyCount = Player.characterCount;
             characterCount = Player.characterCount;
-
+            
             renderScores();
+            GUI.FocusWindow(0);
+            Cursor.visible = false;
         }
         initialiseMap();
 
