@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using UnityEditor;
@@ -11,10 +12,12 @@ using UnityEngine.EventSystems;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 
 public class PopUpMenus : MonoBehaviour
 {
+    private float timeSinceClicked;
     public bool mapDisplayed = false;
     public bool inspectDisplayed = false;
     public bool scoreDisplayed = false;
@@ -65,7 +68,7 @@ public class PopUpMenus : MonoBehaviour
     private string currentScrollDisplay;
     private Text[] mapText;
     public bool dialoguing = false;
-
+    private Stopwatch sw;
     [System.Serializable]
     public class UserData
     {
@@ -188,7 +191,11 @@ public class PopUpMenus : MonoBehaviour
     }
     void Start()
     {
-
+        
+        // for toggle scroll elapsed duration init
+        sw = new Stopwatch();
+        sw.Start();
+        
         scoreScreenUI.SetActive(false);
         // should let you skip logging in whilst debugging
         if (Player.loggedIn == false)
@@ -343,6 +350,12 @@ public class PopUpMenus : MonoBehaviour
 
     public void toggleScroll()
     {
+
+        timeSinceClicked = sw.ElapsedMilliseconds;
+        if (timeSinceClicked < 600)
+        {
+            return;
+        }
         if (Player.loggedIn)
         {
             saveGame();
@@ -370,6 +383,9 @@ public class PopUpMenus : MonoBehaviour
                 break; 
         }
         player.GetComponent<FirstPersonController>().enabled = false;
+        
+        sw.Start();
+
     }
 
     private IEnumerator toggleStoryScroll() {
@@ -690,7 +706,7 @@ public class PopUpMenus : MonoBehaviour
                 Player.characterCount = 1;
                 Player.latestCharacterCount = Player.characterCount;
             }
-            toggleMap();
+            // toggleMap();
         }
         else
         {
