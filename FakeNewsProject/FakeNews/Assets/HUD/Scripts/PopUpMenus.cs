@@ -550,7 +550,7 @@ public class PopUpMenus : MonoBehaviour
                 Player.characterCount = 1;
                 Player.latestCharacterCount = Player.characterCount;
             }
-            toggleMap();
+            //toggleMap();
         }
         else
         {
