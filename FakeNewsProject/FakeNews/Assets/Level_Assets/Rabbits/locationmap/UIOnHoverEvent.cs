@@ -9,7 +9,7 @@ public class UIOnHoverEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     Vector3 cachedScale;
     private Text inftext;
-    private Vector3 textloc = new Vector3(1000f, 240f, 100f); 
+    private Vector3 textloc = new Vector3(550f, 100f, 100f); 
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class UIOnHoverEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         inftext.text = ""; 
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        transform.localScale = new Vector3(0.12f, 0.12f, 0.12f);
         GameObject LandInfo = transform.Find("info").gameObject;
         LandInfo.SetActive(true);
         LandInfo.transform.position = textloc;  
