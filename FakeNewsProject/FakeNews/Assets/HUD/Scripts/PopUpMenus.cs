@@ -165,10 +165,6 @@ public class PopUpMenus : MonoBehaviour
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         scoreDisplayed = !scoreDisplayed;
-        // displayMapError(false);
-            
-        // mapMenu.SetActive(!mapMenu.activeInHierarchy);
-        // player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     public void initialiseMap()
@@ -185,8 +181,6 @@ public class PopUpMenus : MonoBehaviour
         }
         
     }
-
-
 
     private void togglePause()
     {
@@ -217,6 +211,8 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
 
+        //checks count of character to display different scrolls based on current count
+        //@author Madison Beare
         switch (characterCount) {
             case 1: 
                 scrollDisplay1.SetActive(!scrollDisplay1.activeInHierarchy);
@@ -239,6 +235,9 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Toggles story scrolls 1 second after an answer has been selected for previous scroll. 
+    //This allows for a basic story line to occur automatically without user input
+    //@author Madison Beare
     private IEnumerator toggleStoryScroll() {
         storyFlag = true; 
         yield return new WaitForSeconds(1);
@@ -282,6 +281,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Advisors opinion popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterAdvisorsOpinion() {
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
@@ -292,6 +293,8 @@ public class PopUpMenus : MonoBehaviour
         
     }
 
+    //Empire map popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterEmpireMap() {
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
@@ -301,9 +304,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Peoples Opinion popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterPeoplesOpinion() {
         setScrollDisplaysToFalse();
-        //Player.updateAbilityPoints(1); 
         self.updateAbilityPoints(1);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
@@ -311,6 +315,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Lietenant's Opinion popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterLieutOpinion() {
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
@@ -320,6 +326,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Councils Opinion popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterCouncilOpinion() {
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
@@ -338,6 +346,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+    //Inspect popup - sets active and removes all other popups
+    //@author Madison Beare
     public void returntoGameFromInspect()
     {
         inspectMenu.SetActive(false);
@@ -378,6 +388,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+    //Returning to game after an explanation is given - sets active and removes all other popups
+    //@author Madison Beare
     public void returnToGameAfterExplain()
     {
         setScrollDisplaysToFalse();       
@@ -435,6 +447,8 @@ public class PopUpMenus : MonoBehaviour
         toggleScroll(); 
     }
 
+    //Incorrect Character popup - sets active and removes all other popups
+    //@author Madison Beare
     private void incorrectCharacterCall()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -444,6 +458,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Replay Character popup - sets active and removes all other popups
+    //@author Madison Beare
     private void replayCharacterCall()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -453,6 +469,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Enter Correct Explanation popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterCorrectExplanation()
     {
         setScrollDisplaysToFalse(); 
@@ -464,6 +482,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Enter Incorrect Explanation popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterIncorrectExplanation()
     {
         setScrollDisplaysToFalse(); 
@@ -475,6 +495,8 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    //Not Enough Points popup - sets active and removes all other popups
+    //@author Madison Beare
     public void enterNotEnoughPoints()
     {
         setAbilityDisplaysToFalse(); 
@@ -486,7 +508,10 @@ public class PopUpMenus : MonoBehaviour
         insufficientAbilityPoints.SetActive(!insufficientAbilityPoints.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
-
+    
+    //Set's all displays to false when function is called. All are set for brevity. 
+    //@author Madison Beare
+    //@author Jaiden Harding
     public void setScrollDisplaysToFalse() {
         scrollDisplay1.SetActive(false);
         scrollDisplay2.SetActive(false);
