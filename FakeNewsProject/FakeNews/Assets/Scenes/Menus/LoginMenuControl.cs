@@ -118,6 +118,7 @@ public class LoginMenuControl : MonoBehaviour
             Player.activeScene = Int32.Parse(v.activeScene);
             Player.latestScene = Player.activeScene;
             Player.loggedIn = true;
+            Debug.Log(Player.activeScene);
             SceneManager.LoadScene(Player.activeScene); //todo change back
         }
     }
