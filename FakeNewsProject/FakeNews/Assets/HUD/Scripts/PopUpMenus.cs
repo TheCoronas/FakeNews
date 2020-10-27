@@ -31,6 +31,7 @@ public class PopUpMenus : MonoBehaviour
     public GameObject player;
     public GameObject pauseMenu;
     public GameObject helpDisplay;
+    public GameObject scoreDisplay;
     public GameObject scrollDisplay1;
     public GameObject scrollDisplay2;
     public GameObject scrollDisplay3;
@@ -108,17 +109,17 @@ public class PopUpMenus : MonoBehaviour
             toggleInspect();            
         }
         
-        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp) {
+        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed) {
             togglePause();            
         }
 
-        if (Input.GetKeyDown("h") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
+        if (Input.GetKeyDown("h") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !inspectDisplayed && !scoreDisplayed)
         {
             toggleHelp();
         }
 
         // for highscore screen
-        if (Input.GetKeyDown("z") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
+        if (Input.GetKeyDown("z") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !inspectDisplayed && !showHelp)
         {
             toggleScores();
         }
@@ -133,7 +134,7 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing || scoreDisplayed)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -165,6 +166,9 @@ public class PopUpMenus : MonoBehaviour
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         scoreDisplayed = !scoreDisplayed;
+
+        scoreDisplay.SetActive(!scoreDisplay.activeInHierarchy);
+        player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
     public void initialiseMap()
@@ -371,6 +375,15 @@ public class PopUpMenus : MonoBehaviour
         helpDisplay.SetActive(false);
         Cursor.visible = false;
         showHelp = false;
+        Time.timeScale = 1;
+        player.GetComponent<FirstPersonController>().enabled = true;
+    }
+
+    public void returntoGameFromScore()
+    {
+        scoreDisplay.SetActive(false);
+        Cursor.visible = false;
+        scoreDisplayed = false;
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }

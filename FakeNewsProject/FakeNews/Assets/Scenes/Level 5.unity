@@ -28353,7 +28353,7 @@ RectTransform:
   m_Children:
   - {fileID: 2044115844}
   m_Father: {fileID: 1940405546}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29980,6 +29980,7 @@ MonoBehaviour:
   player: {fileID: 652134008}
   pauseMenu: {fileID: 1728959539}
   helpDisplay: {fileID: 1591491001}
+  scoreDisplay: {fileID: 1001276877}
   scrollDisplay1: {fileID: 1632481397}
   scrollDisplay2: {fileID: 1272320147}
   scrollDisplay3: {fileID: 498975898}
@@ -42461,6 +42462,8 @@ MonoBehaviour:
     Abilities:
     Buttons on the right when viewing scrolls
 
+    Z: View Scoreboard
+
     H: Exit'
 --- !u!222 &1567911068
 CanvasRenderer:
@@ -51580,7 +51583,7 @@ Transform:
   - {fileID: 780499243}
   - {fileID: 1864293406}
   m_Father: {fileID: 1940405546}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1872741769 stripped
 Transform:
@@ -53007,8 +53010,8 @@ RectTransform:
   - {fileID: 353842259}
   - {fileID: 1346118581}
   - {fileID: 1693433190}
-  - {fileID: 1001276878}
   - {fileID: 1872524005}
+  - {fileID: 1001276878}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
