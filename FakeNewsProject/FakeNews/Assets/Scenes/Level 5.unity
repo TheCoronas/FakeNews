@@ -24242,7 +24242,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CORRECT explanation given here
+  m_Text: You have chosen wisely, you have progressed without harm.
 --- !u!222 &823273859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24640,7 +24640,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: INSUFFICIENT ABILITY POINTS
+  m_Text: You do not have sufficient ability points left for this level.
 --- !u!222 &832444692
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29185,7 +29185,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: INCORRECT explanation given here
+  m_Text: You have chosen incorrectly, which will take a toll on your funds or the
+    health of the empire.
 --- !u!222 &1019073430
 CanvasRenderer:
   m_ObjectHideFlags: 0
