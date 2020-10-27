@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/signup_screen.unity
     guid: 23321aeb8acc04ff7ab0c71ac8b4bdb9
+  - enabled: 1
+    path: Assets/Scenes/Menus/intro1Scene 1.unity
+    guid: c0e523ed8186dba42ad03828b445a796
+  - enabled: 1
+    path: Assets/Scenes/Menus/intro2Scene.unity
+    guid: 9da221710d6695d45ae59836a53bd340
   m_configObjects: {}

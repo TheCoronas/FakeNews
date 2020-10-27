@@ -1279,7 +1279,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1953338278}
-        m_MethodName: ButtonQuit
+        m_MethodName: ButtonNext
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1348,7 +1348,7 @@ GameObject:
   - component: {fileID: 1953338279}
   - component: {fileID: 1953338278}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: TutorialMenuControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1363,7 +1363,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1953338277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6631fe511bdc3433bb2751631d3d6ee7, type: 3}
+  m_Script: {fileID: 11500000, guid: 34a65e131d83b494c8c7b8f4ad243541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1953338279
