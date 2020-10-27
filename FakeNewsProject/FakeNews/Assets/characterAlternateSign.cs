@@ -19,7 +19,7 @@ public class characterAlternateSign : MonoBehaviour
                 if (t.name == "NPC_Indicator")
                 {
                     allIndicators[count] = t.gameObject;
-                    count += 1; 
+                    count += 1;
                 }// Do something to child one
             }
         }
@@ -45,7 +45,7 @@ public class characterAlternateSign : MonoBehaviour
         {
             if (t.name == "NPC_Indicator")
             {
-                t.gameObject.SetActive(true); 
+                t.gameObject.SetActive(true);
             }// Do something to child one
         }
     }
