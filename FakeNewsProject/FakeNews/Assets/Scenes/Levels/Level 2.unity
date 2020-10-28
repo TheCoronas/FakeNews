@@ -9688,7 +9688,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterCouncilOpinion
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9711,7 +9711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7411765, g: 0.59607846, b: 0.40784317, a: 1}
+  m_Color: {r: 0.40784314, g: 0.40784314, b: 0.40784317, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -29115,11 +29115,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Player, \n\nWelcome to The Castle.\n\nYou were right. Rumours of corruption
-    fill the air. It is time to storm the castle and save your people. You have your
-    army. You\u2019ve gathered your council.\n\nEvery decision you have made has
-    led you to this point.\n\nYou are seeking out the King's most trusted councillor.
-    He wishes to speak with you. Good luck."
+  m_Text: "Player, \n\nAfter travelling the lands with the Geographer, you have decided
+    to settle down and make yourself a home here at Salisbury.\n\nThe talk amidst
+    the people is that there is a upcoming festival of some sort advertised on posters
+    stuck around town. Your task is to investigate these rumors."
 --- !u!222 &1642503364
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32443,7 +32442,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterLieutOpinion
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32466,7 +32465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7725491, g: 0.61960787, b: 0.427451, a: 1}
+  m_Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -34030,7 +34029,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterPeoplesOpinion
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34053,7 +34052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.80392164, g: 0.64705884, b: 0.44705886, a: 1}
+  m_Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -34146,9 +34145,17 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Player, \n\nI am the King\u2019s advisor. Please meet with me secretly
-    to discuss the rebellion and my role in the plan moving forward. I can provide
-    you valuable information regarding the castle and its innermost workings. "
+  m_Text: 'Come one, come all! Join us at Redwater for the annual burning festival!
+
+
+    Plenty
+    of drink, food, and games to play. Everyone is wellcome!
+
+
+    Leave through
+    the Western gate and follow the road, you cant miss it!
+
+'
 --- !u!222 &1884195351
 CanvasRenderer:
   m_ObjectHideFlags: 0
