@@ -6,6 +6,11 @@ using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
 
+
+//This script sets the Health, Coins and Ability points of a player. 
+//Updates the HUD functionality when either a correct/incorrect answer is selected. 
+//@author Madison Beare
+
 public class Player : MonoBehaviour
 {
 
@@ -38,19 +43,12 @@ public class Player : MonoBehaviour
 
     public static int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
-    // Start is called before the first frame update
     void Start()
     {
-        // currentHealth = maxHealth;
-        // currentCoins = maxCoins; // todo change 
-        // currentAbilityPoints = maxAbilityPoints; 
-        
-        // set max values
+         // set max values
         healthBar.SetMaxHealth(maxHealth); 
         coinBar.SetMaxCoins(maxCoins); 
-        abilityPointsBar.SetMaxAbilityPoints(maxAbilityPoints);    
-        
-       
+        abilityPointsBar.SetMaxAbilityPoints(maxAbilityPoints);           
     }
 
     // Update is called once per frame
@@ -63,15 +61,14 @@ public class Player : MonoBehaviour
          
         health = SelectObject.scrollDamage; 
         expense = SelectObject.scrollCoins;
-        //points = SelectObject.scrollCoins;
 
+        //Adds specified point value to HUD bars
         if (PopUpMenus.displayCorrectExplanation) 
         {
             PopUpMenus.characterCount += 1;
             characterCount += 1;
             latestCharacterCount = characterCount;
             currentHealth = currentHealth + health;
-            //currentAbilityPoints = currentAbilityPoints + expense; 
             currentCoins = currentCoins + expense;
 
             if ((currentHealth) < maxHealth) { 
@@ -88,13 +85,13 @@ public class Player : MonoBehaviour
                 currentCoins = maxCoins;  
             }
 
+        //Subtracts specified point value to HUD bars
         } else if (PopUpMenus.displayIncorrectExplanation) {
             PopUpMenus.characterCount += 1;
             characterCount += 1;
 
             latestCharacterCount = characterCount;
             currentHealth = currentHealth - health;
-            //currentAbilityPoints = currentAbilityPoints - expense; 
             currentCoins = currentCoins - expense;
 
             if ((currentHealth) > 0) { 
@@ -115,6 +112,7 @@ public class Player : MonoBehaviour
         PopUpMenus.displayIncorrectExplanation = false;
     }
 
+    //Updates ability points based on abilities selected
     public void updateAbilityPoints(int points) {
         currentAbilityPoints = currentAbilityPoints - points;
         if ((currentAbilityPoints) >= 0) { 

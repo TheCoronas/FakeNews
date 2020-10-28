@@ -10,5 +10,5 @@ public class healthCounter : MonoBehaviour
         health = GetComponent<Text> ();
     }
 
-    void Update() => health.text = "Empire Strength: " + Player.CurrentHealth;
+    void Update() => health.text = "Health: " + Player.CurrentHealth;
 }
