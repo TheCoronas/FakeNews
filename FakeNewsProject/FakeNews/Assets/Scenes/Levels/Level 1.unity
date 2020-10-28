@@ -14445,7 +14445,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22371,11 +22371,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1d3860404e4f3e349b1bb6a53d6ecc46, type: 3}
+    m_Font: {fileID: 12800000, guid: 3a0d338037bd7fa428d6d0277341f644, type: 3}
     m_FontSize: 50
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 50
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -32022,7 +32022,7 @@ RectTransform:
   m_AnchorMin: {x: 0.053187188, y: 0}
   m_AnchorMax: {x: 1, y: 0.94880366}
   m_AnchoredPosition: {x: -36.5, y: 32.033474}
-  m_SizeDelta: {x: -658.3646, y: -573.6739}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1060188187
 MonoBehaviour:
@@ -52761,7 +52761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1483940022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57994,12 +57994,13 @@ MonoBehaviour:
   displayExplanation: 0
   storyFlag: 0
   self: {fileID: 2018675342}
+  scoreScreenUI: {fileID: 1219727479}
   mapMenu: {fileID: 1039428767}
   inspectMenu: {fileID: 358525144}
   player: {fileID: 1334521179}
   pauseMenu: {fileID: 1127167223}
   helpDisplay: {fileID: 172272527}
-  scoreDisplay: {fileID: 1483940021}
+  scoreContentParent: {fileID: 1060188185}
   scrollDisplay1: {fileID: 1249286578}
   scrollDisplay2: {fileID: 742331369}
   scrollDisplay3: {fileID: 1232798253}
@@ -58023,6 +58024,7 @@ MonoBehaviour:
   peoplesOpinion: {fileID: 846325897}
   lieutOpinion: {fileID: 1379180518}
   councilOpinion: {fileID: 543708337}
+  ScoreText: {fileID: 760152157}
   dialoguing: 0
 --- !u!4 &1639627033
 Transform:
