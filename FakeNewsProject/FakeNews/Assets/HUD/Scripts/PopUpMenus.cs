@@ -277,7 +277,7 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         } 
-        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing || scoreDisplayed)
+        if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing || scoreDisplayed || showHelp)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
