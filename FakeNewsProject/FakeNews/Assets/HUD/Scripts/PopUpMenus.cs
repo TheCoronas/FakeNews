@@ -85,9 +85,10 @@ public class PopUpMenus : MonoBehaviour
         public UserData[] userInfo;
     }
 
-    /** Makes scoreboard. **/
+    /** Populates the scoreboard. **/
     private void renderScores()
     {
+            // Retrieve the scores
             WebClient client = new WebClient();
             var values = new NameValueCollection();
             values["user_id"] = Player.userId.ToString();
@@ -98,10 +99,11 @@ public class PopUpMenus : MonoBehaviour
 
             var v = JsonUtility.FromJson<ScoreJSON>("{\"userInfo\":" + result + "}");
 
-            int playerPos;
+            // Populate the scoreboard
             int count = 1;
             foreach (UserData user in v.userInfo)
             {
+                // initialise each score
                 GameObject o = new GameObject();
                 o.transform.SetParent(scoreContentParent.transform);
                 o.AddComponent<Text>();
@@ -110,11 +112,11 @@ public class PopUpMenus : MonoBehaviour
                 o.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
                 o.GetComponent<Text>().alignment = TextAnchor.UpperLeft;
                 o.GetComponent<RectTransform>().pivot = new Vector2(0, (float) 0.5);
-                
                 o.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
                 
                 char[] text = new char[70];
 
+                // For the player position
                 String countStr = count.ToString();
                 for (int i = 0; i < countStr.Length; ++i)
                 {
@@ -189,10 +191,11 @@ public class PopUpMenus : MonoBehaviour
             
             Canvas.ForceUpdateCanvases();
     }
+    
+    /** Occurs when script is first run. **/
     void Start()
     {
-        
-        // for toggle scroll elapsed duration init
+        // initialise toggle scroll delay
         sw = new Stopwatch();
         sw.Start();
         
@@ -223,6 +226,7 @@ public class PopUpMenus : MonoBehaviour
 
     }
 
+    /** Occurs once for each frame. **/
     void Update()
     {
         // Debug.Log(storyCount);
@@ -264,7 +268,7 @@ public class PopUpMenus : MonoBehaviour
         }
 
         scrollClicked = SelectObject.scrollClicked;
-        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false) {
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false && !scoreDisplayed) {
             if (SelectObject.currentCharacter > characterCount) {
                 incorrectCharacterCall(); 
             } else if (SelectObject.currentCharacter < characterCount) {
