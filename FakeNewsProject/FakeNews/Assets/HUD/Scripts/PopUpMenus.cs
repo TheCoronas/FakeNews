@@ -439,7 +439,7 @@ public class PopUpMenus : MonoBehaviour
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
-
+        
         advisorsOpinion.SetActive(!advisorsOpinion.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
         

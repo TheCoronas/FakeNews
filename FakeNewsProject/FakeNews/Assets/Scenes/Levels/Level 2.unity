@@ -4793,7 +4793,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterIncorrectExplanation
+        m_MethodName: enterCorrectExplanation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6691,7 +6691,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterCorrectExplanation
+        m_MethodName: enterIncorrectExplanation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9909,13 +9909,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ADVISORS OPINION
-
-
-    I have not heard of this person, but I trust their
-    intentions are pure. Proceed with caution.
-
-'
+  m_Text: "ADVISORS OPINION\n\nI've got a strange feeling about this.. Something
+    just doesn't seem right. If you take a close look, the spelling is a bit wrong.
+    Plus, I thought our town had some kind of issues with them.. \n"
 --- !u!222 &593577348
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13758,7 +13754,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterPeoplesOpinion
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13781,7 +13777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.80392164, g: 0.64705884, b: 0.44705886, a: 1}
+  m_Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -18447,7 +18443,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterCouncilOpinion
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18470,7 +18466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7411765, g: 0.59607846, b: 0.40784317, a: 1}
+  m_Color: {r: 0.40784314, g: 0.40784314, b: 0.40784317, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -26381,9 +26377,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "You receive an anonymous scroll. It states that someone have requested
-    your presence, as the sun sets below the horizon, in the right alley beside the
-    castle. \n\nFind the source of this scroll."
+  m_Text: "Hmmm.. That does indeed seem quite strange. \n\nPerhaps the town Seer
+    will have something to say about this.\n\nFollow the path, and you'll find directions
+    to her house."
 --- !u!222 &1509583046
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32922,7 +32918,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 903472506}
-        m_MethodName: enterLieutOpinion
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32945,7 +32941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7725491, g: 0.61960787, b: 0.427451, a: 1}
+  m_Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -34134,7 +34130,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fae067962e5934395be31c8aba4a3455, type: 3}
-    m_FontSize: 45
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -34152,8 +34148,8 @@ MonoBehaviour:
     of drink, food, and games to play. Everyone is wellcome!
 
 
-    Leave through
-    the Western gate and follow the road, you cant miss it!
+    Follow the road
+    to the west and leave throught the mountain pass. You cant miss it!
 
 '
 --- !u!222 &1884195351
