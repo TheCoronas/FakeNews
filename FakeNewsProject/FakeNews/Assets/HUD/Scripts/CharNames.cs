@@ -26,22 +26,29 @@ public class CharNames : MonoBehaviour
     public GameObject char4Name;
     public GameObject char5Name;
 
-    // Record if the 
+    // Record if the name is displayed.
     public bool displayChar1 = false;
     public bool displayChar2 = false;
     public bool displayChar3 = false;
     public bool displayChar4 = false;
     public bool displayChar5 = false;
 
+    // Call function when count reaches a multiple of 4.
+    public int count = 0;
+
     // Update is called once per frame
     void Update()
     {
-        // Cast ray
-        RaycastHit hit;
-        if (Physics.Raycast (transform.position, transform.TransformDirection(Vector3.forward), out hit))
+        if (count % 4 == 0)
         {
-            toggleCharName(hit.collider.gameObject);
+            // Cast ray
+            RaycastHit hit;
+            if (Physics.Raycast (transform.position, transform.TransformDirection(Vector3.forward), out hit))
+            {
+                toggleCharName(hit.collider.gameObject);
+            }
         }
+        count++;
     }
     
     // Display name of targetted character.
