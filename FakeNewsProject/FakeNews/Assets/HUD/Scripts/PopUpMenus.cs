@@ -250,7 +250,6 @@ public class PopUpMenus : MonoBehaviour
     /** Occurs once for each frame. **/
     void Update()
     {
-        // Debug.Log(storyCount);
         if (storyCount == 1 && !storyFlag)
         {
             StartCoroutine(toggleStoryScroll());
@@ -331,6 +330,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
+    /**
+     * Toggle the Map Display on the Screen. Locks the screen and player movement.
+     * Author: Jaiden Harding
+     */
     public void toggleMap()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -351,6 +354,11 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
+    /**
+     * Informs the player of their current level. Very dependent on the scene heirarchy. Gets the text element and updates with
+     * the scene name.
+     * Author: Jaiden Harding
+     */
     public void initialiseMap()
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -367,10 +375,10 @@ public class PopUpMenus : MonoBehaviour
 
     }
 
-
-
-    // Used as an admin function to quickly change between levels. [ to go back ] goes forward.
-    // @author Jaiden Harding
+    /**
+     * Used as an admin function to quickly change between levels. [ to go back ] goes forward.
+     * Author: Jaiden Harding
+     */
     private void adminLevelChange()
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -396,6 +404,11 @@ public class PopUpMenus : MonoBehaviour
         }
     }
 
+    /**
+     * Toggle Pause functionality. Locks the screen and player movement. Displays pause menu, capable of resuming or returning to
+     * menu.
+     * Author: Jaiden Harding
+     */
     private void togglePause()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -648,6 +661,11 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Used for button functionality on the Map Screen. Resumes the game, disables map screen and
+     * removes the cursor.
+     * Author: Jaiden Harding
+     */
     public void returntoGameFromMap()
     {
         mapMenu.SetActive(false);
@@ -666,6 +684,11 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+    /**
+     * Used for button functionality on the Pause Screen. Resumes the game, disables pause screen and
+     * removes the cursor.
+     * Author: Jaiden Harding
+     */
     public void returntoGameFromPause()
     {
         pauseMenu.SetActive(false);
@@ -674,7 +697,6 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
-
 
     public void returntoGameFromHelp()
     {
@@ -685,6 +707,11 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+    /**
+     * Used for button functionality on the Scrolls. Resumes the game, disables map screen and
+     * removes the cursor.
+     * Author: Jaiden Harding, Madison Beare
+     */
     public void returnToGameFromScroll()
     {
         setScrollDisplaysToFalse();
@@ -892,8 +919,11 @@ public class PopUpMenus : MonoBehaviour
         inspectMenu.SetActive(false);
     }
 
-    // Returns true if the requested level is not the current, false otherwise. Used for map navigation.
-    // todo: Check whether a player has completed all scrolls on a level before allowing access to later ones.
+    /**
+     * Returns true if the requested level is not the current, false otherwise. Used for map navigation on the map screen.
+     * Sets the character count depending on whether the level is above or below the current.
+     * Author: Jaiden Harding, Dom Zhu
+     */
     private void changeLevels(int currentLevel, int nextLevel)
     {
         
@@ -915,15 +945,13 @@ public class PopUpMenus : MonoBehaviour
                 Player.characterCount = Player.latestCharacterCount;
                 
             }
-            else if (nextLevel > Player.latestScene) // go to next level - todo need to check if you've completed previous scrolls 
-            // maybe charactercount > that levels max character count
+            else if (nextLevel > Player.latestScene) // go to next level
             {
                 Player.currentAbilityPoints = 3;
                 Player.latestScene = nextLevel;
                 Player.characterCount = 1;
                 Player.latestCharacterCount = Player.characterCount;
             }
-            // toggleMap();
         }
         else
         {
@@ -937,6 +965,11 @@ public class PopUpMenus : MonoBehaviour
         }
     }
 
+    /**
+     * Used for the button functionality on the Map Screen. Depending on the button that is clicked, the relevant scene indexes are
+     * generated. This relies on Levels 1 through 5 being their respective numbers within the build settings.
+     * Author: Jaiden Harding
+     */
     public void navigateMapLevels(Button button)
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -994,6 +1027,10 @@ public class PopUpMenus : MonoBehaviour
         }
     }
 
+    /**
+     * If the player selects the level that they are currently on, an error will display on the Map Screen.
+     * Author: Jaiden Harding
+     */
     private void displayMapError(bool status)
     {
         foreach (Text mapText in mapText)
