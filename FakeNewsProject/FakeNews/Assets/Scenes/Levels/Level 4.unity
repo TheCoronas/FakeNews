@@ -672,7 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterOrder: 3
   scrollDamage: 3
-  ScrollCoins: 3
+  ScrollCoins: 5
 --- !u!143 &27562234
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6026,7 +6026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterOrder: 2
   scrollDamage: 2
-  ScrollCoins: 2
+  ScrollCoins: 5
 --- !u!114 &296761574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26970,8 +26970,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterOrder: 1
-  scrollDamage: 1
-  ScrollCoins: 1
+  scrollDamage: 2
+  ScrollCoins: 4
 --- !u!4 &1216787163 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4445584750326018, guid: f95d1a9483a8c6a4496c281ffd93702c,
@@ -29458,6 +29458,7 @@ MonoBehaviour:
   displayChar3: 1
   displayChar4: 0
   displayChar5: 0
+  count: 0
 --- !u!1 &1335444743
 GameObject:
   m_ObjectHideFlags: 0
