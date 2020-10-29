@@ -293,6 +293,8 @@ public class PopUpMenus : MonoBehaviour
             toggleScores();
         }
 
+        adminLevelChange();
+
         scrollClicked = SelectObject.scrollClicked;
         if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false && !scoreDisplayed)
         {
@@ -363,6 +365,35 @@ public class PopUpMenus : MonoBehaviour
             }
         }
 
+    }
+
+
+
+    // Used as an admin function to quickly change between levels. [ to go back ] goes forward.
+    // @author Jaiden Harding
+    private void adminLevelChange()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+
+        // Goes forward
+        if (Input.GetKeyDown("["))
+        {
+            int currentLevel = scene.buildIndex;
+            if (currentLevel != 1)
+            {
+                changeLevels(currentLevel, currentLevel - 1);
+            }
+        }
+
+        // Goes back
+        if (Input.GetKeyDown("]"))
+        {
+            int currentLevel = scene.buildIndex;
+            if (currentLevel != 5)
+            {
+                changeLevels(currentLevel, currentLevel + 1);
+            }
+        }
     }
 
     private void togglePause()
