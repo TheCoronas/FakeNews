@@ -10,6 +10,12 @@ using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/**
+ * Author: Troy Wright
+ * Raycasting which determines when a character is being targetted.
+ * Character name should be displayed in the HUD for each of 5
+ * characters.
+ */
 public class CharNames : MonoBehaviour
 {
     // Assigned to the 5 holders of scrolls in the level.
@@ -36,12 +42,12 @@ public class CharNames : MonoBehaviour
     // Call function when count reaches a multiple of 4.
     public int count = 0;
 
-    // Update is called once per frame
+    /* Update is called once per frame. */
     void Update()
     {
         if (count % 4 == 0)
         {
-            // Cast ray
+            // Cast ray every 4 frames.
             RaycastHit hit;
             if (Physics.Raycast (transform.position, transform.TransformDirection(Vector3.forward), out hit))
             {
@@ -51,7 +57,7 @@ public class CharNames : MonoBehaviour
         count++;
     }
     
-    // Display name of targetted character.
+    /* Display name of targetted character. */
     public void toggleCharName(GameObject character)
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -82,7 +88,7 @@ public class CharNames : MonoBehaviour
             displayChar5 = true;
             char5Name.SetActive(true);
         }
-        // Hide names.
+        // Hide all names if no character is targetted.
         else if (displayChar1 || displayChar2 || displayChar3 || displayChar4 || displayChar5)
         {
             displayChar1 = false;

@@ -14,10 +14,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
-
+/**
+ * Handles all HUD menus in the game, including scrolls, map,
+ * pause menu, help menu, game over screen, all abilities,
+ * correct / incorrect screen, or insufficient points screen.
+ */
 public class PopUpMenus : MonoBehaviour
 {
     private float timeSinceClicked;
+
+    // Booleans storing whether a menu is being displayed.
     public bool mapDisplayed = false;
     public bool inspectDisplayed = false;
     public bool scoreDisplayed = false;
@@ -31,7 +37,11 @@ public class PopUpMenus : MonoBehaviour
     public static bool displayIncorrectExplanation = false;
     public bool storyFlag = false;
     public static bool displayNotEnoughPoints = false;
+
+    // The Player object from Player.cs
     public Player self;
+
+    // The objects within Unity used as displays.
     public GameObject scoreScreenUI;
     public GameObject mapMenu;
     public GameObject inspectMenu;
@@ -83,9 +93,12 @@ public class PopUpMenus : MonoBehaviour
     public GameObject councilOpinion4;
     public GameObject councilOpinion5;
     public GameObject ScoreText;
+
+    // Variables storing the player's game progression.
     public static int characterCount;
     public static int storyCount;
     private string currentScrollDisplay;
+
     private Text[] mapText;
     public bool dialoguing = false;
     private Stopwatch sw;
@@ -247,23 +260,31 @@ public class PopUpMenus : MonoBehaviour
 
     }
 
-    /** Occurs once for each frame. **/
+    /**
+     * Occurs once for each frame.
+     * Multiple authors.
+     */
     void Update()
     {
+        // Opens introduction scroll.
         if (storyCount == 1 && !storyFlag)
         {
             StartCoroutine(toggleStoryScroll());
         }
+
+        // Checks for game over.
         if (Player.CurrentHealth <= 0 && !displayGameOver)
         {
             enterGameOver();
         }
 
+        // Checks player ability points.
         if (Player.currentAbilityPoints == 0 && displayNotEnoughPoints)
         {
             enterNotEnoughPoints();
         }
 
+        // Open map on 'M' press.
         if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed)
         {
             toggleMap();
@@ -271,32 +292,40 @@ public class PopUpMenus : MonoBehaviour
 
         Scene scene = SceneManager.GetActiveScene();
         int currentBuildIndex = scene.buildIndex;
+
+        // Inspect stamp on 'I' press.
         if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !showHelp && !scoreDisplayed && scene.buildIndex == 4)
         {
             toggleInspect();
         }
 
+        // Display pause menu on 'ESC' press.
         if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed)
         {
             togglePause();
         }
 
+        // Display help screen on 'H' press.
         if (Input.GetKeyDown("h") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !scoreDisplayed)
         {
             toggleHelp();
         }
 
-        // for highscore screen
+        // Display high scores on 'Z' press.
         if (Input.GetKeyDown("z") && Player.loggedIn && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed)
         {
             toggleScores();
         }
 
+        // Set up manual level changing for debugging.
         adminLevelChange();
 
+        // Open scroll when talking to character.
         scrollClicked = SelectObject.scrollClicked;
-        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false && !scoreDisplayed)
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false
+            && inspectDisplayed == false && !scoreDisplayed)
         {
+            // Determine which scroll to display.
             if (SelectObject.currentCharacter > characterCount)
             {
                 incorrectCharacterCall();
@@ -310,6 +339,8 @@ public class PopUpMenus : MonoBehaviour
                 toggleScroll();
             }
         }
+
+        // Allow / disallow mouse movement in menus.
         if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing || scoreDisplayed || showHelp)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -419,6 +450,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
+    /**
+     * Toggle help display. Locks screen and player movement, displays help screen, showing all controls in the game.
+     * Author: Troy Wright
+     */
     private void toggleHelp()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -505,6 +540,10 @@ public class PopUpMenus : MonoBehaviour
         yield return null;
     }
 
+    /**
+     * Once the players health has reduced to 0, the game will end. Screen and player movement
+     * are locked and a message is displayed. The player can press a button to exit.
+     */
     public void enterGameOver()
     {
         displayGameOver = true;
@@ -698,6 +737,11 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+    /**
+     * Used for button functionality on the Help Screen. Resumes the game, disables help screen and
+     * removes the cursor.
+     * Author: Troy Wright
+     */
     public void returntoGameFromHelp()
     {
         helpDisplay.SetActive(false);
