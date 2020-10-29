@@ -16110,11 +16110,31 @@ MonoBehaviour:
   incorrectExplanationView: {fileID: 1670063786}
   insufficientAbilityPoints: {fileID: 1326355802}
   replayCharacterView: {fileID: 1567555339}
-  advisorsOpinion: {fileID: 648433209}
-  empireMap: {fileID: 1316428637}
-  peoplesOpinion: {fileID: 749104294}
-  lieutOpinion: {fileID: 1455045210}
-  councilOpinion: {fileID: 1342711021}
+  advisorsOpinion1: {fileID: 0}
+  advisorsOpinion2: {fileID: 0}
+  advisorsOpinion3: {fileID: 0}
+  advisorsOpinion4: {fileID: 0}
+  advisorsOpinion5: {fileID: 0}
+  empireMap1: {fileID: 0}
+  empireMap2: {fileID: 0}
+  empireMap3: {fileID: 0}
+  empireMap4: {fileID: 0}
+  empireMap5: {fileID: 0}
+  peoplesOpinion1: {fileID: 0}
+  peoplesOpinion2: {fileID: 0}
+  peoplesOpinion3: {fileID: 0}
+  peoplesOpinion4: {fileID: 0}
+  peoplesOpinion5: {fileID: 0}
+  lieutOpinion1: {fileID: 0}
+  lieutOpinion2: {fileID: 0}
+  lieutOpinion3: {fileID: 0}
+  lieutOpinion4: {fileID: 0}
+  lieutOpinion5: {fileID: 0}
+  councilOpinion1: {fileID: 0}
+  councilOpinion2: {fileID: 0}
+  councilOpinion3: {fileID: 0}
+  councilOpinion4: {fileID: 0}
+  councilOpinion5: {fileID: 0}
   ScoreText: {fileID: 1475021645}
   dialoguing: 0
 --- !u!4 &903472507
@@ -28338,7 +28358,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Empire Strength: 10'
+  m_Text: 'Empire Health: 10'
 --- !u!222 &1581214081
 CanvasRenderer:
   m_ObjectHideFlags: 0
