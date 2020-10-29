@@ -5,13 +5,16 @@
 
 This game was designed to target primary school students, and has been designed as a desktop application.
 
-## System Requirements
+## Development Stack
 The development environment consisted of:
 - Unity V 2019.4.8f1 (front-end development)
 - mySQL
 - phpMyAdmin
 - Nginx
 - CodeIgniter
+
+## How To Run
+To run the game from Unity, navigate to: `Assets>Scenes>Menus>Menu Scenes>start_screen`. From here, sign up to create an account, and start playing the game.
 
 ## Assets
 Unless otherwise specified, all assets were obtained from the Unity Asset Store. The "Standard Assets" default Unity Package is located within `Assets>Standard Assets`.
