@@ -56,6 +56,4 @@ The starting menus (signup, login), along with tutorials are located within `Ass
 Character and Camera control scripts are located within `Assets>Scripts>Character Scripts` and `Assets>Scripts>Camera Scripts` respectively. These are primarily utilised within Level 3.
 
 ## References
-All resources are referenced in this file LOCATED AT `Assets>Scripts>Resources`. This includes references of all images, assets and packages used and imported in Fact and Fantasy.
-
-
+All resources are referenced in this file located at `Assets>Scripts>Resources`. This includes references of all images, assets and packages used and imported in Fact and Fantasy.
