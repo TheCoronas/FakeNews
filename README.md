@@ -16,6 +16,12 @@ The development environment consisted of:
 ## How To Run
 To run the game from Unity, navigate to: `Assets>Scenes>Menus>Menu Scenes>start_screen`. From here, create an account, sign in, and start playing the game.
 
+### Admin Functions
+For demonstration purposes, some additional functionality was implemented. This was only implemented to speed up demonstration and for debugging, and not for base game functionality. 
+- `[` is used to immediately navigate to the previous level
+- `]` is used to immediately navigate to the next level
+- `P` is used to reset the number of ability points
+
 ## Assets
 Unless otherwise specified, all assets were obtained from the Unity Asset Store. The "Standard Assets" default Unity Package is located within `Assets>Standard Assets`.
 
