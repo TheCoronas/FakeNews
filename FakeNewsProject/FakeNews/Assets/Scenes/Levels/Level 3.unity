@@ -33129,6 +33129,7 @@ MonoBehaviour:
   displayChar3: 0
   displayChar4: 0
   displayChar5: 0
+  count: 0
 --- !u!1 &721273255
 GameObject:
   m_ObjectHideFlags: 0
@@ -94193,8 +94194,8 @@ MonoBehaviour:
   gameOverMenu: {fileID: 333991738}
   explanationView: {fileID: 1818962908}
   incorrectCharacter: {fileID: 646422898}
-  correctExplanationView: {fileID: 0}
-  incorrectExplanationView: {fileID: 0}
+  correctExplanationView: {fileID: 1303837311}
+  incorrectExplanationView: {fileID: 1444976008}
   insufficientAbilityPoints: {fileID: 1574148220}
   replayCharacterView: {fileID: 544268240}
   advisorsOpinion1: {fileID: 1238544094}
