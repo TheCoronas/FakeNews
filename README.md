@@ -8,7 +8,10 @@ This game was designed to target primary school students, and has been designed 
 ## System Requirements
 The development environment consisted of:
 - Unity V 2019.4.8f1 (front-end development)
-- mySQL V x (DBMS)
+- mySQL
+- phpMyAdmin
+- Nginx
+- CodeIgniter
 
 ## Assets
 Unless otherwise specified, all assets were obtained from the Unity Asset Store. The "Standard Assets" default Unity Package is located within `Assets>Standard Assets`.
