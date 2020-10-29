@@ -19486,6 +19486,7 @@ MonoBehaviour:
   displayChar3: 1
   displayChar4: 0
   displayChar5: 0
+  count: 0
 --- !u!4 &652134013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0,
@@ -45990,7 +45991,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next Level
+  m_Text: End Game
 --- !u!222 &1693056469
 CanvasRenderer:
   m_ObjectHideFlags: 0

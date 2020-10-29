@@ -5,10 +5,16 @@
 
 This game was designed to target primary school students, and has been designed as a desktop application.
 
-## System Requirements
+## Development Stack
 The development environment consisted of:
 - Unity V 2019.4.8f1 (front-end development)
-- mySQL V x (DBMS)
+- mySQL
+- phpMyAdmin
+- Nginx
+- CodeIgniter
+
+## How To Run
+To run the game from Unity, navigate to: `Assets>Scenes>Menus>Menu Scenes>start_screen`. From here, create an account, sign in, and start playing the game.
 
 ## Assets
 Unless otherwise specified, all assets were obtained from the Unity Asset Store. The "Standard Assets" default Unity Package is located within `Assets>Standard Assets`.
@@ -52,3 +58,5 @@ The starting menus (signup, login), along with tutorials are located within `Ass
 ## Other Scripts
 Character and Camera control scripts are located within `Assets>Scripts>Character Scripts` and `Assets>Scripts>Camera Scripts` respectively. These are primarily utilised within Level 3.
 
+## References
+All resources are referenced in this file located at `Assets>Scripts>Resources`. This includes references of all images, assets and packages used and imported in Fact and Fantasy.
