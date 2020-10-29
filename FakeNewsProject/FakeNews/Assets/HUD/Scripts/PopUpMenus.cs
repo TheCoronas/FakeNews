@@ -26,11 +26,11 @@ public class PopUpMenus : MonoBehaviour
     public bool scrollClicked;
     public bool showScroll = false;
     public bool displayGameOver = false;
-    public bool displayExplanation = false; 
-    public static bool displayCorrectExplanation = false; 
-    public static bool displayIncorrectExplanation = false; 
-    public bool storyFlag = false; 
-    public static bool displayNotEnoughPoints = false; 
+    public bool displayExplanation = false;
+    public static bool displayCorrectExplanation = false;
+    public static bool displayIncorrectExplanation = false;
+    public bool storyFlag = false;
+    public static bool displayNotEnoughPoints = false;
     public Player self;
     public GameObject scoreScreenUI;
     public GameObject mapMenu;
@@ -51,20 +51,40 @@ public class PopUpMenus : MonoBehaviour
     public GameObject storyDisplay5;
     public GameObject storyDisplay6;
     public GameObject gameOverMenu;
-    public GameObject explanationView; 
-    public GameObject incorrectCharacter; 
-    public GameObject correctExplanationView; 
+    public GameObject explanationView;
+    public GameObject incorrectCharacter;
+    public GameObject correctExplanationView;
     public GameObject incorrectExplanationView;
-    public GameObject insufficientAbilityPoints; 
+    public GameObject insufficientAbilityPoints;
     public GameObject replayCharacterView;
-    public GameObject advisorsOpinion; 
-    public GameObject empireMap; 
-    public GameObject peoplesOpinion; 
-    public GameObject lieutOpinion; 
-    public GameObject councilOpinion;
+    public GameObject advisorsOpinion1;
+    public GameObject advisorsOpinion2;
+    public GameObject advisorsOpinion3;
+    public GameObject advisorsOpinion4;
+    public GameObject advisorsOpinion5;
+    public GameObject empireMap1;
+    public GameObject empireMap2;
+    public GameObject empireMap3;
+    public GameObject empireMap4;
+    public GameObject empireMap5;
+    public GameObject peoplesOpinion1;
+    public GameObject peoplesOpinion2;
+    public GameObject peoplesOpinion3;
+    public GameObject peoplesOpinion4;
+    public GameObject peoplesOpinion5;
+    public GameObject lieutOpinion1;
+    public GameObject lieutOpinion2;
+    public GameObject lieutOpinion3;
+    public GameObject lieutOpinion4;
+    public GameObject lieutOpinion5;
+    public GameObject councilOpinion1;
+    public GameObject councilOpinion2;
+    public GameObject councilOpinion3;
+    public GameObject councilOpinion4;
+    public GameObject councilOpinion5;
     public GameObject ScoreText;
-    public static int characterCount; 
-    public static int storyCount; 
+    public static int characterCount;
+    public static int storyCount;
     private string currentScrollDisplay;
     private Text[] mapText;
     public bool dialoguing = false;
@@ -78,7 +98,7 @@ public class PopUpMenus : MonoBehaviour
         public string coins;
         public string abilityPoints;
     }
-    
+
     [System.Serializable]
     public class ScoreJSON
     {
@@ -88,117 +108,118 @@ public class PopUpMenus : MonoBehaviour
     /** Populates the scoreboard. **/
     private void renderScores()
     {
-            // Retrieve the scores
-            WebClient client = new WebClient();
-            var values = new NameValueCollection();
-            values["user_id"] = Player.userId.ToString();
-            byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/getScores", values);
-            var result = Encoding.UTF8.GetString(response);
-    
-            Debug.Log(result);
+        // Retrieve the scores
+        WebClient client = new WebClient();
+        var values = new NameValueCollection();
+        values["user_id"] = Player.userId.ToString();
+        byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/getScores", values);
+        var result = Encoding.UTF8.GetString(response);
 
-            var v = JsonUtility.FromJson<ScoreJSON>("{\"userInfo\":" + result + "}");
+        Debug.Log(result);
 
-            // Populate the scoreboard
-            int count = 1;
-            foreach (UserData user in v.userInfo)
+        var v = JsonUtility.FromJson<ScoreJSON>("{\"userInfo\":" + result + "}");
+
+        // Populate the scoreboard
+        int count = 1;
+        foreach (UserData user in v.userInfo)
+        {
+            // initialise each score
+            GameObject o = new GameObject();
+            o.transform.SetParent(scoreContentParent.transform);
+            o.AddComponent<Text>();
+            o.AddComponent<ContentSizeFitter>();
+            o.GetComponent<ContentSizeFitter>().horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+            o.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            o.GetComponent<Text>().alignment = TextAnchor.UpperLeft;
+            o.GetComponent<RectTransform>().pivot = new Vector2(0, (float)0.5);
+            o.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
+
+            char[] text = new char[70];
+
+            // For the player position
+            String countStr = count.ToString();
+            for (int i = 0; i < countStr.Length; ++i)
             {
-                // initialise each score
-                GameObject o = new GameObject();
-                o.transform.SetParent(scoreContentParent.transform);
-                o.AddComponent<Text>();
-                o.AddComponent<ContentSizeFitter>();
-                o.GetComponent<ContentSizeFitter>().horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-                o.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-                o.GetComponent<Text>().alignment = TextAnchor.UpperLeft;
-                o.GetComponent<RectTransform>().pivot = new Vector2(0, (float) 0.5);
-                o.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 600);
-                
-                char[] text = new char[70];
-
-                // For the player position
-                String countStr = count.ToString();
-                for (int i = 0; i < countStr.Length; ++i)
-                {
-                    text[i] = countStr[i];
-                }
-
-                // save player position to inform of change in rank
-                if (user.user_id == Player.userId.ToString())
-                {
-                    int rankGain = Player.ranking - count;
-                    
-                    if (Player.ranking != -1)
-                    {
-                        Cursor.visible = true;
-                        Cursor.lockState = CursorLockMode.Confined;
-                        if (rankGain > 0)
-                        {
-                            EditorUtility.DisplayDialog("Class Rank", $"Your rank has increased by {rankGain}. You are now rank {count}", "Ok");
-                        } else if (rankGain == 0)
-                        {
-                            EditorUtility.DisplayDialog("Class Rank", $"Your rank has not changed. You are still rank {Player.ranking}", "Ok");
-                        }
-                        else
-                        {
-                            EditorUtility.DisplayDialog("Class Rank", $"Your rank has decreased by {rankGain}. You are now rank {count}", "Ok");
-                        }
-                    }
-                    Player.ranking = count;
-                }
-
-                text[countStr.Length] = '.';
-                
-                // set username
-                for (int i = 0; i < user.username.Length; ++i)
-                {
-                    text[i + 3] = user.username[i];
-                }
-
-                // set empire health
-                for (int i = 0; i < user.currentHealth.Length; ++i)
-                {
-                    text[i + 16] = user.currentHealth[i];
-                }
-                
-                // set coins
-                for (int i = 0; i < user.coins.Length; ++i)
-                {
-                    text[i + 26] = user.coins[i];
-                }
-                
-                
-                // set ability points
-                for (int i = 0; i < user.abilityPoints.Length; ++i)
-                {
-                    text[i + 34] = user.abilityPoints[i];
-                }
-                
-
-                // replace nulls
-                for (int i = 0; i < text.Length; ++i)
-                {
-                    if (text[i] == '\0')
-                    {
-                        text[i] = ' ';
-                    }
-                }
-                o.GetComponent<Text>().text = new string(text);
-                o.GetComponent<Text>().font = ScoreText.GetComponent<Text>().font;
-                o.GetComponent<Text>().fontSize = 20;
-                count++;
+                text[i] = countStr[i];
             }
-            
-            Canvas.ForceUpdateCanvases();
+
+            // save player position to inform of change in rank
+            if (user.user_id == Player.userId.ToString())
+            {
+                int rankGain = Player.ranking - count;
+
+                if (Player.ranking != -1)
+                {
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.Confined;
+                    if (rankGain > 0)
+                    {
+                        EditorUtility.DisplayDialog("Class Rank", $"Your rank has increased by {rankGain}. You are now rank {count}", "Ok");
+                    }
+                    else if (rankGain == 0)
+                    {
+                        EditorUtility.DisplayDialog("Class Rank", $"Your rank has not changed. You are still rank {Player.ranking}", "Ok");
+                    }
+                    else
+                    {
+                        EditorUtility.DisplayDialog("Class Rank", $"Your rank has decreased by {rankGain}. You are now rank {count}", "Ok");
+                    }
+                }
+                Player.ranking = count;
+            }
+
+            text[countStr.Length] = '.';
+
+            // set username
+            for (int i = 0; i < user.username.Length; ++i)
+            {
+                text[i + 3] = user.username[i];
+            }
+
+            // set empire health
+            for (int i = 0; i < user.currentHealth.Length; ++i)
+            {
+                text[i + 16] = user.currentHealth[i];
+            }
+
+            // set coins
+            for (int i = 0; i < user.coins.Length; ++i)
+            {
+                text[i + 26] = user.coins[i];
+            }
+
+
+            // set ability points
+            for (int i = 0; i < user.abilityPoints.Length; ++i)
+            {
+                text[i + 34] = user.abilityPoints[i];
+            }
+
+
+            // replace nulls
+            for (int i = 0; i < text.Length; ++i)
+            {
+                if (text[i] == '\0')
+                {
+                    text[i] = ' ';
+                }
+            }
+            o.GetComponent<Text>().text = new string(text);
+            o.GetComponent<Text>().font = ScoreText.GetComponent<Text>().font;
+            o.GetComponent<Text>().fontSize = 20;
+            count++;
+        }
+
+        Canvas.ForceUpdateCanvases();
     }
-    
+
     /** Occurs when script is first run. **/
     void Start()
     {
         // initialise toggle scroll delay
         sw = new Stopwatch();
         sw.Start();
-        
+
         scoreScreenUI.SetActive(false);
         // should let you skip logging in whilst debugging
         if (Player.loggedIn == false)
@@ -210,14 +231,14 @@ public class PopUpMenus : MonoBehaviour
             Player.currentCoins = Player.maxCoins;
             Player.characterCount = 1;
             Player.activeScene = SceneManager.GetActiveScene().buildIndex;
-            
+
             storyCount = 1;
         }
         else
         {
             storyCount = Player.characterCount;
             characterCount = Player.characterCount;
-            
+
             renderScores();
             GUI.FocusWindow(0);
             Cursor.visible = false;
@@ -230,7 +251,8 @@ public class PopUpMenus : MonoBehaviour
     void Update()
     {
         // Debug.Log(storyCount);
-        if (storyCount == 1 && !storyFlag) {
+        if (storyCount == 1 && !storyFlag)
+        {
             StartCoroutine(toggleStoryScroll());
         }
         if (Player.CurrentHealth <= 0 && !displayGameOver)
@@ -238,22 +260,26 @@ public class PopUpMenus : MonoBehaviour
             enterGameOver();
         }
 
-        if (Player.currentAbilityPoints == 0 && displayNotEnoughPoints) {
-            enterNotEnoughPoints(); 
+        if (Player.currentAbilityPoints == 0 && displayNotEnoughPoints)
+        {
+            enterNotEnoughPoints();
         }
 
-        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed) {
-            toggleMap();            
+        if (Input.GetKeyDown("m") && !gamePaused && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed)
+        {
+            toggleMap();
         }
 
         Scene scene = SceneManager.GetActiveScene();
         int currentBuildIndex = scene.buildIndex;
-        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !showHelp && !scoreDisplayed && scene.buildIndex == 4) {
-            toggleInspect();            
+        if (Input.GetKeyDown("i") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !showHelp && !scoreDisplayed && scene.buildIndex == 4)
+        {
+            toggleInspect();
         }
-        
-        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed) {
-            togglePause();            
+
+        if (Input.GetButtonDown("Cancel") && !mapDisplayed && !showScroll && !displayGameOver && !inspectDisplayed && !showHelp && !scoreDisplayed)
+        {
+            togglePause();
         }
 
         if (Input.GetKeyDown("h") && !gamePaused && !showScroll && !displayGameOver && !mapDisplayed && !scoreDisplayed)
@@ -268,20 +294,28 @@ public class PopUpMenus : MonoBehaviour
         }
 
         scrollClicked = SelectObject.scrollClicked;
-        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false && !scoreDisplayed) {
-            if (SelectObject.currentCharacter > characterCount) {
-                incorrectCharacterCall(); 
-            } else if (SelectObject.currentCharacter < characterCount) {
-                replayCharacterCall(); 
-            } else {
+        if (scrollClicked == true && showScroll == false && mapDisplayed == false && gamePaused == false && displayGameOver == false && inspectDisplayed == false && !scoreDisplayed)
+        {
+            if (SelectObject.currentCharacter > characterCount)
+            {
+                incorrectCharacterCall();
+            }
+            else if (SelectObject.currentCharacter < characterCount)
+            {
+                replayCharacterCall();
+            }
+            else
+            {
                 toggleScroll();
             }
-        } 
+        }
         if (mapDisplayed || gamePaused || showScroll || displayGameOver || inspectDisplayed || dialoguing || scoreDisplayed || showHelp)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-        } else {
+        }
+        else
+        {
             Cursor.visible = false;
         }
     }
@@ -290,7 +324,7 @@ public class PopUpMenus : MonoBehaviour
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         inspectDisplayed = !inspectDisplayed;
-            
+
         inspectMenu.SetActive(!inspectMenu.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
@@ -300,7 +334,7 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         mapDisplayed = !mapDisplayed;
         displayMapError(false);
-            
+
         mapMenu.SetActive(!mapMenu.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
@@ -310,7 +344,7 @@ public class PopUpMenus : MonoBehaviour
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         scoreDisplayed = !scoreDisplayed;
-            
+
         scoreScreenUI.SetActive(!scoreScreenUI.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
@@ -321,24 +355,23 @@ public class PopUpMenus : MonoBehaviour
 
         mapText = GameObject.Find("HUD/MapScreen/MapScreenUI/Text").GetComponentsInChildren<Text>();
 
-        foreach (Text mapText in mapText) {
+        foreach (Text mapText in mapText)
+        {
             if (mapText.name == "CurrentLevelText")
             {
                 mapText.text = String.Format("Current Level: {0}", scene.name);
             }
         }
-        
+
     }
-
-
 
     private void togglePause()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         gamePaused = !gamePaused;
-    
+
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
-        
+
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
@@ -367,8 +400,9 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
 
-        switch (characterCount) {
-            case 1: 
+        switch (characterCount)
+        {
+            case 1:
                 scrollDisplay1.SetActive(!scrollDisplay1.activeInHierarchy);
                 break;
             case 2:
@@ -383,23 +417,25 @@ public class PopUpMenus : MonoBehaviour
             case 5:
                 scrollDisplay5.SetActive(!scrollDisplay5.activeInHierarchy);
                 break;
-            default: 
-                break; 
+            default:
+                break;
         }
         player.GetComponent<FirstPersonController>().enabled = false;
-        
+
         sw.Start();
 
     }
 
-    private IEnumerator toggleStoryScroll() {
-        storyFlag = true; 
+    private IEnumerator toggleStoryScroll()
+    {
+        storyFlag = true;
         yield return new WaitForSeconds(1);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
         player.GetComponent<FirstPersonController>().enabled = false;
-        
-        switch (storyCount) {
+
+        switch (storyCount)
+        {
             case 1:
                 storyDisplay1.SetActive(!storyDisplay1.activeInHierarchy);
                 yield break;
@@ -418,67 +454,166 @@ public class PopUpMenus : MonoBehaviour
             case 6:
                 storyDisplay6.SetActive(!storyDisplay6.activeInHierarchy);
                 yield break;
-            default: 
-                yield break; 
+            default:
+                yield break;
         }
         StopCoroutine(toggleStoryScroll());
-        yield return null;      
+        yield return null;
     }
 
     public void enterGameOver()
     {
         displayGameOver = true;
-        incorrectExplanationView.SetActive(false); 
+        incorrectExplanationView.SetActive(false);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
         gameOverMenu.SetActive(!gameOverMenu.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
-    public void enterAdvisorsOpinion() {
-        setScrollDisplaysToFalse();
-        self.updateAbilityPoints(1);
-        Time.timeScale = Math.Abs(Time.timeScale - 1);
-        
-        advisorsOpinion.SetActive(!advisorsOpinion.activeInHierarchy);
-        player.GetComponent<FirstPersonController>().enabled = false;
-        
-    }
-
-    public void enterEmpireMap() {
+    public void enterAdvisorsOpinion()
+    {
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
-        empireMap.SetActive(!empireMap.activeInHierarchy);
+        switch (characterCount)
+        {
+            case 1:
+                advisorsOpinion1.SetActive(!advisorsOpinion1.activeInHierarchy);
+                break;
+            case 2:
+                advisorsOpinion2.SetActive(!advisorsOpinion2.activeInHierarchy);
+                break;
+            case 3:
+                advisorsOpinion3.SetActive(!advisorsOpinion3.activeInHierarchy);
+                break;
+            case 4:
+                advisorsOpinion4.SetActive(!advisorsOpinion4.activeInHierarchy);
+                break;
+            case 5:
+                advisorsOpinion5.SetActive(!advisorsOpinion5.activeInHierarchy);
+                break;
+            default:
+                break;
+        }
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
-    public void enterPeoplesOpinion() {
+    public void enterEmpireMap()
+    {
+        setScrollDisplaysToFalse();
+        self.updateAbilityPoints(1);
+        Time.timeScale = Math.Abs(Time.timeScale - 1);
+
+        switch (characterCount)
+        {
+            case 1:
+                empireMap1.SetActive(!empireMap1.activeInHierarchy);
+                break;
+            case 2:
+                empireMap2.SetActive(!empireMap2.activeInHierarchy);
+                break;
+            case 3:
+                empireMap3.SetActive(!empireMap3.activeInHierarchy);
+                break;
+            case 4:
+                empireMap4.SetActive(!empireMap4.activeInHierarchy);
+                break;
+            case 5:
+                empireMap5.SetActive(!empireMap5.activeInHierarchy);
+                break;
+            default:
+                break;
+        }
+        player.GetComponent<FirstPersonController>().enabled = false;
+    }
+
+    public void enterPeoplesOpinion()
+    {
         setScrollDisplaysToFalse();
         //Player.updateAbilityPoints(1); 
         self.updateAbilityPoints(1);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
-        peoplesOpinion.SetActive(!peoplesOpinion.activeInHierarchy);
+        switch (characterCount)
+        {
+            case 1:
+                peoplesOpinion1.SetActive(!peoplesOpinion1.activeInHierarchy);
+                break;
+            case 2:
+                peoplesOpinion2.SetActive(!peoplesOpinion2.activeInHierarchy);
+                break;
+            case 3:
+                peoplesOpinion3.SetActive(!peoplesOpinion3.activeInHierarchy);
+                break;
+            case 4:
+                peoplesOpinion4.SetActive(!peoplesOpinion4.activeInHierarchy);
+                break;
+            case 5:
+                peoplesOpinion5.SetActive(!peoplesOpinion5.activeInHierarchy);
+                break;
+            default:
+                break;
+        }
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
-    public void enterLieutOpinion() {
+    public void enterLieutOpinion()
+    {
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
-        lieutOpinion.SetActive(!lieutOpinion.activeInHierarchy);
+        switch (characterCount)
+        {
+            case 1:
+                lieutOpinion1.SetActive(!lieutOpinion1.activeInHierarchy);
+                break;
+            case 2:
+                lieutOpinion2.SetActive(!lieutOpinion2.activeInHierarchy);
+                break;
+            case 3:
+                lieutOpinion3.SetActive(!lieutOpinion3.activeInHierarchy);
+                break;
+            case 4:
+                lieutOpinion4.SetActive(!lieutOpinion4.activeInHierarchy);
+                break;
+            case 5:
+                lieutOpinion5.SetActive(!lieutOpinion5.activeInHierarchy);
+                break;
+            default:
+                break;
+        }
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
-    public void enterCouncilOpinion() {
+    public void enterCouncilOpinion()
+    {
         setScrollDisplaysToFalse();
         self.updateAbilityPoints(1);
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
-        councilOpinion.SetActive(!councilOpinion.activeInHierarchy);
+        switch (characterCount)
+        {
+            case 1:
+                councilOpinion1.SetActive(!councilOpinion1.activeInHierarchy);
+                break;
+            case 2:
+                councilOpinion2.SetActive(!councilOpinion2.activeInHierarchy);
+                break;
+            case 3:
+                councilOpinion3.SetActive(!councilOpinion3.activeInHierarchy);
+                break;
+            case 4:
+                councilOpinion4.SetActive(!councilOpinion4.activeInHierarchy);
+                break;
+            case 5:
+                councilOpinion5.SetActive(!councilOpinion5.activeInHierarchy);
+                break;
+            default:
+                break;
+        }
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
@@ -499,7 +634,7 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
     }
-    
+
     public void returntoGameFromPause()
     {
         pauseMenu.SetActive(false);
@@ -509,7 +644,7 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
-   
+
     public void returntoGameFromHelp()
     {
         helpDisplay.SetActive(false);
@@ -521,9 +656,9 @@ public class PopUpMenus : MonoBehaviour
 
     public void returnToGameFromScroll()
     {
-        setScrollDisplaysToFalse(); 
+        setScrollDisplaysToFalse();
         setAbilityDisplaysToFalse();
-        setStoryDisplaysToFalse(); 
+        setStoryDisplaysToFalse();
 
         Cursor.visible = false;
         showScroll = false;
@@ -534,14 +669,14 @@ public class PopUpMenus : MonoBehaviour
 
     public void returnToGameAfterExplain()
     {
-        setScrollDisplaysToFalse();       
+        setScrollDisplaysToFalse();
 
         Cursor.visible = false;
         showScroll = false;
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
 
-        storyCount += 1; 
+        storyCount += 1;
 
         StartCoroutine(toggleStoryScroll());
     }
@@ -559,13 +694,13 @@ public class PopUpMenus : MonoBehaviour
             values["activeScene"] = Player.latestScene.ToString();
             values["coins"] = Player.currentCoins.ToString();
             values["characterCount"] = Player.latestCharacterCount.ToString();
-            
+
             byte[] response = client.UploadValues("https://corona.uqcloud.net/test/welcome/save", values);
             var result = Encoding.UTF8.GetString(response);
             Debug.Log(result);
         }
     }
-    
+
     public void returnToMenu()
     {
         saveGame();
@@ -579,21 +714,21 @@ public class PopUpMenus : MonoBehaviour
 
     public void returnToScroll()
     {
-        setAbilityDisplaysToFalse();      
+        setAbilityDisplaysToFalse();
 
         Cursor.visible = false;
         showScroll = false;
         Time.timeScale = 1;
         player.GetComponent<FirstPersonController>().enabled = true;
 
-        toggleScroll(); 
+        toggleScroll();
     }
 
     private void incorrectCharacterCall()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
-    
+
         incorrectCharacter.SetActive(!incorrectCharacter.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
@@ -602,14 +737,14 @@ public class PopUpMenus : MonoBehaviour
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
-    
+
         replayCharacterView.SetActive(!replayCharacterView.activeInHierarchy);
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
     public void enterCorrectExplanation()
     {
-        setScrollDisplaysToFalse(); 
+        setScrollDisplaysToFalse();
 
         displayCorrectExplanation = true;
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -620,7 +755,7 @@ public class PopUpMenus : MonoBehaviour
 
     public void enterIncorrectExplanation()
     {
-        setScrollDisplaysToFalse(); 
+        setScrollDisplaysToFalse();
 
         displayIncorrectExplanation = true;
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -631,9 +766,9 @@ public class PopUpMenus : MonoBehaviour
 
     public void enterNotEnoughPoints()
     {
-        setAbilityDisplaysToFalse(); 
+        setAbilityDisplaysToFalse();
         setScrollDisplaysToFalse();
-        displayNotEnoughPoints = false; 
+        displayNotEnoughPoints = false;
 
         Time.timeScale = Math.Abs(Time.timeScale - 1);
 
@@ -641,19 +776,21 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
-    public void setScrollDisplaysToFalse() {
+    public void setScrollDisplaysToFalse()
+    {
         scrollDisplay1.SetActive(false);
         scrollDisplay2.SetActive(false);
         scrollDisplay3.SetActive(false);
         scrollDisplay4.SetActive(false);
         scrollDisplay5.SetActive(false);
-        correctExplanationView.SetActive(false); 
-        incorrectExplanationView.SetActive(false); 
+        correctExplanationView.SetActive(false);
+        incorrectExplanationView.SetActive(false);
         incorrectCharacter.SetActive(false);
         replayCharacterView.SetActive(false);
     }
 
-    public void setStoryDisplaysToFalse() {
+    public void setStoryDisplaysToFalse()
+    {
         storyDisplay1.SetActive(false);
         storyDisplay2.SetActive(false);
         storyDisplay3.SetActive(false);
@@ -662,14 +799,60 @@ public class PopUpMenus : MonoBehaviour
         storyDisplay6.SetActive(false);
     }
 
-    public void setAbilityDisplaysToFalse() {
-        advisorsOpinion.SetActive(false); 
-        empireMap.SetActive(false); 
-        peoplesOpinion.SetActive(false);
-        lieutOpinion.SetActive(false); 
-        councilOpinion.SetActive(false);
+    public void setAdvisorsOpinionToFalse()
+    {
+        advisorsOpinion1.SetActive(false);
+        advisorsOpinion2.SetActive(false);
+        advisorsOpinion3.SetActive(false);
+        advisorsOpinion4.SetActive(false);
+        advisorsOpinion5.SetActive(false);
+    }
+
+    public void setEmpireOpinionToFalse()
+    {
+        empireMap1.SetActive(false);
+        empireMap2.SetActive(false);
+        empireMap3.SetActive(false);
+        empireMap4.SetActive(false);
+        empireMap5.SetActive(false);
+    }
+
+    public void setPeoplesOpinionToFalse()
+    {
+        peoplesOpinion1.SetActive(false);
+        peoplesOpinion2.SetActive(false);
+        peoplesOpinion3.SetActive(false);
+        peoplesOpinion4.SetActive(false);
+        peoplesOpinion5.SetActive(false);
+    }
+
+    public void setLieutOpinionToFalse()
+    {
+        lieutOpinion1.SetActive(false);
+        lieutOpinion2.SetActive(false);
+        lieutOpinion3.SetActive(false);
+        lieutOpinion4.SetActive(false);
+        lieutOpinion5.SetActive(false);
+    }
+
+    public void setCouncilOpinionToFalse()
+    {
+        councilOpinion1.SetActive(false);
+        councilOpinion2.SetActive(false);
+        councilOpinion3.SetActive(false);
+        councilOpinion4.SetActive(false);
+        councilOpinion5.SetActive(false);
+    }
+
+    public void setAbilityDisplaysToFalse()
+    {
+        setAdvisorsOpinionToFalse();
+        setEmpireOpinionToFalse();
+        setPeoplesOpinionToFalse(); 
+        setLieutOpinionToFalse(); 
+        setCouncilOpinionToFalse();      
         insufficientAbilityPoints.SetActive(false);
-        
+
         // todo temp dom
         if (SceneManager.GetActiveScene().buildIndex != 4)
         {
@@ -687,11 +870,11 @@ public class PopUpMenus : MonoBehaviour
         {
             saveGame();
         }
-        
+
         if (currentLevel != nextLevel)
         {
             SceneManager.LoadScene(nextLevel);
-            
+
             // if go to previous level
             if (Player.latestScene > nextLevel)
             {
@@ -703,7 +886,8 @@ public class PopUpMenus : MonoBehaviour
             else if (nextLevel == Player.latestScene)
             {
                 Player.characterCount = Player.latestCharacterCount;
-            } else if (nextLevel > Player.latestScene) // go to next level - todo need to check if you've completed previous scrolls 
+            }
+            else if (nextLevel > Player.latestScene) // go to next level - todo need to check if you've completed previous scrolls 
             // maybe charactercount > that levels max character count
             {
                 Player.latestScene = nextLevel;

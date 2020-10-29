@@ -94118,11 +94118,31 @@ MonoBehaviour:
   incorrectExplanationView: {fileID: 1163411459}
   insufficientAbilityPoints: {fileID: 1574148220}
   replayCharacterView: {fileID: 544268240}
-  advisorsOpinion: {fileID: 1238544094}
-  empireMap: {fileID: 1200274107}
-  peoplesOpinion: {fileID: 1974453060}
-  lieutOpinion: {fileID: 260658494}
-  councilOpinion: {fileID: 999164855}
+  advisorsOpinion1: {fileID: 1238544094}
+  advisorsOpinion2: {fileID: 772246227}
+  advisorsOpinion3: {fileID: 1142156578}
+  advisorsOpinion4: {fileID: 1035619964}
+  advisorsOpinion5: {fileID: 192158368}
+  empireMap1: {fileID: 1200274107}
+  empireMap2: {fileID: 2079502357}
+  empireMap3: {fileID: 742831757}
+  empireMap4: {fileID: 914753372}
+  empireMap5: {fileID: 1453300361}
+  peoplesOpinion1: {fileID: 1974453060}
+  peoplesOpinion2: {fileID: 1210086420}
+  peoplesOpinion3: {fileID: 1745058552}
+  peoplesOpinion4: {fileID: 2133585848}
+  peoplesOpinion5: {fileID: 65546583}
+  lieutOpinion1: {fileID: 260658494}
+  lieutOpinion2: {fileID: 968814330}
+  lieutOpinion3: {fileID: 388148716}
+  lieutOpinion4: {fileID: 1542441216}
+  lieutOpinion5: {fileID: 860003944}
+  councilOpinion1: {fileID: 999164855}
+  councilOpinion2: {fileID: 903860218}
+  councilOpinion3: {fileID: 1763742164}
+  councilOpinion4: {fileID: 578710203}
+  councilOpinion5: {fileID: 35393379}
   ScoreText: {fileID: 774507110}
   dialoguing: 0
 --- !u!4 &2014144895
