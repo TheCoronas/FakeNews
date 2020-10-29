@@ -16302,17 +16302,10 @@ MonoBehaviour:
   m_Text: 'Player,
 
 
-    You have uncovered the lies within this land, and brought
-    the King down.
-
-
-    From a humble farmhand, to royalty, you have proven your
-    worth and learnt to question the very essence of information.
-
-
-    Your journey
-    does not end here! Take these skills, build your empire, and never stop seeking
-    answers. The world needs people like you, now more than ever.'
+    Your investigation skills are superb. Thanks to you, we
+    narrowly evaded attack by Redwater. The townspeople are more than grateful for
+    your services and word has gotten to the King of your actions. He has generously
+    donated land to you. '
 --- !u!222 &922698269
 CanvasRenderer:
   m_ObjectHideFlags: 0
