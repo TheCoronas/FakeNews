@@ -14,7 +14,7 @@ The development environment consisted of:
 - CodeIgniter
 
 ## How To Run
-To run the game from Unity, navigate to: `Assets>Scenes>Menus>Menu Scenes>start_screen`. From here, sign up to create an account, and start playing the game.
+To run the game from Unity, navigate to: `Assets>Scenes>Menus>Menu Scenes>start_screen`. From here, create an account, sign in, and start playing the game.
 
 ## Assets
 Unless otherwise specified, all assets were obtained from the Unity Asset Store. The "Standard Assets" default Unity Package is located within `Assets>Standard Assets`.
