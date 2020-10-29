@@ -16121,11 +16121,31 @@ MonoBehaviour:
   incorrectExplanationView: {fileID: 1670063786}
   insufficientAbilityPoints: {fileID: 1326355802}
   replayCharacterView: {fileID: 1567555339}
-  advisorsOpinion: {fileID: 648433209}
-  empireMap: {fileID: 1316428637}
-  peoplesOpinion: {fileID: 749104294}
-  lieutOpinion: {fileID: 1455045210}
-  councilOpinion: {fileID: 1342711021}
+  advisorsOpinion1: {fileID: 648433209}
+  advisorsOpinion2: {fileID: 686410873}
+  advisorsOpinion3: {fileID: 525126165}
+  advisorsOpinion4: {fileID: 1879521422}
+  advisorsOpinion5: {fileID: 1879521422}
+  empireMap1: {fileID: 1316428637}
+  empireMap2: {fileID: 209199625}
+  empireMap3: {fileID: 80447992}
+  empireMap4: {fileID: 1142192024}
+  empireMap5: {fileID: 393590469}
+  peoplesOpinion1: {fileID: 1882437868}
+  peoplesOpinion2: {fileID: 1882437868}
+  peoplesOpinion3: {fileID: 1882437868}
+  peoplesOpinion4: {fileID: 1882437868}
+  peoplesOpinion5: {fileID: 1882437868}
+  lieutOpinion1: {fileID: 1808541801}
+  lieutOpinion2: {fileID: 1808541801}
+  lieutOpinion3: {fileID: 1808541801}
+  lieutOpinion4: {fileID: 1808541801}
+  lieutOpinion5: {fileID: 1808541801}
+  councilOpinion1: {fileID: 584595438}
+  councilOpinion2: {fileID: 584595438}
+  councilOpinion3: {fileID: 584595438}
+  councilOpinion4: {fileID: 584595438}
+  councilOpinion5: {fileID: 584595438}
   ScoreText: {fileID: 1475021645}
   dialoguing: 0
 --- !u!4 &903472507
@@ -22684,6 +22704,34 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1716197059}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1340064843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340064838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f287f8012764b14483251a648513a7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  char1: {fileID: 1863274094}
+  char2: {fileID: 1122199293}
+  char3: {fileID: 367599101}
+  char4: {fileID: 6902218}
+  char5: {fileID: 329853907}
+  char1Name: {fileID: 813553655}
+  char2Name: {fileID: 1483291905}
+  char3Name: {fileID: 1446702689}
+  char4Name: {fileID: 182067854}
+  char5Name: {fileID: 1525735796}
+  displayChar1: 0
+  displayChar2: 0
+  displayChar3: 0
+  displayChar4: 0
+  displayChar5: 0
+  count: 0
 --- !u!1 &1342711021
 GameObject:
   m_ObjectHideFlags: 0

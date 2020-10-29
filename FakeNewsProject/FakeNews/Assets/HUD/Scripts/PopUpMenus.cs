@@ -865,11 +865,7 @@ public class PopUpMenus : MonoBehaviour
     // todo: Check whether a player has completed all scrolls on a level before allowing access to later ones.
     private void changeLevels(int currentLevel, int nextLevel)
     {
-        // save game every level change
-        if (Player.loggedIn)
-        {
-            saveGame();
-        }
+        
 
         if (currentLevel != nextLevel)
         {
@@ -886,10 +882,12 @@ public class PopUpMenus : MonoBehaviour
             else if (nextLevel == Player.latestScene)
             {
                 Player.characterCount = Player.latestCharacterCount;
+                
             }
             else if (nextLevel > Player.latestScene) // go to next level - todo need to check if you've completed previous scrolls 
             // maybe charactercount > that levels max character count
             {
+                Player.currentAbilityPoints = 3;
                 Player.latestScene = nextLevel;
                 Player.characterCount = 1;
                 Player.latestCharacterCount = Player.characterCount;
@@ -899,6 +897,12 @@ public class PopUpMenus : MonoBehaviour
         else
         {
             displayMapError(true);
+        }
+        
+        // save game every level change
+        if (Player.loggedIn)
+        {
+            saveGame();
         }
     }
 
