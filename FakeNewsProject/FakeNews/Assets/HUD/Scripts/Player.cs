@@ -110,6 +110,13 @@ public class Player : MonoBehaviour
         }
         PopUpMenus.displayCorrectExplanation = false; 
         PopUpMenus.displayIncorrectExplanation = false;
+
+
+        if (Input.GetKeyDown("p"))
+        {
+            currentAbilityPoints = maxAbilityPoints;
+            abilityPointsBar.SetAbilityPoints(currentAbilityPoints);
+        }
     }
 
     //Updates ability points based on abilities selected
