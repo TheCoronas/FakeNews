@@ -101,6 +101,8 @@ public class PopUpMenus : MonoBehaviour
 
     private Text[] mapText;
     public bool dialoguing = false;
+    
+    // to prevent double clicking on scrolls
     private Stopwatch sw;
     
     // used for retrieving data from db json result
@@ -472,6 +474,7 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = !player.GetComponent<FirstPersonController>().enabled;
     }
 
+    /** Toggles the display of a scroll depending on player's current progression. **/
     public void toggleScroll()
     {
         // prevents you from clicking on the same scroll too quickly
@@ -868,6 +871,7 @@ public class PopUpMenus : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    /** Returns focus to scroll. **/
     public void returnToScroll()
     {
         setAbilityDisplaysToFalse();
@@ -922,6 +926,7 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /** Controls incorrect explanation actions**/
     public void enterIncorrectExplanation()
     {
         setScrollDisplaysToFalse();
