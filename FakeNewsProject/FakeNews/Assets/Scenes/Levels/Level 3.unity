@@ -4290,10 +4290,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Dear \n\r\nI am sorry to burden you with terrible news but I do not know
-    who else can save Rosewind. Our dear friend, Sir Lawrance - whom I rent my store
-    from - took ill last week and has unfortunately passed away. I am in urgent need
-    of assistance. Please come to Rosewind as soon as possible.\r\n\r\nSincerely,
+  m_Text: "Dear Player,\n\r\nI am sorry to burden you with terrible news but I do
+    not know who else can save Rosewind. Our dear friend, Sir Lawrance - whom I rent
+    my store from - took ill last week and has unfortunately passed away. I am in
+    urgent need of assistance. Please come to Rosewind as soon as possible.\r\n\r\nSincerely,
     \r\nLeo\u2019s General Store"
 --- !u!222 &85023832
 CanvasRenderer:
@@ -25585,7 +25585,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EMPIRE MAP
+  m_Text: The King has not travelled these roads in many moons.
 --- !u!222 &604771767
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26259,7 +26259,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EMPIRE MAP
+  m_Text: We have remained close to Rosewood for some time - have you seen anything
+    strange?
 --- !u!222 &646651075
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -44171,10 +44172,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Hello \n\n\nLast night I was playing outside and saw the witches gathering
-    deeper into the woods. I am really scared of them, can you please take your men
-    and make them go away. I told Mother, and she said she could pay you for helping
-    us.\n\n\n- Johnny"
+  m_Text: 'Hello Player,
+
+
+
+    Last night I was playing outside and saw the witches
+    gathering deeper into the woods. I am really scared of them, can you please take
+    your men and make them go away. I told Mother, and she said she could pay you
+    for helping us.
+
+
+
+    - Johnny'
 --- !u!222 &872679178
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -50086,7 +50095,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EMPIRE MAP
+  m_Text: Rosewind is nearby, less than a day ride.
 --- !u!222 &1050954708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -57835,7 +57844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EMPIRE MAP
+  m_Text: A strange light is often seen coming from the dwelling of the apothecary.
 --- !u!222 &1194809590
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -66136,7 +66145,6 @@ MonoBehaviour:
   healthBar: {fileID: 153948193}
   coinBar: {fileID: 1502814346}
   abilityPointsBar: {fileID: 1351566034}
-  points: 0
 --- !u!4 &1367423721
 Transform:
   m_ObjectHideFlags: 0
@@ -89597,7 +89605,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EMPIRE MAP
+  m_Text: Havendusk is well known for its forests, and even better known for the
+    stories of what lie within...
 --- !u!222 &1939339280
 CanvasRenderer:
   m_ObjectHideFlags: 0
