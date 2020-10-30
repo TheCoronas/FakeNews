@@ -8,10 +8,9 @@ This game was designed to target primary school students, and has been designed 
 ## Development Stack
 The development environment consisted of:
 - Unity V 2019.4.8f1 (front-end development)
-- mySQL
-- phpMyAdmin
-- Nginx
-- CodeIgniter
+- phpMyAdmin with MySQL
+- Nginx for the web server
+- CodeIgniter as PHP backend framework
 
 ## How To Run
 To run the game from Unity, navigate to: `Assets>Scenes>Menus>Menu Scenes>start_screen`. From here, create an account, sign in, and start playing the game.
