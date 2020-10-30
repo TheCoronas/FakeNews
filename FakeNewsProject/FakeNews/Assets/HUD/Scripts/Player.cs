@@ -32,17 +32,21 @@ public class Player : MonoBehaviour
     // player's current latest character count
     public static int latestCharacterCount;
 
+    // Unity objects for bars
     public HealthBar healthBar; 
     public CoinBar coinBar; 
     public AbilityPointsBar abilityPointsBar;
+    
+    // The buildindex for the active scene
     public static int activeScene;
 
+    // costs associated with a correct / incorrect response
     public static int health;
     public static int expense; 
-    public int points; 
 
     public static int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
+    /** Occurs when script is first run. **/
     void Start()
     {
          // set max values
@@ -85,7 +89,7 @@ public class Player : MonoBehaviour
                 currentCoins = maxCoins;  
             }
 
-        //Subtracts specified point value to HUD bars
+        // Subtracts specified point value to HUD bars
         } else if (PopUpMenus.displayIncorrectExplanation) {
             PopUpMenus.characterCount += 1;
             characterCount += 1;
@@ -111,7 +115,7 @@ public class Player : MonoBehaviour
         PopUpMenus.displayCorrectExplanation = false; 
         PopUpMenus.displayIncorrectExplanation = false;
 
-
+        // cheat code to reset ability points - used for debugging
         if (Input.GetKeyDown("p"))
         {
             currentAbilityPoints = maxAbilityPoints;
@@ -119,7 +123,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //Updates ability points based on abilities selected
+    // Updates ability points based on abilities selected
     public void updateAbilityPoints(int points) {
         currentAbilityPoints = currentAbilityPoints - points;
         if ((currentAbilityPoints) >= 0) { 

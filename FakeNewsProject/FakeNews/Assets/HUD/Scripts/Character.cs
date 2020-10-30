@@ -20,11 +20,6 @@ public class Character : MonoBehaviour
         return scrollDamage;
     }
 
-    // public int getScrollAbilityPoints()
-    // {
-    //     return scrollAbilityPoints;
-    // }
-
     public int getScrollCoins()
     {
         return ScrollCoins;
