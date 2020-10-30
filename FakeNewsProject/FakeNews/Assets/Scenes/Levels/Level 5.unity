@@ -25267,7 +25267,6 @@ MonoBehaviour:
   healthBar: {fileID: 1608525762}
   coinBar: {fileID: 1559650964}
   abilityPointsBar: {fileID: 211087475}
-  points: 0
 --- !u!1001 &859797666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56535,6 +56534,18 @@ PrefabInstance:
     - target: {fileID: 4569300711265150, guid: 23447ea53621e884e8fff38a0647be97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569300711265150, guid: 23447ea53621e884e8fff38a0647be97, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569300711265150, guid: 23447ea53621e884e8fff38a0647be97, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569300711265150, guid: 23447ea53621e884e8fff38a0647be97, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 95690508696154446, guid: 23447ea53621e884e8fff38a0647be97,
         type: 3}
