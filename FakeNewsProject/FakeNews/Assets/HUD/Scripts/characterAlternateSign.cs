@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Author: Jelena Price
+ * Checks object tag and adds child NPC indicator to the current character 
+ * for identification.
+ */
 public class characterAlternateSign : MonoBehaviour
 {
     private GameObject[] possibleCharacters;
