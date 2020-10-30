@@ -102,6 +102,8 @@ public class PopUpMenus : MonoBehaviour
     private Text[] mapText;
     public bool dialoguing = false;
     private Stopwatch sw;
+    
+    // used for retrieving data from db json result
     [System.Serializable]
     public class UserData
     {
@@ -112,6 +114,7 @@ public class PopUpMenus : MonoBehaviour
         public string abilityPoints;
     }
 
+    // wrapper for json 
     [System.Serializable]
     public class ScoreJSON
     {
@@ -234,7 +237,8 @@ public class PopUpMenus : MonoBehaviour
         sw.Start();
 
         scoreScreenUI.SetActive(false);
-        // should let you skip logging in whilst debugging
+        
+        // Initializes player state for debugging
         if (Player.loggedIn == false)
         {
             characterCount = 1;
@@ -466,7 +470,7 @@ public class PopUpMenus : MonoBehaviour
 
     public void toggleScroll()
     {
-
+        // prevents you from clicking on the same scroll too quickly
         timeSinceClicked = sw.ElapsedMilliseconds;
         if (timeSinceClicked < 600)
         {
@@ -955,11 +959,6 @@ public class PopUpMenus : MonoBehaviour
         setCouncilOpinionToFalse();      
         insufficientAbilityPoints.SetActive(false);
 
-        // todo temp dom
-        if (SceneManager.GetActiveScene().buildIndex != 4)
-        {
-            return;
-        }
         inspectMenu.SetActive(false);
     }
 
@@ -970,8 +969,6 @@ public class PopUpMenus : MonoBehaviour
      */
     private void changeLevels(int currentLevel, int nextLevel)
     {
-        
-
         if (currentLevel != nextLevel)
         {
             SceneManager.LoadScene(nextLevel);
@@ -989,7 +986,8 @@ public class PopUpMenus : MonoBehaviour
                 Player.characterCount = Player.latestCharacterCount;
                 
             }
-            else if (nextLevel > Player.latestScene) // go to next level
+            // go to next level
+            else if (nextLevel > Player.latestScene)
             {
                 Player.currentAbilityPoints = 3;
                 Player.latestScene = nextLevel;
@@ -1024,41 +1022,31 @@ public class PopUpMenus : MonoBehaviour
         {
             case "Level1":
                 requestedSceneIndex = 1;
-
                 changeLevels(currentBuildIndex, requestedSceneIndex);
-
                 break;
 
             case "Level2":
                 requestedSceneIndex = 2;
-
                 changeLevels(currentBuildIndex, requestedSceneIndex);
-
                 break;
 
             case "Level3":
                 requestedSceneIndex = 3;
-
                 changeLevels(currentBuildIndex, requestedSceneIndex);
-
                 break;
 
             case "Level4":
                 requestedSceneIndex = 4;
-
                 changeLevels(currentBuildIndex, requestedSceneIndex);
-
                 break;
 
             case "Level5":
                 requestedSceneIndex = 5;
-
                 changeLevels(currentBuildIndex, requestedSceneIndex);
                 break;
 
             case "ReturnToGame":
                 break;
-
 
             case "NextLevel":
                 requestedSceneIndex = currentBuildIndex + 1;
