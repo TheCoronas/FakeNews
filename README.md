@@ -15,6 +15,8 @@ The development environment consisted of:
 ## How To Run
 To run the game from Unity, navigate to: `Assets>Scenes>Menus>Menu Scenes>start_screen`. From here, create an account, sign in, and start playing the game.
 
+A full list of required assets, along with references is located within `Assets>Scripts>Resources.cs`. These are all from the Unity Asset Store, and will need to be downloaded and extracted into the `Assets` folder prior to running the game.
+
 ### Admin Functions
 For demonstration purposes, some additional functionality was implemented. This was only implemented to speed up demonstration and for debugging, and not for base game functionality. 
 - `[` is used to immediately navigate to the previous level
