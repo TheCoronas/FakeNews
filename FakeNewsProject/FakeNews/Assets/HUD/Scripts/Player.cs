@@ -6,11 +6,11 @@ using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
 
-
-//This script sets the Health, Coins and Ability points of a player. 
-//Updates the HUD functionality when either a correct/incorrect answer is selected. 
-//@author Madison Beare
-
+/**
+* This script sets the Health, Coins and Ability points of a player. 
+* Updates the HUD functionality when either a correct/incorrect answer is selected. 
+* Author: Madison Beare
+*/
 public class Player : MonoBehaviour
 {
 

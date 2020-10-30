@@ -356,6 +356,10 @@ public class PopUpMenus : MonoBehaviour
         }
     }
 
+    /**
+     * Toggle Inspect scroll. Set to only be applicable on level 4. 
+     * Author: Madison Beare
+     */
     public void toggleInspect()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -483,6 +487,10 @@ public class PopUpMenus : MonoBehaviour
         Time.timeScale = Math.Abs(Time.timeScale - 1);
         showScroll = !showScroll;
 
+        /**
+        * Checks character count to determine which scroll to display. 
+        Author: Madison Beare
+        */
         switch (characterCount)
         {
             case 1:
@@ -509,7 +517,12 @@ public class PopUpMenus : MonoBehaviour
 
     }
 
-    private IEnumerator toggleStoryScroll()
+    /**
+     * Triggers story scroll display 1 second after player has completed previous scroll. 
+     * Provides a story for the game level.
+     * Author: Madison Beare     
+     */   
+      private IEnumerator toggleStoryScroll()
     {
         storyFlag = true;
         yield return new WaitForSeconds(1);
@@ -558,6 +571,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Switches between correct scroll display based on the character count.
+     * Author: Madison Beare
+     */
     public void enterAdvisorsOpinion()
     {
         setScrollDisplaysToFalse();
@@ -587,6 +604,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Switches between correct scroll display based on the character count.
+     * Author: Madison Beare
+     */
     public void enterEmpireMap()
     {
         setScrollDisplaysToFalse();
@@ -616,6 +637,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Switches between correct scroll display based on the character count.
+     * Author: Madison Beare
+     */
     public void enterPeoplesOpinion()
     {
         setScrollDisplaysToFalse();
@@ -646,6 +671,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Switches between correct scroll display based on the character count.
+     * Author: Madison Beare
+     */
     public void enterLieutOpinion()
     {
         setScrollDisplaysToFalse();
@@ -675,6 +704,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Switches between correct scroll display based on the character count.
+     * Author: Madison Beare
+     */
     public void enterCouncilOpinion()
     {
         setScrollDisplaysToFalse();
@@ -718,6 +751,11 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+    /**
+     * Used for button functionality on Inspect Screen. Resumes the game, disables inspect screen and 
+     * removes the cursor.
+     * Author: Madison Beare
+     */
     public void returntoGameFromInspect()
     {
         inspectMenu.SetActive(false);
@@ -773,6 +811,12 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 
+
+    /**
+     * Used for button functionality on Explanation Screen. Resumes the game, disables explanation screen and 
+     * removes the cursor.
+     * Author: Madison Beare
+     */
     public void returnToGameAfterExplain()
     {
         setScrollDisplaysToFalse();
@@ -807,6 +851,12 @@ public class PopUpMenus : MonoBehaviour
         }
     }
 
+    /** 
+     * Functions: returnToMenu, returnToScroll
+     * Used for button functionality on scroll screens. Resumes the game, disables scroll screen and 
+     * removes the cursor.
+     * Author: Jaiden Harding
+     */
     public void returnToMenu()
     {
         saveGame();
@@ -830,6 +880,10 @@ public class PopUpMenus : MonoBehaviour
         toggleScroll();
     }
 
+    /**
+     * Used to trigger a scroll if the incorrect character is tried to talk to.
+     * Author: Madison Beare
+     */
     private void incorrectCharacterCall()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -839,6 +893,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Used to trigger a scroll if the character has already been talked to, and scroll received.
+     * Author: Madison Beare
+     */
     private void replayCharacterCall()
     {
         Time.timeScale = Math.Abs(Time.timeScale - 1);
@@ -848,6 +906,11 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Functions: enterCorrectExplanation, enterIncorrectExplanation
+     * Used to trigger an explanation screen after selecting an answer for a scroll.
+     * Author: Madison Beare
+     */
     public void enterCorrectExplanation()
     {
         setScrollDisplaysToFalse();
@@ -870,6 +933,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * Used to trigger a scroll that tells a player they do not have enough ability points. 
+     * Author: Madison Beare
+     */
     public void enterNotEnoughPoints()
     {
         setAbilityDisplaysToFalse();
@@ -882,6 +949,10 @@ public class PopUpMenus : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = false;
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setScrollDisplaysToFalse()
     {
         scrollDisplay1.SetActive(false);
@@ -895,6 +966,10 @@ public class PopUpMenus : MonoBehaviour
         replayCharacterView.SetActive(false);
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setStoryDisplaysToFalse()
     {
         storyDisplay1.SetActive(false);
@@ -905,6 +980,10 @@ public class PopUpMenus : MonoBehaviour
         storyDisplay6.SetActive(false);
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setAdvisorsOpinionToFalse()
     {
         advisorsOpinion1.SetActive(false);
@@ -914,6 +993,10 @@ public class PopUpMenus : MonoBehaviour
         advisorsOpinion5.SetActive(false);
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setEmpireOpinionToFalse()
     {
         empireMap1.SetActive(false);
@@ -923,6 +1006,10 @@ public class PopUpMenus : MonoBehaviour
         empireMap5.SetActive(false);
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setPeoplesOpinionToFalse()
     {
         peoplesOpinion1.SetActive(false);
@@ -932,6 +1019,10 @@ public class PopUpMenus : MonoBehaviour
         peoplesOpinion5.SetActive(false);
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setLieutOpinionToFalse()
     {
         lieutOpinion1.SetActive(false);
@@ -941,6 +1032,10 @@ public class PopUpMenus : MonoBehaviour
         lieutOpinion5.SetActive(false);
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setCouncilOpinionToFalse()
     {
         councilOpinion1.SetActive(false);
@@ -950,6 +1045,10 @@ public class PopUpMenus : MonoBehaviour
         councilOpinion5.SetActive(false);
     }
 
+    /**
+     * A flag setting function that calls all flags of a similar type. Used for neatness and brevity. 
+     * Author: Madison Beare
+     */
     public void setAbilityDisplaysToFalse()
     {
         setAdvisorsOpinionToFalse();

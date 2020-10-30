@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
+/**
+* Sets max ability points and slider value. 
+* Author: Madison Beare
+*/
 public class AbilityPointsBar : MonoBehaviour
 {
     public Slider slider; 

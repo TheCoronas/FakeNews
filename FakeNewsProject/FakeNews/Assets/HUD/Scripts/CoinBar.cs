@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
+/**
+* Sets max coins and slider value. 
+* Author: Madison Beare
+*/
 public class CoinBar : MonoBehaviour
 {
     public Slider slider; 
