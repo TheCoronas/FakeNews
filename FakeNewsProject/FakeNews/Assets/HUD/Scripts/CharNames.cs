@@ -45,13 +45,19 @@ public class CharNames : MonoBehaviour
     /* Update is called once per frame. */
     void Update()
     {
-        if (count % 4 == 0)
+        if (count > 0)
         {
             // Cast ray every 4 frames.
             RaycastHit hit;
             if (Physics.Raycast (transform.position, transform.TransformDirection(Vector3.forward), out hit))
             {
-                toggleCharName(hit.collider.gameObject);
+                if (hit.collider.gameObject.tag == "Character")
+                {
+                    toggleCharName(hit.collider.gameObject);
+                } else
+                {
+                    disableNames();
+                }
             }
         }
         count++;
@@ -60,47 +66,53 @@ public class CharNames : MonoBehaviour
     /* Display name of targetted character. */
     public void toggleCharName(GameObject character)
     {
-        Time.timeScale = Math.Abs(Time.timeScale - 1);
+        //Time.timeScale = Math.Abs(Time.timeScale - 1);
 
-        // Check which name to display.
-        if (character == char1)
+        if (character.tag == "Character")
         {
-            displayChar1 = true;
-            char1Name.SetActive(true);
+            // Check which name to display.
+            if (character == char1)
+            {
+                displayChar1 = true;
+                char1Name.SetActive(true);
+            }
+            else if (character == char2)
+            {
+                displayChar2 = true;
+                char2Name.SetActive(true);
+            }
+            else if (character == char3)
+            {
+                displayChar3 = true;
+                char3Name.SetActive(true);
+            }
+            else if (character == char4)
+            {
+                displayChar4 = true;
+                char4Name.SetActive(true);
+            }
+            else if (character == char5)
+            {
+                displayChar5 = true;
+                char5Name.SetActive(true);
+            }
+
         }
-        else if (character == char2)
-        {
-            displayChar2 = true;
-            char2Name.SetActive(true);
-        }
-        else if (character == char3)
-        {
-            displayChar3 = true;
-            char3Name.SetActive(true);
-        }
-        else if (character == char4)
-        {
-            displayChar4 = true;
-            char4Name.SetActive(true);
-        }
-        else if (character == char5)
-        {
-            displayChar5 = true;
-            char5Name.SetActive(true);
-        }
-        // Hide all names if no character is targetted.
-        else if (displayChar1 || displayChar2 || displayChar3 || displayChar4 || displayChar5)
-        {
-            displayChar1 = false;
-            char1Name.SetActive(false);
-            displayChar2 = false;
-            char2Name.SetActive(false);
-            displayChar3 = false;
-            char3Name.SetActive(false);
-            displayChar4 = false;
-            char4Name.SetActive(false);
-            displayChar5 = false;
-            char5Name.SetActive(false);
-        }
+    }
+
+    /** Disable Character names from appearing when not selected **/
+    public void disableNames()
+    {
+        displayChar1 = false;
+        char1Name.SetActive(false);
+        displayChar2 = false;
+        char2Name.SetActive(false);
+        displayChar3 = false;
+        char3Name.SetActive(false);
+        displayChar4 = false;
+        char4Name.SetActive(false);
+        displayChar5 = false;
+        char5Name.SetActive(false);
+
     }
 }

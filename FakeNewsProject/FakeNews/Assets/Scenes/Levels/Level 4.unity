@@ -15125,7 +15125,7 @@ MonoBehaviour:
   scrollDisplay2: {fileID: 1462461622}
   scrollDisplay3: {fileID: 1076804186}
   scrollDisplay4: {fileID: 1177235976}
-  scrollDisplay5: {fileID: 1052429449}
+  scrollDisplay5: {fileID: 1559392916}
   storyDisplay1: {fileID: 2097418090}
   storyDisplay2: {fileID: 1452961549}
   storyDisplay3: {fileID: 1916507437}
@@ -47974,7 +47974,6 @@ MonoBehaviour:
   healthBar: {fileID: 1660958348}
   coinBar: {fileID: 1250917178}
   abilityPointsBar: {fileID: 1631378425}
-  points: 0
 --- !u!1001 &2024912214
 PrefabInstance:
   m_ObjectHideFlags: 0
