@@ -41,4 +41,5 @@
  * [25] Morillas, W., Basic Bandit (2017), https://assetstore.unity.com/packages/3d/characters/humanoids/humans/basic-bandit-89978, Accessed 31 Aug 2020
  * [26] Polytope Studio, Lowpoly Medieval Peasants - Free Pack, (2020). https://assetstore.unity.com/packages/3d/characters/humanoids/humans/lowpoly-medieval-peasants-free-pack-122225, Accessed 3 Sep 2020
  * [27] ALP8310, Grass Flowers Pack Free (2019). https://assetstore.unity.com/packages/2d/textures-materials/grass-flowers-pack-free-138810, Accessed 30 Aug 2020
+ * [28] Unity Technologies, Standard Assets (2020). https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351
  */
